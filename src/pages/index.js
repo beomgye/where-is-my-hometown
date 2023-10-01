@@ -1,7 +1,7 @@
+import styles from '@/styles/Home.module.css'
+import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,6 +38,8 @@ export default function Home() {
             </a>
           </div>
         </div>
+
+        <div>범계역 <b>2번출구</b> 오후 2시까지</div>
 
         <div className={styles.center}>
           <Image
