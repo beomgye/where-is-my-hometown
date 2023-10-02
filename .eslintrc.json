@@ -4,7 +4,8 @@
 		"es6": true,
 		"node": true
 	},
-	"parser": "babel-eslint",
+
+	"parser": "@babel/eslint-parser",
 	"extends": ["eslint:recommended", "plugin:react/recommended", "airbnb", "plugin:prettier/recommended"],
 	"settings": {
 		"react": {
@@ -12,6 +13,7 @@
 		}
 	},
 	"parserOptions": {
+		"requireConfigFile": false,
 		"ecmaFeatures": {
 			"jsx": true
 		},
@@ -20,10 +22,13 @@
 	},
 	"plugins": ["react", "react-hooks", "prettier"],
 	"rules": {
-		"react/react-in-jsx-scope": 1,
+		"react/react-in-jsx-scope": 0,
 		"react/prefer-stateless-function": 1,
 		"react/jsx-filename-extension": 1,
 		"react/jsx-one-expression-per-line": 1,
-		"no-nested-ternary": 1
+		"no-nested-ternary": 1,
+		"import/no-unresolved": "off",
+		"react/prop-types": "off",
+		"react/jsx-props-no-spreading": "off"
 	}
 }

@@ -1,0 +1,20 @@
+{
+    "presets": [
+        "next/babel",
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "chrome": "91",
+                    "firefox": "89"
+                }
+            }
+        ],
+        [
+            "@babel/preset-react",
+            {
+                "runtime": "automatic"
+            }
+        ]
+    ]
+}
