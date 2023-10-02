@@ -25,11 +25,12 @@
 	},
 	"plugins": ["react", "react-hooks", "prettier"],
 	"rules": {
-		"react/react-in-jsx-scope": 0,
-		"react/prefer-stateless-function": 1,
-		"react/jsx-filename-extension": 1,
-		"react/jsx-one-expression-per-line": 1,
-		"no-nested-ternary": 1,
+		"react/react-in-jsx-scope": "off",
+		"react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"]}],
+		"react/prefer-stateless-function": "warn",
+		"react/jsx-one-expression-per-line": "warn",
+		"no-nested-ternary": "warn",
+		"no-useless-catch": "warn",
 		"import/no-unresolved": "off",
 		"react/prop-types": "off",
 		"react/jsx-props-no-spreading": "off"
