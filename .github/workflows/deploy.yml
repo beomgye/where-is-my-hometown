@@ -1,4 +1,4 @@
-name: Where Is My Hometown 
+name: Deploy 
 on: 
   push:
     branches:
@@ -7,16 +7,14 @@ jobs:
   build:
     runs-on: ubuntu-20.04 
     steps:
-      - name: Git Checkout 
+      - name: Checkout source code 
         uses: actions/checkout@v2
 
-      - name: Check Node Version 
+      - name: Check Node v
         run: node -v
 
       - name: Install Dependencies
-        run: |
-          npm install -g yarn
-          yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Build
         run: yarn build
