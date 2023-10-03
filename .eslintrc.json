@@ -44,6 +44,7 @@
 		"no-useless-catch": "off",
 		"import/no-unresolved": "off",
 		"import/extensions": ["error", "never"],
+		"import/prefer-default-export": "off",
 		"react/prop-types": "off",
 		"react/function-component-definition": [
 			2,
