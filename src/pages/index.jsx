@@ -3,12 +3,14 @@ import { OptionContainer } from "@/containers";
 
 const Home = () => {
   return (
-    <Main>
-      <Title>Where is my HomeTown</Title>
+    <>
+      <Main>
+        <Title>Where is my Hometown</Title>
+      </Main>
       <Container>
         <OptionContainer />
       </Container>
-    </Main>
+    </>
   );
 };
 
