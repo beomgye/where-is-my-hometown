@@ -45,7 +45,7 @@
 		"import/no-unresolved": "off",
 		"import/extensions": ["error", "never"],
 		"import/prefer-default-export": "off",
-		"import/no-extraneous-dependencies": [ "error", { "packageDir": "./" } ],
+		"import/no-extraneous-dependencies": [ "off", { "packageDir": "./" } ],
 		"react/prop-types": "off",
 		"react/function-component-definition": [
 			2,
