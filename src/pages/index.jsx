@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { OptionContainer } from "@/containers";
+import styled from 'styled-components'
+import { OptionContainer } from '@/containers'
 
 const Home = () => {
   return (
@@ -11,11 +11,11 @@ const Home = () => {
         <OptionContainer />
       </Container>
     </>
-  );
-};
+  )
+}
 
-const Main = styled.main``;
-const Title = styled.h1``;
-const Container = styled.div``;
+const Main = styled.main``
+const Title = styled.h1``
+const Container = styled.div``
 
-export default Home;
+export default Home

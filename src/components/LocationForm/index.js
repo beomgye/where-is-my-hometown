@@ -1,3 +1,3 @@
-const LocationForm = () => {};
+const LocationForm = () => {}
 
-export default LocationForm;
+export default LocationForm

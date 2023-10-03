@@ -31,14 +31,14 @@ const Header = ({ title, description, url, ogi }) => {
         rel="stylesheet"
       />
     </>
-  );
-};
+  )
+}
 
 Header.defaultProps = {
   title: process.env.NEXT_PUBLIC_TITLE,
   description: process.env.NEXT_PUBLIC_DESCRIPTION,
   url: process.env.NEXT_PUBLIC_URL,
-  ogi: process.env.NEXT_PUBLIC_OG_IMAGE,
-};
+  ogi: process.env.NEXT_PUBLIC_OG_IMAGE
+}
 
-export default Header;
+export default Header

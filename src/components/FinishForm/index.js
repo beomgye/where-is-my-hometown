@@ -1,3 +1,3 @@
-const FinishForm = () => {};
+const FinishForm = () => {}
 
-export default FinishForm;
+export default FinishForm

@@ -1,3 +1,3 @@
-const AssetInputForm = () => {};
+const AssetInputForm = () => {}
 
-export default AssetInputForm;
+export default AssetInputForm

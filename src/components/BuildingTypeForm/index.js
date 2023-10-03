@@ -1,3 +1,3 @@
-const BuildingTypeForm = () => {};
+const BuildingTypeForm = () => {}
 
-export default BuildingTypeForm;
+export default BuildingTypeForm

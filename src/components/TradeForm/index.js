@@ -1,3 +1,3 @@
-const TradeForm = () => {};
+const TradeForm = () => {}
 
-export default TradeForm;
+export default TradeForm
