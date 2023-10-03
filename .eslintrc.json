@@ -39,7 +39,7 @@
 		"import/no-unresolved": "off",
 		"@typescript-eslint/semi": "off",
 		"import/prefer-default-export": "off",
-		"import/no-extraneous-dependencies": "off",
+		"import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}],
 		"react/prop-types": "off",
 		"react/jsx-props-no-spreading": 0,
 		"react/prefer-stateless-function": "error",
