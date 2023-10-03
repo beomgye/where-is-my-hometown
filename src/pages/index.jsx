@@ -1,9 +1,21 @@
+import styled from "styled-components";
+import { OptionContainer } from "@/containers";
+
 const Home = () => {
   return (
-    <main>
-      <div>경기도 안양시 동안구 동안로 지하130 (호계동)</div>
-    </main>
+    <>
+      <Main>
+        <Title>Where is my Hometown</Title>
+      </Main>
+      <Container>
+        <OptionContainer />
+      </Container>
+    </>
   );
 };
+
+const Main = styled.main``;
+const Title = styled.h1``;
+const Container = styled.div``;
 
 export default Home;
