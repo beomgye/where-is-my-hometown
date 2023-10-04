@@ -59,7 +59,7 @@
 			{
 			  "arrowSpacing": ["error", { "before": true, "after": true }], 
 			  "singleQuote": true, 
-			  "semi": false, 
+			  "semi": true, 
 			  "useTabs": false, 
 			  "tabWidth": 2, 
 			  "trailingComma": "none", 
