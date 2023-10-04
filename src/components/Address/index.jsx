@@ -2,7 +2,7 @@ import { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import Modal from "react-modal";
 
-const Map = () => {
+const Address = () => {
   const [roadAddress, setRoadAddress] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const completeHandler = (data) => {
@@ -42,4 +42,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default Address;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Map from "@/components/Map";
+import Address from "@/components/Address";
 import { OptionContainer } from "@/containers";
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
     <>
       <Main>
         <Title>Where is my Hometown</Title>
-        <Map />
+        <Address />
       </Main>
       <Container>
         <OptionContainer />
