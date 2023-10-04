@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
-const Button = ({ size = 'default', color, children, ...props }) => {
+const Button = ({ type, size = 'default', color, children, ...props }) => {
   return (
-    <StyledButton type="button" size={size} color={color} {...props}>
+    <StyledButton type={type} size={size} color={color} {...props}>
       {children}
     </StyledButton>
   )
