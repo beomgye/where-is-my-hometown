@@ -1,4 +1,5 @@
 export { default as Header } from './common/Header'
+export { default as NavBar } from './common/NavBar'
 export { default as Form } from './common/Form'
 export { default as Button } from './common/Button'
 export { default as Input } from './common/Input'
