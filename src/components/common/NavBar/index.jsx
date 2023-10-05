@@ -24,7 +24,6 @@ const NavBar = ({ current, text }) => {
 };
 
 const StyledNavBar = styled.nav`
-  position: absolute;
   justify-content: flex-start;
   min-height: 504px;
   width: 226px;
