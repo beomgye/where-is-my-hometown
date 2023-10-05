@@ -22,7 +22,7 @@ const OptionContainer = () => {
   }, [step]);
 
   return (
-    <div>
+    <>
       {step === 0 && <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />}
       {step === 1 && (
         <LocationForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
@@ -36,7 +36,7 @@ const OptionContainer = () => {
       {step === 4 && (
         <FinishForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
       )}
-    </div>
+    </>
   );
 };
 
