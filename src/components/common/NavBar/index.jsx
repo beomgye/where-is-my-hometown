@@ -1,44 +1,49 @@
-import { styled } from 'styled-components'
+import styled from 'styled-components';
 
-const NavBar = ({ index, name }) => {
+const NavBar = ({ current, text }) => {
+  const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
+
   return (
     <StyledNavBar>
       <ul className="stepContainer">
-        <li className="step">
-          <div className="circle">{index + 1}</div>
-          <div className="stepDetails">
-            <div className="stepText">
-              Step
-              {index + 1}
+        {steps.map((step, index) => (
+          <li className={step === steps[current] ? 'active' : ''} key={step}>
+            <div className="circle">{index + 1}</div>
+            <div className="stepDetails">
+              <div className="stepText">
+                Step
+                {index + 1}
+              </div>
+              <div className="stepName">{text}</div>
             </div>
-            <div className="stepName">
-              text
-              {name}
-            </div>
-          </div>
-        </li>
+          </li>
+        ))}
       </ul>
     </StyledNavBar>
-  )
-}
+  );
+};
 
 const StyledNavBar = styled.nav`
-  display: flex;
+  position: absolute;
   justify-content: flex-start;
-  min-height: 568px;
-  width: 274px;
+  min-height: 504px;
+  width: 226px;
   border-radius: 8px;
-  padding: 40px 32px;
+  padding: 32px 24px;
+  margin: 16px;
   background-color: #483eff;
 
   & .stepContainer {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 32px;
+    padding: 0;
+    margin: 0;
   }
 
-  & .step {
+  & li {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -80,6 +85,6 @@ const StyledNavBar = styled.nav`
     letter-spacing: 1px;
     color: #ffff;
   }
-`
+`;
 
-export default NavBar
+export default NavBar;
