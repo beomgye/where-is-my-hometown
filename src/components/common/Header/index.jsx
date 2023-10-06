@@ -26,19 +26,15 @@ const Header = ({ title, description, url, ogi }) => {
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
     </>
-  )
-}
+  );
+};
 
 Header.defaultProps = {
   title: process.env.NEXT_PUBLIC_TITLE,
   description: process.env.NEXT_PUBLIC_DESCRIPTION,
   url: process.env.NEXT_PUBLIC_URL,
   ogi: process.env.NEXT_PUBLIC_OG_IMAGE
-}
+};
 
-export default Header
+export default Header;
