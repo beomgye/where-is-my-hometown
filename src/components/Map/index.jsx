@@ -4,7 +4,8 @@ const Map = ({ onGeocoderLoad, onMarkerLoad }) => {
   useEffect(() => {
     const kakaoMapScript = document.createElement("script");
     kakaoMapScript.async = false;
-    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=700d399006256f95732f06b19c046ba5&libraries=services&autoload=false`;
+    kakaoMapScript.src =
+      "//dapi.kakao.com/v2/maps/sdk.js?appkey=d248939062099475f9c7ced600dbbbc6&libraries=services&autoload=false";
     document.head.appendChild(kakaoMapScript);
 
     const onLoadKakaoAPI = () => {
