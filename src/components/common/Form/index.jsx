@@ -8,6 +8,7 @@ const Form = ({
   children,
   footerButton,
   goBackButton,
+  onGoBack,
   buttonText,
   ...props
 }) => {
@@ -26,7 +27,7 @@ const Form = ({
         {!footerButton && (
           <Footer>
             {goBackButton && (
-              <Button type="button" size="default" color="secondary">
+              <Button type="button" size="default" color="secondary" onClick={onGoBack}>
                 Go Back
               </Button>
             )}
