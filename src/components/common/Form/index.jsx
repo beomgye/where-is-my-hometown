@@ -44,7 +44,7 @@ const Form = ({
 
 const StyledForm = styled.form`
   width: auto;
-  height: 568px;
+  height: auto;
 
   display: flex;
   flex-direction: row;
@@ -52,12 +52,11 @@ const StyledForm = styled.form`
 `;
 
 const Container = styled.div`
-  margin: 16px;
-  min-height: 504px;
-  padding: 32px 24px;
-
   flex: 1;
   width: 450px;
+  height: auto;
+  margin-top: 56px;
+  margin-bottom: 32px;
 
   display: flex;
   flex-direction: column;
