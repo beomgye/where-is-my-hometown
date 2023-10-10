@@ -1,30 +1,53 @@
 import { Controller } from 'react-hook-form';
+import styled from 'styled-components';
 import { Form, Input } from '@/components';
+import { Steps } from '@/types/step';
+
+const defaultInputRule = {
+  required: 'This field is required'
+};
 
 const AssetInputForm = ({ control, ...props }) => {
   return (
     <Form
-      index={0}
       title="자산 입력"
       description="갖고 있는 자산을 입력해 주세요"
+      navbarProps={{
+        current: 0,
+        steps: Steps
+      }}
       buttonText="다음 단계"
       {...props}
     >
-      <Controller
-        name="assets"
-        control={control}
-        render={({ field, fieldState: { error } }) => (
-          <Input
-            id="자산"
-            type="number"
-            placeholder="자산을 입력해 주세요."
-            error={error?.message}
-            {...field}
-          />
-        )}
-      />
+      <Container>
+        <Controller
+          name="assets"
+          control={control}
+          rules={defaultInputRule}
+          render={({ field, fieldState: { error } }) => (
+            <Input
+              id="assets"
+              label="자산"
+              type="number"
+              placeholder="자산을 입력해 주세요."
+              error={error?.message}
+              {...field}
+            />
+          )}
+        />
+      </Container>
     </Form>
   );
 };
+
+const Container = styled.div`
+  width: 450px;
+  height: 275px;
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
 export default AssetInputForm;

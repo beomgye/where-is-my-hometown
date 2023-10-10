@@ -1,12 +1,17 @@
 import { Form } from '@/components';
+import { Steps } from '@/types/step';
 
-const FinishForm = ({ control, ...props }) => {
+const FinishForm = ({ subscription, ...props }) => {
   return (
     <Form
-      index={3}
       title="마무리 단계"
       description="총 마무리 단계 입니다"
+      navbarProps={{
+        current: 4,
+        steps: Steps
+      }}
       buttonText="확인"
+      goBackButton
       {...props}
     >
       {/* 선택 옵션 요약 창 */}
