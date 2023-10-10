@@ -1,13 +1,14 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-const Input = ({ id, type, placeholder }) => {
+const Input = ({ label, id, error, type, ...props }) => {
   return (
-    <Container>
-      <Label htmlFor={id}>{id}</Label>
-      <StyledInput id={id} type={type} placeholder={placeholder} />
+    <Container error={error}>
+      <Label htmlFor={id}>{label}</Label>
+      {error && <div>{error}</div>}
+      <StyledInput id={id} type={type} {...props} />
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   display: flex;
@@ -18,14 +19,14 @@ const Container = styled.div`
   align-items: flex-start;
   gap: 8px;
   flex-shrink: 0;
-`
+`;
 const Label = styled.label`
   color: rgba(2, 41, 89, 1);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-`
+`;
 const StyledInput = styled.input`
   position: relative;
   padding: 0 16px;
@@ -48,6 +49,6 @@ const StyledInput = styled.input`
     position: absolute;
     left: 16px;
   }
-`
+`;
 
-export default Input
+export default Input;
