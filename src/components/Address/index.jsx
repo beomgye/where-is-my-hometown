@@ -53,7 +53,7 @@ const Address = () => {
       <Map onGeocoderLoad={handleGeocoderLoad} onMarkerLoad={handleMarkerLoad} />
       <input type="text" id="address" value={roadAddress} placeholder="도로명주소" readOnly />
       <button type="button" onClick={OnToggle}>
-        우편번호 검색
+        우편번호
       </button>
       <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
         <DaumPostcode onComplete={completeHandler} />
