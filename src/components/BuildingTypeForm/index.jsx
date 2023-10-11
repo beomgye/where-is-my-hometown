@@ -21,7 +21,7 @@ const BuildingTypeForm = ({ control, ...props }) => {
         {BuildingTypeOptions && BuildingTypeOptions.length > 0
           ? BuildingTypeOptions.map((type) => (
               <Controller
-                key={`building[${type.id}]`}
+                key={`building[${type.value}]`}
                 name={`building[${type.label}]`}
                 control={control}
                 render={({ field }) => (
