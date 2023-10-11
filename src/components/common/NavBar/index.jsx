@@ -1,20 +1,19 @@
 import styled from 'styled-components';
+import { highlightColor, secondaryColor } from '@/styles/variables';
 
-const NavBar = ({ current, text }) => {
-  const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
-
+const NavBar = ({ navbarProps: { current, steps }, text, ...props }) => {
   return (
-    <StyledNavBar>
+    <StyledNavBar {...props}>
       <ul className="stepContainer">
         {steps.map((step, index) => (
-          <li className={step === steps[current] ? 'active' : ''} key={step}>
+          <li className={current === index ? 'active' : ''} key={step}>
             <div className="circle">{index + 1}</div>
             <div className="stepDetails">
               <div className="stepText">
                 Step
                 {index + 1}
               </div>
-              <div className="stepName">{text}</div>
+              <div className="stepName">{steps[index]}</div>
             </div>
           </li>
         ))}
@@ -63,6 +62,14 @@ const StyledNavBar = styled.nav`
     background: transparent;
     border: 1px solid #fff;
     border-radius: 50%;
+  }
+
+  & .active {
+    .circle {
+      color: ${secondaryColor};
+      background: ${highlightColor};
+      border-color: ${highlightColor};
+    }
   }
 
   & .stepDetails {
