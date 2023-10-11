@@ -12,18 +12,19 @@ const Address = () => {
     // 부드럽게 이동할 지 유무
     isPanto: true,
     // 검색한 주소
-    address: "경기도 안양시 동안구 1143-3 ",
+    address: "",
     // 지도 레벨
     level: 3,
   });
-  const [address, setAddress] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [submit, setSubmit] = useState(false); // 임시
+
+  const [address, setAddress] = useState("제주 Kakao 스페이드닷투");
+  const [isModalOpen, isSetModalOpen] = useState(false);
+  // const [submit, setSubmit] = useState(false); // 임시
 
   const completeHandler = (data) => {
     console.log(data);
     setAddress(data.roadAddress);
-    setIsOpen(false);
+    isSetModalOpen(false);
   };
 
   const kakaoMapGeoCoder = () => {
@@ -52,15 +53,14 @@ const Address = () => {
 
   useEffect(() => {
     kakaoMapGeoCoder();
-    setSubmit(false);
-  }, [submit]);
+  }, [address]);
 
   const onClick = () => {
-    setIsOpen(!isOpen);
     setState((prev) => {
       return { ...prev, address };
     });
-    setSubmit(true);
+
+    isSetModalOpen(!isModalOpen);
   };
 
   return (
@@ -96,7 +96,7 @@ const Address = () => {
         <button type="button" onClick={onClick}>
           우편번호 검색
         </button>
-        <Modal isOpen={isOpen} ariaHideApp={false}>
+        <Modal isOpen={isModalOpen} ariaHideApp={false}>
           <DaumPostcode onComplete={completeHandler} />
         </Modal>
       </div>
