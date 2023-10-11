@@ -1,40 +1,36 @@
 import styled from 'styled-components';
 import { OptionContainer } from '@/containers';
+import { backgroundColor } from '@/styles/variables';
 
 const Home = () => {
   return (
-    <SceenContainer>
-      <Main>
-        <Title>Where is my Hometown</Title>
+    <Main>
+      <Title>Where is my Hometown</Title>
+      <Container>
         <OptionContainer />
-      </Main>
-    </SceenContainer>
+      </Container>
+    </Main>
   );
 };
 
-const SceenContainer = styled.div`
-  width: 100%;
+const Main = styled.main`
   height: 100vh;
+  background-color: ${backgroundColor};
+
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Main = styled.main`
-  position: relative;
-
-  width: 940px;
-  height: 600px;
-  margin: auto;
-
-  border-radius: 15px;
-  background-color: #fff;
-  box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
-`;
-
 const Title = styled.h1`
   position: absolute;
   top: -999px;
+`;
+
+const Container = styled.div`
+  width: 940px;
+  height: 600px;
+  margin: auto;
 `;
 
 export default Home;
