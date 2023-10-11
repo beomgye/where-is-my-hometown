@@ -1,44 +1,51 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
+import { activeColor, borderColor, primaryColor, whiteColor } from '@/styles/variables';
 
 const Checkbox = ({ checkboxProps: { label }, value, onClick, ...props }) => {
   const inputRef = useRef(null);
 
   return (
-    <Container isChecked={value === 'on'} onClick={() => inputRef?.current?.click()}>
-      <Input type="checkbox" ref={inputRef} {...props} />
+    <Container checked={value === 'on'} onClick={() => inputRef?.current?.click()}>
+      <Input type="checkbox" ref={inputRef} checked={value === 'on'} {...props} />
       <Label>{label}</Label>
     </Container>
   );
 };
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-
-  background-color: ${(props) =>
-    props.isChecked ? 'rgba(72, 62, 255, 1)' : 'rgba(255, 255, 255, 1)'};
-  border: 1px solid
-    ${(props) => (props.isChecked ? 'rgba(72, 62, 255, 1)' : 'rgba(214, 217, 230, 1)')};
+  background-color: ${(props) => (props.checked ? activeColor : whiteColor)};
+  border: 1px solid ${(props) => (props.checked ? primaryColor : borderColor)};
   border-radius: 8px;
-  padding: 11px 16px 12px;
-
+  padding: 0 24px;
   cursor: pointer;
   transition: border-color 0.3s;
 
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   &:hover {
-    border-color: rgba(72, 62, 255, 1);
+    border-color: ${primaryColor};
   }
 `;
 
 const Input = styled.input`
-  width: 20px;
-  height: 20px;
-  border: 1px solid rgba(214, 217, 230, 1);
-  border-radius: 0px;
-  appearance: none;
+  position: relative;
+  background: ${primaryColor};
+  border-color: ${primaryColor};
+  border-radius: 4px;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url() no-repeat center;
+    content: '';
+  }
 `;
 
 const Label = styled.label``;

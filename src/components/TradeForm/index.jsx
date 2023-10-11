@@ -21,7 +21,7 @@ const TradeForm = ({ control, ...props }) => {
         {TradeTypeOptions && TradeTypeOptions.length > 0
           ? TradeTypeOptions.map((type) => (
               <Controller
-                key={`trade[${type.id}]`}
+                key={`trade[${type.value}]`}
                 name={`trade[${type.label}]`}
                 control={control}
                 render={({ field }) => (
