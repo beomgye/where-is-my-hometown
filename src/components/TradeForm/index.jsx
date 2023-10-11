@@ -43,12 +43,10 @@ const TradeForm = ({ control, ...props }) => {
 
 const Container = styled.div`
   width: 450px;
-  height: 275px;
-  flex-shrink: 0;
 
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  margin-bottom: 64px;
 `;
 
 export default TradeForm;

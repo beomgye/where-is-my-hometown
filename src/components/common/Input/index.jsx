@@ -18,7 +18,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 8px;
-  flex-shrink: 0;
 `;
 const Label = styled.label`
   color: rgba(2, 41, 89, 1);

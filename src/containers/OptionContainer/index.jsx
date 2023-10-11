@@ -46,6 +46,7 @@ const OptionContainer = () => {
       )}
       {step === 4 && (
         <FinishForm
+          control={control}
           onSubmit={handleSubmit(onSubmit)}
           onGoBack={onGoBack}
           subscription={subscription}

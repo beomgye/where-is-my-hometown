@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button, NavBar } from '@/components';
+import { grayColor, secondaryColor, whiteColor } from '@/styles/variables';
 
 const Form = ({
   navbarProps,
@@ -14,47 +15,85 @@ const Form = ({
 }) => {
   return (
     <StyledForm {...props}>
-      <Wrapper>
-        <NavBar navbarProps={navbarProps} />
+      <NavBar navbarProps={navbarProps} />
 
-        <Container>
-          {title && <Title>{title}</Title>}
-          {description && <Description>{description}</Description>}
-          {children && <Content>{children}</Content>}
+      <Container>
+        {title && <Title>{title}</Title>}
+        {description && <Description>{description}</Description>}
+        {children && <Content>{children}</Content>}
 
-          {!footerHidden && (
-            <Footer>
-              {goBackButton && (
-                <Button type="button" size="default" color="secondary" onClick={onGoBack}>
-                  Go Back
-                </Button>
-              )}
-
-              <Button type="submit" size="default" color="primary">
-                {buttonText}
+        {!footerHidden && (
+          <Footer>
+            {goBackButton && (
+              <Button type="button" size="default" color="secondary" onClick={onGoBack}>
+                Go Back
               </Button>
-            </Footer>
-          )}
-        </Container>
-      </Wrapper>
+            )}
+
+            <Button type="submit" size="default" color="primary">
+              {buttonText}
+            </Button>
+          </Footer>
+        )}
+      </Container>
     </StyledForm>
   );
 };
 
-const StyledForm = styled.form``;
+const StyledForm = styled.form`
+  position: relative;
+  height: 100%;
+  overflow: auto;
 
-const Wrapper = styled.div`
+  border-radius: 15px;
+  background-color: ${whiteColor};
+  box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
+
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding: 0 100px;
+  overflow: scroll;
 
-const Title = styled.h2``;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: calc(var(--vh, 100vh) - 72px - 120px);
+`;
 
-const Description = styled.span``;
+const Title = styled.h2`
+  margin: 40px 0 11px;
 
-const Content = styled.div``;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: normal;
+  font-style: normal;
+  color: ${secondaryColor};
+`;
 
-const Footer = styled.footer``;
+const Description = styled.span`
+  color: ${grayColor};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px;
+`;
+
+const Content = styled.div`
+  flex: 1;
+  max-height: calc(100% - 56px - 32px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Footer = styled.footer`
+  margin: 0 0 16px;
+`;
 
 export default Form;

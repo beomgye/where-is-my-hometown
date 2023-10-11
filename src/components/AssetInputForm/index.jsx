@@ -1,5 +1,5 @@
-import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
+import { Controller } from 'react-hook-form';
 import { Form, Input } from '@/components';
 import { Steps } from '@/types/step';
 
@@ -42,12 +42,10 @@ const AssetInputForm = ({ control, ...props }) => {
 
 const Container = styled.div`
   width: 450px;
-  height: 275px;
-  flex-shrink: 0;
 
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  margin-bottom: 64px;
 `;
 
 export default AssetInputForm;
