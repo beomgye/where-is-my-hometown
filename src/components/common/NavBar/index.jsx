@@ -29,7 +29,7 @@ const StyledNavBar = styled.nav`
   width: 226px;
   border-radius: 8px;
   padding: 32px 24px;
-  margin: 16px;
+  margin: 16px 0 16px 16px;
   background-color: #483eff;
 
   & .stepContainer {

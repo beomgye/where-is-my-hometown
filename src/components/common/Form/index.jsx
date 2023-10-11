@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { Button, NavBar } from '@/components';
+import { grayColor, secondaryColor, whiteColor } from '@/styles/variables';
 
 const Form = ({
-  index,
+  navbarProps,
   title,
   description,
   children,
-  footerButton,
+  footerHidden,
   goBackButton,
   onGoBack,
   buttonText,
@@ -14,17 +15,14 @@ const Form = ({
 }) => {
   return (
     <StyledForm {...props}>
-      <NavBar current={index} text={title} />
+      <NavBar navbarProps={navbarProps} />
 
       <Container>
-        <TitleContainer>
-          {title && <Title>{title}</Title>}
-          {description && <Description>{description}</Description>}
-        </TitleContainer>
-
+        {title && <Title>{title}</Title>}
+        {description && <Description>{description}</Description>}
         {children && <Content>{children}</Content>}
 
-        {!footerButton && (
+        {!footerHidden && (
           <Footer>
             {goBackButton && (
               <Button type="button" size="default" color="secondary" onClick={onGoBack}>
@@ -43,62 +41,59 @@ const Form = ({
 };
 
 const StyledForm = styled.form`
-  width: auto;
-  height: 568px;
+  position: relative;
+  height: 100%;
+  overflow: auto;
+
+  border-radius: 15px;
+  background-color: ${whiteColor};
+  box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
 
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Container = styled.div`
-  margin: 16px;
-  min-height: 504px;
-  padding: 32px 24px;
-
-  flex: 1;
-  width: 450px;
+  padding: 0 100px;
+  overflow: scroll;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const TitleContainer = styled.div`
-  width: 450px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 11px;
+  height: 100%;
+  max-height: calc(var(--vh, 100vh) - 72px - 120px);
 `;
 
 const Title = styled.h2`
-  margin: 0;
-  color: rgba(2, 41, 89, 1);
-  font-size: 32px;
-  font-style: normal;
+  margin: 40px 0 11px;
+
   font-weight: 700;
+  font-size: 32px;
   line-height: normal;
+  font-style: normal;
+  color: ${secondaryColor};
 `;
 
 const Description = styled.span`
-  color: rgba(150, 153, 170, 1);
+  color: ${grayColor};
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 25px;
 `;
-const Content = styled.div``;
 
-const Footer = styled.footer`
-  width: 450px;
-  height: 48px;
+const Content = styled.div`
+  flex: 1;
+  max-height: calc(100% - 56px - 32px);
 
   display: flex;
-  flex-direction: row;
-  justify-content: ${({ goBackButton }) => (goBackButton ? 'space-between' : 'flex-end')};
+  justify-content: center;
+  align-items: center;
+`;
+
+const Footer = styled.footer`
+  margin: 0 0 16px;
 `;
 
 export default Form;

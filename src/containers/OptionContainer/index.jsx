@@ -11,15 +11,26 @@ import {
 const OptionContainer = () => {
   const { control, handleSubmit } = useForm();
   const [step, setStep] = useState(0);
+  const [subscription, setSubscription] = useState();
 
   const onGoBack = useCallback(() => {
     setStep(step - 1);
   }, [step]);
 
-  const onSubmit = useCallback(() => {
-    const nextStep = step + 1;
-    setStep(nextStep);
-  }, [step]);
+  const onSubmit = useCallback(
+    (data) => {
+      const nextStep = step + 1;
+      if (nextStep === 3) {
+        setSubscription(data);
+      }
+      setStep(nextStep);
+    },
+    [step]
+  );
+
+  const onRefreshButton = () => {
+    setStep(1);
+  };
 
   return (
     <>
@@ -34,7 +45,13 @@ const OptionContainer = () => {
         <BuildingTypeForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
       )}
       {step === 4 && (
-        <FinishForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
+        <FinishForm
+          control={control}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
+          subscription={subscription}
+          onRefreshButton={onRefreshButton}
+        />
       )}
     </>
   );
