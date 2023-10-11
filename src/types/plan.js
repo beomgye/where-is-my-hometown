@@ -32,16 +32,16 @@ export const BuildingType = [
   }
 ];
 
-export const TradeTypeOptions = TradeType.map(({ id, name: label }) => {
+export const TradeTypeOptions = TradeType.map(({ id: value, name: label }) => {
   return {
-    id,
+    value,
     label
   };
 });
 
-export const BuildingTypeOptions = BuildingType.map(({ id, name: label }) => {
+export const BuildingTypeOptions = BuildingType.map(({ id: value, name: label }) => {
   return {
-    id,
+    value,
     label
   };
 });
