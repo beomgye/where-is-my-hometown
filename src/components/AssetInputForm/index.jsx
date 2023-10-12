@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
-import { Form, Input } from '@/components';
+import { Form, InputField } from '@/components';
 import { Steps } from '@/types/step';
 
 const defaultInputRule = {
@@ -25,12 +25,15 @@ const AssetInputForm = ({ control, ...props }) => {
           control={control}
           rules={defaultInputRule}
           render={({ field, fieldState: { error } }) => (
-            <Input
+            <InputField
               id="assets"
               label="자산"
-              type="number"
               placeholder="자산을 입력해 주세요."
               error={error?.message}
+              value={field.value}
+              onChange={(newValue) => {
+                field.onChange(newValue);
+              }}
               {...field}
             />
           )}
