@@ -35,24 +35,39 @@
 	
 	"rules": {
 		"react/react-in-jsx-scope": "off",
+		"no-useless-catch": "off",
+		"import/no-unresolved": "off",
+		"@typescript-eslint/semi": "off",
+		"import/prefer-default-export": "off",
+		"import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}],
+		"react/prop-types": "off",
+		"react/jsx-props-no-spreading": 0,
 		"react/prefer-stateless-function": "error",
 		"react/jsx-one-expression-per-line": "error",
 		"no-nested-ternary": "error",
-		"react/jsx-props-no-spreading": 0,
-		"@typescript-eslint/semi": "off",
 		"react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
-		"no-useless-catch": "off",
-		"import/no-unresolved": "off",
 		"import/extensions": ["error", "never"],
-		"import/prefer-default-export": "off",
-		"import/no-extraneous-dependencies": [ "off", { "packageDir": "./" } ],
-		"react/prop-types": "off",
 		"react/function-component-definition": [
 			2,
 			{
 			  "namedComponents": "arrow-function",
 			  "unnamedComponents": "arrow-function"
 			}
-		]
+		],
+		"prettier/prettier": [
+			"error",
+			{
+			  "arrowSpacing": ["error", { "before": true, "after": true }], 
+			  "singleQuote": true, 
+			  "semi": true, 
+			  "useTabs": false, 
+			  "tabWidth": 2, 
+			  "trailingComma": "none", 
+			  "printWidth": 100, 
+			  "bracketSpacing": true, 
+			  "arrowParens": "always", 
+			  "endOfLine": "auto" 
+			}
+		  ]
 	}
 }

@@ -1,23 +1,38 @@
-import styled from "styled-components";
-import Address from "@/components/Address";
-import { OptionContainer } from "@/containers";
+import styled from 'styled-components';
+import { OptionContainer } from '@/containers';
+import { backgroundColor } from '@/styles/variables';
+import Address from '@/components/Address';
 
 const Home = () => {
   return (
-    <>
-      <Main>
-        <Title>Where is my Hometown</Title>
-        <Address />
-      </Main>
+    <Main>
+      <Title>Where is my Hometown</Title>
+      <Address />
       <Container>
         <OptionContainer />
       </Container>
-    </>
+    </Main>
   );
 };
 
-const Main = styled.main``;
-const Title = styled.h1``;
-const Container = styled.div``;
+const Main = styled.main`
+  height: 100vh;
+  background-color: ${backgroundColor};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.h1`
+  position: absolute;
+  top: -999px;
+`;
+
+const Container = styled.div`
+  width: 940px;
+  height: 600px;
+  margin: auto;
+`;
 
 export default Home;
