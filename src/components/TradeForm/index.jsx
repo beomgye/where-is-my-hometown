@@ -1,6 +1,5 @@
-import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
-import { Form, Checkbox } from '@/components';
+import { Form, Checkbox, Container } from '@/components';
 import { TradeTypeOptions } from '../../types/plan';
 import { Steps } from '@/types/step';
 
@@ -40,13 +39,5 @@ const TradeForm = ({ control, ...props }) => {
     </Form>
   );
 };
-
-const Container = styled.div`
-  width: 450px;
-
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 64px;
-`;
 
 export default TradeForm;

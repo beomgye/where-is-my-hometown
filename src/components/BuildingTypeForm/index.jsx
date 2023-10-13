@@ -1,6 +1,5 @@
-import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
-import { Checkbox, Form } from '@/components';
+import { Checkbox, Container, Form } from '@/components';
 import { BuildingTypeOptions } from '@/types/plan';
 import { Steps } from '@/types/step';
 
@@ -40,13 +39,5 @@ const BuildingTypeForm = ({ control, ...props }) => {
     </Form>
   );
 };
-
-const Container = styled.div`
-  width: 450px;
-
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 64px;
-`;
 
 export default BuildingTypeForm;
