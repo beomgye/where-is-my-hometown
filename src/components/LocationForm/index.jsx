@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
 import { Form } from '@/components';
 import { Steps } from '@/types/step';
+import Address from '../Address';
 
 const LocationForm = ({ control, ...props }) => {
   return (
@@ -20,7 +21,7 @@ const LocationForm = ({ control, ...props }) => {
         <Controller
           name="location"
           control={control}
-          render={({ field }) => <div {...field}>Controller 를 활용하여 구현할 것</div>}
+          render={({ field }) => <Address {...field} />}
         />
         {/* 지도 출력 */}
         {/* 다음 포스트 코드 */}

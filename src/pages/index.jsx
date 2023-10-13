@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import { OptionContainer } from '@/containers';
 import { backgroundColor } from '@/styles/variables';
-import Address from '@/components/Address';
 
 const Home = () => {
   return (
     <Main>
       <Title>Where is my Hometown</Title>
-      <Address />
+
       <Container>
         <OptionContainer />
       </Container>
