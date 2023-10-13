@@ -96,7 +96,7 @@ const AddressButton = styled.input`
   border: 0;
   margin: auto 0;
   position: absolute;
-  top: 0;
+  top: -10px;
   bottom: 0;
   right: -10px;
   background-color: white;

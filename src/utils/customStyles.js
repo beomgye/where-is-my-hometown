@@ -1,8 +1,11 @@
 const ModalCustomStyles = {
   overlay: {
-    backgroundColor: 'rgba(0,0,0,0.5)'
+    position: 'fixed',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    zIndex: 9999
   },
   content: {
+    position: 'absolute',
     left: '0',
     margin: 'auto',
     width: '500px',
