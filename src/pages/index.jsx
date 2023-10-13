@@ -6,6 +6,7 @@ const Home = () => {
   return (
     <Main>
       <Title>Where is my Hometown</Title>
+
       <Container>
         <OptionContainer />
       </Container>

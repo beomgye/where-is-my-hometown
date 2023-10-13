@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 const Button = ({ type, size = 'default', color, children, ...props }) => {
   return (
     <StyledButton type={type} size={size} color={color} {...props}>
       {children}
     </StyledButton>
-  )
-}
+  );
+};
 
 const StyledButton = styled.button`
   display: flex;
@@ -21,22 +21,22 @@ const StyledButton = styled.button`
     if (size === 'small') {
       return css`
         font-size: small;
-      `
+      `;
     }
     if (size === 'default') {
       return css`
         font-size: medium;
-      `
+      `;
     }
     if (size === 'large') {
       return css`
         font-size: large;
-      `
+      `;
     }
 
     return css`
       font-size: medium;
-    `
+    `;
   }}
   ${({ color }) => {
     if (color === 'primary') {
@@ -47,7 +47,7 @@ const StyledButton = styled.button`
         &:hover {
           background-color: rgb(67, 139, 255);
         }
-      `
+      `;
     }
     if (color === 'secondary') {
       return css`
@@ -57,13 +57,13 @@ const StyledButton = styled.button`
         &:hover {
           background-color: #e8e9ea;
         }
-      `
+      `;
     }
 
     return css`
       background-color: #022959
       color: white;
-    `
+    `;
   }}
     ${({ disabled }) => {
     if (disabled) {
@@ -77,11 +77,11 @@ const StyledButton = styled.button`
           color: #cccccc;
           cursor: not-allowed;
         }
-      `
+      `;
     }
 
-    return css``
+    return css``;
   }};
-`
+`;
 
-export default Button
+export default Button;
