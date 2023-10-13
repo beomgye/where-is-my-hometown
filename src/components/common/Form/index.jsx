@@ -10,6 +10,8 @@ const Form = ({
   footerHidden,
   goBackButton,
   onGoBack,
+  refreshButton,
+  onRefresh,
   buttonText,
   ...props
 }) => {
@@ -27,6 +29,12 @@ const Form = ({
             {goBackButton && (
               <Button type="button" size="default" color="secondary" onClick={onGoBack}>
                 Go Back
+              </Button>
+            )}
+
+            {refreshButton && (
+              <Button type="button" size="default" color="secondary" onClick={onRefresh}>
+                Refresh
               </Button>
             )}
 

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import ModalCustomStyles from '@/utils/customStyles';
 import { grayColor } from '@/styles/variables';
 
-const Address = () => {
+const Address = ({ value, onChange }) => {
   const [center, setCenter] = useState({ lat: 33.452613, lng: 126.570888 });
   const [address, setAddress] = useState('');
   const [isModalOpen, isSetModalOpen] = useState(false);
@@ -16,6 +16,10 @@ const Address = () => {
     console.log(data);
     setAddress(data.roadAddress);
     isSetModalOpen(false);
+
+    if (onChange) {
+      onChange(data.roadAddress);
+    }
   };
 
   const kakaoMapGeoCoder = () => {
@@ -59,7 +63,7 @@ const Address = () => {
         </MapMarker>
       </Map>
       <AddressContainer>
-        <AddressInput type="text" value={address} readOnly />
+        <AddressInput type="text" value={value} readOnly />
         <AddressButton type="button" onClick={onClick} value="장소 선택" />
       </AddressContainer>
       <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalCustomStyles}>
