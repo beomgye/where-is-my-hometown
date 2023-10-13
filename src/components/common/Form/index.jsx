@@ -26,17 +26,19 @@ const Form = ({
 
         {!footerHidden && (
           <Footer>
-            {goBackButton && (
-              <Button type="button" size="default" color="secondary" onClick={onGoBack}>
-                Go Back
-              </Button>
-            )}
+            <ButtonContainer>
+              {goBackButton && (
+                <Button type="button" size="default" color="secondary" onClick={onGoBack}>
+                  Go Back
+                </Button>
+              )}
 
-            {refreshButton && (
-              <Button type="button" size="default" color="secondary" onClick={onRefresh}>
-                Refresh
-              </Button>
-            )}
+              {refreshButton && (
+                <Button type="button" size="default" color="secondary" onClick={onRefresh}>
+                  Refresh
+                </Button>
+              )}
+            </ButtonContainer>
 
             <Button type="submit" size="default" color="primary">
               {buttonText}
@@ -102,6 +104,15 @@ const Content = styled.div`
 
 const Footer = styled.footer`
   margin: 0 0 16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export default Form;
