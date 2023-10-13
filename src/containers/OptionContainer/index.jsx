@@ -5,11 +5,12 @@ import {
   BuildingTypeForm,
   FinishForm,
   LocationForm,
+  SelectInfo,
   TradeForm
 } from '@/components';
 
 const OptionContainer = () => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
   const [step, setStep] = useState(0);
   const [subscription, setSubscription] = useState();
 
@@ -29,7 +30,8 @@ const OptionContainer = () => {
   );
 
   const onRefreshButton = () => {
-    setStep(1);
+    reset();
+    setStep(0);
   };
 
   return (
@@ -50,6 +52,14 @@ const OptionContainer = () => {
           onSubmit={handleSubmit(onSubmit)}
           onGoBack={onGoBack}
           subscription={subscription}
+          onRefreshButton={onRefreshButton}
+        />
+      )}
+      {step === 5 && (
+        <SelectInfo
+          control={control}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
           onRefreshButton={onRefreshButton}
         />
       )}
