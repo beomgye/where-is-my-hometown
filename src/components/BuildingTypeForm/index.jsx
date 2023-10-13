@@ -21,12 +21,12 @@ const BuildingTypeForm = ({ control, ...props }) => {
         {BuildingTypeOptions && BuildingTypeOptions.length > 0
           ? BuildingTypeOptions.map((type) => (
               <Controller
-                key={`building[${type.value}]`}
-                name={`building[${type.label}]`}
+                key={`buildingType[${type.value}]`}
+                name={`buildingType[${type.label}]`}
                 control={control}
                 render={({ field }) => (
                   <Checkbox
-                    id={`building[${type.id}]`}
+                    id={`buildingType[${type.id}]`}
                     checkboxProps={type}
                     {...field}
                     onChange={() => field.onChange(type.value === field.value ? null : type.value)}
