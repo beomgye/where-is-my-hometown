@@ -21,7 +21,7 @@ const LocationForm = ({ control, ...props }) => {
         <Controller
           name="location"
           control={control}
-          render={({ field }) => <Address {...field} />}
+          render={({ field }) => <Address value={field.value} onChange={field.onChange} />}
         />
         {/* 지도 출력 */}
         {/* 다음 포스트 코드 */}
