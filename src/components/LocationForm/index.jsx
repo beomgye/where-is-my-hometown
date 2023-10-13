@@ -4,7 +4,7 @@ import { Form } from '@/components';
 import { Steps } from '@/types/step';
 import Address from '../Address';
 
-const LocationForm = ({ control, ...props }) => {
+const LocationForm = ({ control, setBcode, ...props }) => {
   return (
     <Form
       title="위치 선택"
@@ -21,10 +21,17 @@ const LocationForm = ({ control, ...props }) => {
         <Controller
           name="location"
           control={control}
-          render={({ field }) => <Address value={field.value} onChange={field.onChange} />}
+          render={({ field, fieldState: { error } }) => (
+            <Address
+              setBcode={setBcode}
+              error={error?.message}
+              address={field.value}
+              changeAddress={(newValue) => {
+                field.onChange(newValue);
+              }}
+            />
+          )}
         />
-        {/* 지도 출력 */}
-        {/* 다음 포스트 코드 */}
       </Container>
     </Form>
   );

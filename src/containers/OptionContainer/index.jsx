@@ -15,6 +15,7 @@ const OptionContainer = () => {
       location: ''
     }
   });
+  const [bcode, setBcode] = useState('');
   const [step, setStep] = useState(0);
   const [option, setOption] = useState({});
 
@@ -37,6 +38,7 @@ const OptionContainer = () => {
           assets: data.assets,
           location: data.location,
           tradeType,
+          bcode,
           buildingType
         });
       }
@@ -59,7 +61,12 @@ const OptionContainer = () => {
     <>
       {step === 0 && <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />}
       {step === 1 && (
-        <LocationForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
+        <LocationForm
+          setBcode={setBcode}
+          control={control}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
+        />
       )}
       {step === 2 && (
         <TradeForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
