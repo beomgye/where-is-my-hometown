@@ -33,9 +33,11 @@ const Container = styled.div`
 
 const Input = styled.input`
   position: relative;
-  background: ${primaryColor};
-  border-color: ${primaryColor};
   border-radius: 4px;
+
+  width: 17.422px;
+  height: 17.531px;
+  appearance: none;
 
   &::before {
     position: absolute;
@@ -43,9 +45,17 @@ const Input = styled.input`
     left: 0;
     width: 100%;
     height: 100%;
-    background: url() no-repeat center;
+    background: url('/icons/checkbox-unchecked.svg') no-repeat center;
     content: '';
   }
+
+  ${({ checked }) =>
+    checked &&
+    `
+    &:before {
+      background: url('/icons/checkbox-checked.svg') no-repeat center;
+    }
+  `}
 `;
 
 const Label = styled.label``;
