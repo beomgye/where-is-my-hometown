@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   AssetInputForm,
@@ -9,9 +9,14 @@ import {
 } from '@/components';
 
 const OptionContainer = () => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      assets: '',
+      location: ''
+    }
+  });
   const [step, setStep] = useState(0);
-  const [subscription, setSubscription] = useState();
+  const [option, setOption] = useState({});
 
   const onGoBack = useCallback(() => {
     setStep(step - 1);
@@ -20,16 +25,34 @@ const OptionContainer = () => {
   const onSubmit = useCallback(
     (data) => {
       const nextStep = step + 1;
-      if (nextStep === 3) {
-        setSubscription(data);
+      if (nextStep === 4) {
+        const tradeType = data.trade
+          ? Object.keys(data.trade).filter((key) => data.trade[key])
+          : [];
+        const buildingType = data.buildingType
+          ? Object.keys(data.buildingType).filter((key) => data.buildingType[key])
+          : [];
+
+        setOption({
+          assets: data.assets,
+          location: data.location,
+          tradeType,
+          buildingType
+        });
       }
       setStep(nextStep);
     },
     [step]
   );
 
-  const onRefreshButton = () => {
-    setStep(1);
+  useEffect(() => {
+    console.log(option);
+  }, [option]);
+
+  const onRefresh = () => {
+    setStep(0);
+    setOption({});
+    reset();
   };
 
   return (
@@ -44,15 +67,7 @@ const OptionContainer = () => {
       {step === 3 && (
         <BuildingTypeForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
       )}
-      {step === 4 && (
-        <FinishForm
-          control={control}
-          onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
-          subscription={subscription}
-          onRefreshButton={onRefreshButton}
-        />
-      )}
+      {step === 4 && <FinishForm onGoBack={onGoBack} onRefresh={onRefresh} option={option} />}
     </>
   );
 };

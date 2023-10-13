@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Form } from '@/components';
 import { Steps } from '@/types/step';
 
-const FinishForm = ({ control, ...props }) => {
+const FinishForm = ({ option, ...props }) => {
   return (
     <Form
       title="마무리 단계"
@@ -13,6 +13,7 @@ const FinishForm = ({ control, ...props }) => {
       }}
       buttonText="확인"
       goBackButton
+      refreshButton
       {...props}
     >
       <Container>
@@ -20,20 +21,20 @@ const FinishForm = ({ control, ...props }) => {
           <TotalContainer>
             <Asset>
               <AssetTitle>자산</AssetTitle>
-              <AssetValue>자산</AssetValue>
+              <AssetValue>{option.assets}</AssetValue>
             </Asset>
             <hr />
             <Location>
               <LocationTitle>위치</LocationTitle>
-              <LocationValue>위치</LocationValue>
+              <LocationValue>{option.location}</LocationValue>
             </Location>
             <Trade>
-              <TradeTitle>전세/월세/매매</TradeTitle>
-              <TradeValue>거래</TradeValue>
+              <TradeTitle>거래 방식</TradeTitle>
+              <TradeValue>{option.tradeType.join(', ')}</TradeValue>
             </Trade>
             <BuildingType>
-              <BuildingTitle>아파트/연립/단독/주택연합</BuildingTitle>
-              <BuildingValue>건물</BuildingValue>
+              <BuildingTitle>건물 유형</BuildingTitle>
+              <BuildingValue>{option.buildingType.join(', ')}</BuildingValue>
             </BuildingType>
           </TotalContainer>
         </StyledFinishForm>
