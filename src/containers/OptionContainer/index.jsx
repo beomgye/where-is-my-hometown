@@ -5,6 +5,7 @@ import {
   BuildingTypeForm,
   FinishForm,
   LocationForm,
+  SelectInfo,
   TradeForm
 } from '@/components';
 
@@ -75,6 +76,14 @@ const OptionContainer = () => {
         <BuildingTypeForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
       )}
       {step === 4 && <FinishForm onGoBack={onGoBack} onRefresh={onRefresh} option={option} />}
+      {step === 5 && (
+        <SelectInfo
+          control={control}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
+          onRefreshButton={onRefreshButton}
+        />
+      )}
     </>
   );
 };

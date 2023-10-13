@@ -10,3 +10,4 @@ export { default as LocationForm } from './LocationForm';
 export { default as BuildingTypeForm } from './BuildingTypeForm';
 export { default as FinishForm } from './FinishForm';
 export { default as TradeForm } from './TradeForm';
+export { default as SelectInfo } from './SelectInfo';
