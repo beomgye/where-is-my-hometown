@@ -6,16 +6,20 @@ import styled from 'styled-components';
 import ModalCustomStyles from '@/utils/customStyles';
 import { grayColor } from '@/styles/variables';
 
-const Address = () => {
+const Address = ({ address, changeAddress, setBcode }) => {
   const [center, setCenter] = useState({ lat: 33.452613, lng: 126.570888 });
-  const [address, setAddress] = useState('');
   const [isModalOpen, isSetModalOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   const completeHandler = (data) => {
     console.log(data);
-    setAddress(data.roadAddress);
+    changeAddress(data.roadAddress);
+    setBcode(data.bcode);
     isSetModalOpen(false);
+
+    if (changeAddress) {
+      changeAddress(data.roadAddress);
+    }
   };
 
   const kakaoMapGeoCoder = () => {

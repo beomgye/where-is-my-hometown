@@ -63,7 +63,7 @@ const Input = styled.input`
   color: ${denimColor};
   font-size: 16px;
   font-weight: 500;
-  line-weight: normal;
+  line-height: normal;
 
   &::placeholder {
     color: rgba(150, 153, 170, 1);
