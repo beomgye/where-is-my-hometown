@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
-import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import styled from 'styled-components';
 import ModalCustomStyles from '@/utils/customStyles';
 import { grayColor } from '@/styles/variables';
@@ -10,6 +10,7 @@ const Address = () => {
   const [center, setCenter] = useState({ lat: 33.452613, lng: 126.570888 });
   const [address, setAddress] = useState('');
   const [isModalOpen, isSetModalOpen] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   const completeHandler = (data) => {
     console.log(data);
@@ -43,12 +44,18 @@ const Address = () => {
     isSetModalOpen(!isModalOpen);
   };
 
+  const onMoustOver = () => {
+    setIsInfoOpen(true);
+  };
+
+  const onMoustOut = () => {
+    setIsInfoOpen(false);
+  };
   return (
     <div>
       <Map style={{ width: '450px', height: '250px' }} center={center} isPanto level={3}>
-        <MapMarker position={center}>
-          <InfoWindow>{address}</InfoWindow>
-          <CustomOverlayMap position={center} yAnchor={1} />
+        <MapMarker position={center} clickable onMouseOver={onMoustOver} onMouseOut={onMoustOut}>
+          {isInfoOpen && <InfoWindow>{address}</InfoWindow>}
         </MapMarker>
       </Map>
       <AddressContainer>
