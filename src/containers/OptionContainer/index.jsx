@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import {
   AssetInputForm,
   BuildingTypeForm,
@@ -8,7 +9,6 @@ import {
   SelectInfo,
   TransactionTypeForm
 } from '@/components';
-import { axiosInstance } from '@/api';
 
 const OptionContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm({
@@ -46,8 +46,13 @@ const OptionContainer = () => {
       if (nextStep === 5) {
         const { location, ...restOfOption } = option;
 
-        axiosInstance
-          .post('/whereismyneighborhood', restOfOption)
+        console.log(restOfOption);
+        axios
+          .post('/whereismyneighborhood', restOfOption, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
           .then((res) => {
             setTownList(res.data);
             console.log(res.data);
