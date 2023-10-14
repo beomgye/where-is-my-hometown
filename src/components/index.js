@@ -5,10 +5,11 @@ export { default as Button } from './common/Button';
 export { default as InputField } from './common/InputField';
 export { default as Checkbox } from './common/Checkbox';
 export { default as Container } from './common/Container';
+export { default as Address } from './common/Address';
 
-export { default as AssetInputForm } from './AssetInputForm';
-export { default as LocationForm } from './LocationForm';
-export { default as BuildingTypeForm } from './BuildingTypeForm';
-export { default as FinishForm } from './FinishForm';
-export { default as TradeForm } from './TradeForm';
-export { default as SelectInfo } from './SelectInfo';
+export { default as AssetInputForm } from './screens/AssetInputForm';
+export { default as LocationForm } from './screens/LocationForm';
+export { default as BuildingTypeForm } from './screens/BuildingTypeForm';
+export { default as FinishForm } from './screens/FinishForm';
+export { default as TradeForm } from './screens/TradeForm';
+export { default as SelectInfo } from './screens/SelectInfo';

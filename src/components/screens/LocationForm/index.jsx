@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
-import { Form } from '@/components';
+import { Address, Form } from '@/components';
 import { Steps } from '@/types/step';
-import Address from '../Address';
 
 const LocationForm = ({ control, setBcode, ...props }) => {
   return (
