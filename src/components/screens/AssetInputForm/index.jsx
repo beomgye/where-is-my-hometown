@@ -1,34 +1,41 @@
 import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
-import { Form } from '@/components';
+import { Form, InputField } from '@/components';
 import { Steps } from '@/types/step';
-import Address from '../Address';
 
-const LocationForm = ({ control, setBcode, ...props }) => {
+const defaultInputRule = {
+  required: 'This field is required'
+};
+
+const AssetInputForm = ({ control, ...props }) => {
   return (
     <Form
-      title="위치 선택"
-      description="위치를 선택해 주세요"
+      title="자산 입력"
+      description="갖고 있는 자산을 입력해 주세요"
       navbarProps={{
-        current: 1,
+        current: 0,
         steps: Steps
       }}
       buttonText="다음 단계"
-      goBackButton
       {...props}
     >
       <Container>
         <Controller
-          name="location"
+          name="assets"
           control={control}
+          rules={defaultInputRule}
           render={({ field, fieldState: { error } }) => (
-            <Address
-              setBcode={setBcode}
+            <InputField
+              id="assets"
+              label="자산"
+              placeholder="자산을 입력해 주세요."
               error={error?.message}
-              address={field.value}
-              changeAddress={(newValue) => {
+              ref={field.ref}
+              value={field.value}
+              onChange={(newValue) => {
                 field.onChange(newValue);
               }}
+              {...field}
             />
           )}
         />
@@ -45,4 +52,4 @@ const Container = styled.div`
   margin-bottom: 64px;
 `;
 
-export default LocationForm;
+export default AssetInputForm;

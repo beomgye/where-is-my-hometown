@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Form } from '@/components';
 import { Steps } from '@/types/step';
+import { formatMoney } from '@/utils/formatMoney';
 
 const FinishForm = ({ option, ...props }) => {
   return (
@@ -21,7 +22,7 @@ const FinishForm = ({ option, ...props }) => {
           <TotalContainer>
             <Asset>
               <AssetTitle>자산</AssetTitle>
-              <AssetValue>{option.assets}</AssetValue>
+              <AssetValue>{`${formatMoney(option.property)} 원`}</AssetValue>
             </Asset>
             <hr />
             <Location>
@@ -30,11 +31,11 @@ const FinishForm = ({ option, ...props }) => {
             </Location>
             <Trade>
               <TradeTitle>거래 방식</TradeTitle>
-              <TradeValue>{option.tradeType.join(', ')}</TradeValue>
+              <TradeValue>{option.transactionType}</TradeValue>
             </Trade>
             <BuildingType>
               <BuildingTitle>건물 유형</BuildingTitle>
-              <BuildingValue>{option.buildingType.join(', ')}</BuildingValue>
+              <BuildingValue>{option.buildingType}</BuildingValue>
             </BuildingType>
           </TotalContainer>
         </StyledFinishForm>

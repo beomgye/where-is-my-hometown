@@ -1,17 +1,18 @@
-import { useRef } from 'react';
 import styled from 'styled-components';
+import React from 'react';
 import { activeColor, borderColor, primaryColor, whiteColor } from '@/styles/variables';
 
-const Checkbox = ({ checkboxProps: { label }, value, onClick, ...props }) => {
-  const inputRef = useRef(null);
-
+const Radio = React.forwardRef(function Checkbox(
+  { radioProps: { label }, onChange, checked, ...props },
+  ref
+) {
   return (
-    <Container checked={value === 'on'} onClick={() => inputRef?.current?.click()}>
-      <Input type="checkbox" ref={inputRef} checked={value === 'on'} {...props} />
+    <Container checked={checked} onClick={() => onChange(() => onChange(!checked))}>
+      <Input type="radio" ref={ref} defaultChecked={checked} {...props} />
       <Label>{label}</Label>
     </Container>
   );
-};
+});
 
 const Container = styled.div`
   background-color: ${(props) => (props.checked ? activeColor : whiteColor)};
@@ -33,9 +34,11 @@ const Container = styled.div`
 
 const Input = styled.input`
   position: relative;
-  background: ${primaryColor};
-  border-color: ${primaryColor};
   border-radius: 4px;
+
+  width: 17.422px;
+  height: 17.531px;
+  appearance: none;
 
   &::before {
     position: absolute;
@@ -43,11 +46,19 @@ const Input = styled.input`
     left: 0;
     width: 100%;
     height: 100%;
-    background: url() no-repeat center;
+    background: url('/icons/checkbox-unchecked.svg') no-repeat center;
     content: '';
   }
+
+  ${({ defaultChecked }) =>
+    defaultChecked &&
+    `
+    &:before {
+      background: url('/icons/checkbox-checked.svg') no-repeat center;
+    }
+  `}
 `;
 
 const Label = styled.label``;
 
-export default Checkbox;
+export default Radio;

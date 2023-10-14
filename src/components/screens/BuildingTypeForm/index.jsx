@@ -1,10 +1,11 @@
-import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
-import { Checkbox, Form } from '@/components';
-import { BuildingTypeOptions } from '@/types/plan';
+import { Container, Form, Radio } from '@/components';
+import { BuildingTypeOptions } from '@/types/option';
 import { Steps } from '@/types/step';
 
-const BuildingTypeForm = ({ control, ...props }) => {
+const BuildingTypeForm = ({ control, watch, ...props }) => {
+  const selectedValue = watch('buildingType');
+
   return (
     <Form
       title="건물 유형"
@@ -22,15 +23,16 @@ const BuildingTypeForm = ({ control, ...props }) => {
           ? BuildingTypeOptions.map((type) => (
               <Controller
                 key={`buildingType[${type.value}]`}
-                name={`buildingType[${type.label}]`}
+                name="buildingType"
                 control={control}
                 render={({ field }) => (
-                  <Checkbox
+                  <Radio
                     id={`buildingType[${type.id}]`}
-                    checkboxProps={type}
-                    {...field}
-                    onChange={() => field.onChange(type.value === field.value ? null : type.value)}
-                    value={type.value === field.value ? 'on' : 'off'}
+                    name="buildingType"
+                    radioProps={type}
+                    value={type.value}
+                    onChange={() => field.onChange(type.value)}
+                    checked={selectedValue === type.value}
                   />
                 )}
               />
@@ -40,13 +42,5 @@ const BuildingTypeForm = ({ control, ...props }) => {
     </Form>
   );
 };
-
-const Container = styled.div`
-  width: 450px;
-
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 64px;
-`;
 
 export default BuildingTypeForm;

@@ -5,11 +5,13 @@ import {
   BuildingTypeForm,
   FinishForm,
   LocationForm,
-  TradeForm
+  SelectInfo,
+  TransactionTypeForm
 } from '@/components';
+import { axiosInstance } from '@/api';
 
 const OptionContainer = () => {
-  const { control, handleSubmit, reset } = useForm({
+  const { control, watch, handleSubmit, reset } = useForm({
     defaultValues: {
       assets: '',
       location: '주소를 입력해주세요.'
@@ -18,33 +20,50 @@ const OptionContainer = () => {
   const [bcode, setBcode] = useState('');
   const [step, setStep] = useState(0);
   const [option, setOption] = useState({});
+  const [townList, setTownList] = useState([]);
 
   const onGoBack = useCallback(() => {
     setStep(step - 1);
   }, [step]);
 
   const onSubmit = useCallback(
-    (data) => {
+    async (data) => {
       const nextStep = step + 1;
-      if (nextStep === 4) {
-        const tradeType = data.trade
-          ? Object.keys(data.trade).filter((key) => data.trade[key])
-          : [];
-        const buildingType = data.buildingType
-          ? Object.keys(data.buildingType).filter((key) => data.buildingType[key])
-          : [];
+      const assets = data.assets.replace(/,/g, '');
 
+      if (nextStep === 4) {
         setOption({
-          assets: data.assets,
+          isKBApi: 0,
+          property: assets,
           location: data.location,
-          tradeType,
-          bcode,
-          buildingType
+          neighborhoodCode: bcode,
+          transactionType: data.transactionType,
+          buildingType: data.buildingType,
+          recommendedNumber: 1
         });
       }
-      setStep(nextStep);
+
+      if (nextStep === 5) {
+        const { location, ...restOfOption } = option;
+
+        axiosInstance
+          .post('/whereismyneighborhood', restOfOption)
+          .then((res) => {
+            setTownList(res.data);
+            console.log(res.data);
+            setStep(nextStep);
+          })
+          .catch((err) => {
+            alert('추천 동네를 불러오는 데 실패했습니다.');
+            console.log(err);
+          });
+      }
+
+      if (nextStep !== 5) {
+        setStep(nextStep);
+      }
     },
-    [step]
+    [step, bcode]
   );
 
   useEffect(() => {
@@ -62,19 +81,39 @@ const OptionContainer = () => {
       {step === 0 && <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />}
       {step === 1 && (
         <LocationForm
-          setBcode={setBcode}
           control={control}
+          setBcode={setBcode}
           onSubmit={handleSubmit(onSubmit)}
           onGoBack={onGoBack}
         />
       )}
       {step === 2 && (
-        <TradeForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
+        <TransactionTypeForm
+          control={control}
+          watch={watch}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
+        />
       )}
       {step === 3 && (
-        <BuildingTypeForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
+        <BuildingTypeForm
+          control={control}
+          watch={watch}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
+        />
       )}
-      {step === 4 && <FinishForm onGoBack={onGoBack} onRefresh={onRefresh} option={option} />}
+      {step === 4 && (
+        <FinishForm
+          option={option}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
+          onRefresh={onRefresh}
+        />
+      )}
+      {step === 5 && (
+        <SelectInfo townList={townList} onGoBack={onGoBack} onRefreshButton={onRefresh} />
+      )}
     </>
   );
 };
