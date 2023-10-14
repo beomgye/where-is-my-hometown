@@ -16,6 +16,7 @@ const StyledButton = styled.button`
   border: 0;
   width: 123px;
   height: 48px;
+  cursor: pointer;
 
   ${({ size }) => {
     if (size === 'small') {

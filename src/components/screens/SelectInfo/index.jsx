@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '@/components';
 
 const SelectInfo = ({ onRefreshButton }) => {
   return (
@@ -47,19 +48,6 @@ const Info = styled.p`
   border-radius: 5px;
   border: 2px solid rgba(214, 217, 230, 1);
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
-`;
-
-const Button = styled.button`
-  border-radius: 8px;
-  display: flex;
-  border: 0;
-  width: 123px;
-  height: 48px;
-  background-color: rgba(2, 41, 89, 1);
-  color: white;
-  margin-left: 634px;
-  align-items: center;
-  justify-content: center;
 `;
 
 export default SelectInfo;
