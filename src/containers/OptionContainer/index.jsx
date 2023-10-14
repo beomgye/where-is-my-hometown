@@ -12,7 +12,7 @@ const OptionContainer = () => {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       assets: '',
-      location: ''
+      location: '주소를 입력해주세요.'
     }
   });
   const [bcode, setBcode] = useState('');
