@@ -27,6 +27,8 @@ const OptionContainer = () => {
   const onSubmit = useCallback(
     (data) => {
       const nextStep = step + 1;
+      const assets = data.assets.replace(/,/g, '');
+
       if (nextStep === 4) {
         const tradeType = data.trade
           ? Object.keys(data.trade).filter((key) => data.trade[key])
@@ -36,7 +38,7 @@ const OptionContainer = () => {
           : [];
 
         setOption({
-          assets: data.assets,
+          assets,
           location: data.location,
           tradeType,
           bcode,
@@ -45,7 +47,7 @@ const OptionContainer = () => {
       }
       setStep(nextStep);
     },
-    [step]
+    [step, bcode]
   );
 
   useEffect(() => {
