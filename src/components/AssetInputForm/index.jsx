@@ -30,6 +30,7 @@ const AssetInputForm = ({ control, ...props }) => {
               label="자산"
               placeholder="자산을 입력해 주세요."
               error={error?.message}
+              ref={field.ref}
               value={field.value}
               onChange={(newValue) => {
                 field.onChange(newValue);
