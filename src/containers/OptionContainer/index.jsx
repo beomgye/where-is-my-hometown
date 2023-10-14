@@ -81,7 +81,7 @@ const OptionContainer = () => {
           control={control}
           onSubmit={handleSubmit(onSubmit)}
           onGoBack={onGoBack}
-          onRefreshButton={onRefreshButton}
+          onRefreshButton={onRefresh}
         />
       )}
     </>
