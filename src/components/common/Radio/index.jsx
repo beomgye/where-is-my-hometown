@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import React from 'react';
 import { activeColor, borderColor, primaryColor, whiteColor } from '@/styles/variables';
 
-const Checkbox = React.forwardRef(function Checkbox(
-  { checkboxProps: { label }, onChange, value, ...props },
+const Radio = React.forwardRef(function Checkbox(
+  { radioProps: { label }, onChange, checked, ...props },
   ref
 ) {
   return (
-    <Container checked={value === 'on'} onClick={() => onChange(value === 'on')}>
-      <Input type="checkbox" ref={ref} defaultChecked={value === 'on'} {...props} />
+    <Container checked={checked} onClick={() => onChange(() => onChange(!checked))}>
+      <Input type="radio" ref={ref} defaultChecked={checked} {...props} />
       <Label>{label}</Label>
     </Container>
   );
@@ -61,4 +61,4 @@ const Input = styled.input`
 
 const Label = styled.label``;
 
-export default Checkbox;
+export default Radio;
