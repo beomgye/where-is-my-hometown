@@ -55,6 +55,7 @@ const Address = ({ address, changeAddress, setBcode }) => {
   const onMoustOut = () => {
     setIsInfoOpen(false);
   };
+
   return (
     <div>
       <Map style={{ width: '450px', height: '250px' }} center={center} isPanto level={3}>
@@ -67,11 +68,19 @@ const Address = ({ address, changeAddress, setBcode }) => {
         <AddressButton type="button" onClick={onClick} value="장소 선택" />
       </AddressContainer>
       <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalCustomStyles}>
-        <DaumPostcode onComplete={completeHandler} />
+        <DaumPostcode style={{ height: '100%' }} onComplete={completeHandler} />
+        <CloseButtonWrapper>
+          <CloseButton onClick={onClick}>닫기</CloseButton>
+        </CloseButtonWrapper>
       </Modal>
     </div>
   );
 };
+
+const CloseButtonWrapper = styled.div`
+  padding: 12px;
+  background-color: #ececec;
+`;
 
 const InfoWindow = styled.div`
   padding: 5px;
@@ -105,6 +114,16 @@ const AddressButton = styled.input`
   right: -10px;
   background-color: white;
   color: ${grayColor};
+  cursor: pointer;
+`;
+
+const CloseButton = styled.button`
+  width: 100%;
+  padding: 16px 0;
+  border-radius: 10px;
+  border: 0;
+  font-size: 20px;
+  background-color: white;
   cursor: pointer;
 `;
 
