@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Form } from '@/components';
 import { Steps } from '@/types/step';
+import { formatMoney } from '@/utils/formatMoney';
 
 const FinishForm = ({ option, ...props }) => {
   return (
@@ -21,7 +22,7 @@ const FinishForm = ({ option, ...props }) => {
           <TotalContainer>
             <Asset>
               <AssetTitle>자산</AssetTitle>
-              <AssetValue>{option.assets}</AssetValue>
+              <AssetValue>{formatMoney(option.assets)}</AssetValue>
             </Asset>
             <hr />
             <Location>

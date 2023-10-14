@@ -7,15 +7,13 @@ const InputField = React.forwardRef(function InputField(
   { label, id, error, value, ...props },
   ref
 ) {
-  const formattedValue = formatMoney(value);
-
   return (
     <Container>
       <LabelContainer>
         <Label htmlFor={id}>{label}</Label>
         {error && <Error>{error}</Error>}
       </LabelContainer>
-      <Input ref={ref} type="text" id={id} value={formattedValue} {...props} />
+      <Input ref={ref} type="text" id={id} value={formatMoney(value)} {...props} />
     </Container>
   );
 });
