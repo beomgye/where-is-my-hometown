@@ -1,17 +1,17 @@
 import { Controller } from 'react-hook-form';
-import { Container, Form, Radio } from '@/components';
-import { BuildingTypeOptions } from '@/types/option';
+import { Form, Container, Radio } from '@/components';
+import { TransactionTypeOptions } from '@/types/option';
 import { Steps } from '@/types/step';
 
-const BuildingTypeForm = ({ control, watch, ...props }) => {
-  const selectedValue = watch('buildingType');
+const TransactionTypeForm = ({ control, watch, ...props }) => {
+  const selectedValue = watch('transactionType');
 
   return (
     <Form
-      title="건물 유형"
-      description="아파트, 빌라, 오피스텔을 선택하세요"
+      title="거래 방식"
+      description="전세, 월세, 매매를 선택해 주세요."
       navbarProps={{
-        current: 3,
+        current: 2,
         steps: Steps
       }}
       buttonText="다음 단계"
@@ -19,16 +19,16 @@ const BuildingTypeForm = ({ control, watch, ...props }) => {
       {...props}
     >
       <Container>
-        {BuildingTypeOptions && BuildingTypeOptions.length > 0
-          ? BuildingTypeOptions.map((type) => (
+        {TransactionTypeOptions && TransactionTypeOptions.length > 0
+          ? TransactionTypeOptions.map((type) => (
               <Controller
-                key={`buildingType[${type.value}]`}
-                name="buildingType"
+                key={`transactionType[${type.value}]`}
+                name="transactionType"
                 control={control}
                 render={({ field }) => (
                   <Radio
-                    id={`buildingType[${type.id}]`}
-                    name="buildingType"
+                    id={`transactionType[${type.id}]`}
+                    name="transactionType"
                     radioProps={type}
                     value={type.value}
                     onChange={() => field.onChange(type.value)}
@@ -43,4 +43,4 @@ const BuildingTypeForm = ({ control, watch, ...props }) => {
   );
 };
 
-export default BuildingTypeForm;
+export default TransactionTypeForm;

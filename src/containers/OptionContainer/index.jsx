@@ -6,11 +6,11 @@ import {
   FinishForm,
   LocationForm,
   SelectInfo,
-  TradeForm
+  TransactionTypeForm
 } from '@/components';
 
 const OptionContainer = () => {
-  const { control, handleSubmit, reset } = useForm({
+  const { control, watch, handleSubmit, reset } = useForm({
     defaultValues: {
       assets: '',
       location: ''
@@ -30,20 +30,19 @@ const OptionContainer = () => {
       const assets = data.assets.replace(/,/g, '');
 
       if (nextStep === 4) {
-        const tradeType = data.trade
-          ? Object.keys(data.trade).filter((key) => data.trade[key])
-          : [];
-        const buildingType = data.buildingType
-          ? Object.keys(data.buildingType).filter((key) => data.buildingType[key])
-          : [];
-
         setOption({
-          assets,
+          isKBApi: 0,
+          property: assets,
           location: data.location,
-          tradeType,
-          bcode,
-          buildingType
+          neighborhoodCode: data.bcode,
+          transactionType: data.transactionType,
+          buildingType: data.buildingType,
+          recommendedNumber: 1
         });
+      }
+
+      if (nextStep === 5) {
+        console.log('데이터 요청');
       }
       setStep(nextStep);
     },
@@ -65,27 +64,37 @@ const OptionContainer = () => {
       {step === 0 && <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />}
       {step === 1 && (
         <LocationForm
-          setBcode={setBcode}
           control={control}
+          setBcode={setBcode}
           onSubmit={handleSubmit(onSubmit)}
           onGoBack={onGoBack}
         />
       )}
       {step === 2 && (
-        <TradeForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
-      )}
-      {step === 3 && (
-        <BuildingTypeForm control={control} onSubmit={handleSubmit(onSubmit)} onGoBack={onGoBack} />
-      )}
-      {step === 4 && <FinishForm onGoBack={onGoBack} onRefresh={onRefresh} option={option} />}
-      {step === 5 && (
-        <SelectInfo
+        <TransactionTypeForm
           control={control}
+          watch={watch}
           onSubmit={handleSubmit(onSubmit)}
           onGoBack={onGoBack}
-          onRefreshButton={onRefresh}
         />
       )}
+      {step === 3 && (
+        <BuildingTypeForm
+          control={control}
+          watch={watch}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
+        />
+      )}
+      {step === 4 && (
+        <FinishForm
+          option={option}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={onGoBack}
+          onRefresh={onRefresh}
+        />
+      )}
+      {step === 5 && <SelectInfo onGoBack={onGoBack} onRefreshButton={onRefresh} />}
     </>
   );
 };
