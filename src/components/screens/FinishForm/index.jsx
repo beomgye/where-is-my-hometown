@@ -22,7 +22,7 @@ const FinishForm = ({ option, ...props }) => {
           <TotalContainer>
             <Asset>
               <AssetTitle>자산</AssetTitle>
-              <AssetValue>{formatMoney(option.assets)}</AssetValue>
+              <AssetValue>{`${formatMoney(option.property)} 원`}</AssetValue>
             </Asset>
             <hr />
             <Location>
@@ -31,11 +31,11 @@ const FinishForm = ({ option, ...props }) => {
             </Location>
             <Trade>
               <TradeTitle>거래 방식</TradeTitle>
-              <TradeValue>{option.tradeType.join(', ')}</TradeValue>
+              <TradeValue>{option.transactionType}</TradeValue>
             </Trade>
             <BuildingType>
               <BuildingTitle>건물 유형</BuildingTitle>
-              <BuildingValue>{option.buildingType.join(', ')}</BuildingValue>
+              <BuildingValue>{option.buildingType}</BuildingValue>
             </BuildingType>
           </TotalContainer>
         </StyledFinishForm>
