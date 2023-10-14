@@ -1,17 +1,18 @@
-import { useRef } from 'react';
 import styled from 'styled-components';
+import React from 'react';
 import { activeColor, borderColor, primaryColor, whiteColor } from '@/styles/variables';
 
-const Checkbox = ({ checkboxProps: { label }, value, onClick, ...props }) => {
-  const inputRef = useRef(null);
-
+const Checkbox = React.forwardRef(function Checkbox(
+  { checkboxProps: { label }, onChange, value, ...props },
+  ref
+) {
   return (
-    <Container checked={value === 'on'} onClick={() => inputRef?.current?.click()}>
-      <Input type="checkbox" ref={inputRef} checked={value === 'on'} {...props} />
+    <Container checked={value === 'on'} onClick={() => onChange(value === 'on')}>
+      <Input type="checkbox" ref={ref} defaultChecked={value === 'on'} {...props} />
       <Label>{label}</Label>
     </Container>
   );
-};
+});
 
 const Container = styled.div`
   background-color: ${(props) => (props.checked ? activeColor : whiteColor)};
@@ -49,8 +50,8 @@ const Input = styled.input`
     content: '';
   }
 
-  ${({ checked }) =>
-    checked &&
+  ${({ defaultChecked }) =>
+    defaultChecked &&
     `
     &:before {
       background: url('/icons/checkbox-checked.svg') no-repeat center;
