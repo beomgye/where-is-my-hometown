@@ -8,6 +8,7 @@ import {
   SelectInfo,
   TransactionTypeForm
 } from '@/components';
+import { axiosInstance } from '@/api';
 
 const OptionContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm({
@@ -19,13 +20,14 @@ const OptionContainer = () => {
   const [bcode, setBcode] = useState('');
   const [step, setStep] = useState(0);
   const [option, setOption] = useState({});
+  const [townList, setTownList] = useState([]);
 
   const onGoBack = useCallback(() => {
     setStep(step - 1);
   }, [step]);
 
   const onSubmit = useCallback(
-    (data) => {
+    async (data) => {
       const nextStep = step + 1;
       const assets = data.assets.replace(/,/g, '');
 
@@ -34,7 +36,7 @@ const OptionContainer = () => {
           isKBApi: 0,
           property: assets,
           location: data.location,
-          neighborhoodCode: data.bcode,
+          neighborhoodCode: bcode,
           transactionType: data.transactionType,
           buildingType: data.buildingType,
           recommendedNumber: 1
@@ -42,9 +44,24 @@ const OptionContainer = () => {
       }
 
       if (nextStep === 5) {
-        console.log('데이터 요청');
+        const { location, ...restOfOption } = option;
+
+        axiosInstance
+          .post('/whereismyneighborhood', restOfOption)
+          .then((res) => {
+            setTownList(res.data);
+            console.log(res.data);
+            setStep(nextStep);
+          })
+          .catch((err) => {
+            alert('추천 동네를 불러오는 데 실패했습니다.');
+            console.log(err);
+          });
       }
-      setStep(nextStep);
+
+      if (nextStep !== 5) {
+        setStep(nextStep);
+      }
     },
     [step, bcode]
   );
@@ -94,7 +111,9 @@ const OptionContainer = () => {
           onRefresh={onRefresh}
         />
       )}
-      {step === 5 && <SelectInfo onGoBack={onGoBack} onRefreshButton={onRefresh} />}
+      {step === 5 && (
+        <SelectInfo townList={townList} onGoBack={onGoBack} onRefreshButton={onRefresh} />
+      )}
     </>
   );
 };
