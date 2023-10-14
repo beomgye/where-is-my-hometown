@@ -1,38 +1,38 @@
-export const TradeType = [
+export const TransactionType = [
+  {
+    id: 0,
+    name: '월세'
+  },
   {
     id: 1,
     name: '전세'
   },
   {
     id: 2,
-    name: '월세'
-  },
-  {
-    id: 3,
     name: '매매'
   }
 ];
 
 export const BuildingType = [
   {
-    id: 1,
+    id: 0,
     name: '아파트'
   },
   {
-    id: 2,
+    id: 1,
     name: '연립'
   },
   {
-    id: 3,
+    id: 2,
     name: '단독'
   },
   {
-    id: 4,
-    name: '오피스텔'
+    id: 3,
+    name: '주택종합'
   }
 ];
 
-export const TradeTypeOptions = TradeType.map(({ id: value, name: label }) => {
+export const TransactionTypeOptions = TransactionType.map(({ id: value, name: label }) => {
   return {
     value,
     label
