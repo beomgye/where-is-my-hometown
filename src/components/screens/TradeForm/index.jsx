@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form';
 import { Form, Checkbox, Container } from '@/components';
-import { TradeTypeOptions } from '../../../types/plan';
+import { TradeTypeOptions } from '@/types/plan';
 import { Steps } from '@/types/step';
 
 const TradeForm = ({ control, ...props }) => {
