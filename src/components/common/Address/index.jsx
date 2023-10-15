@@ -44,34 +44,51 @@ const Address = ({ address, changeAddress, setBcode }) => {
     kakaoMapGeoCoder();
   }, [address]);
 
-  const onClick = () => {
-    isSetModalOpen(!isModalOpen);
+  const closeModal = () => {
+    if (isModalOpen) {
+      isSetModalOpen(false);
+    }
   };
 
-  const onMoustOver = () => {
+  const openModal = () => {
+    if (!isModalOpen) {
+      isSetModalOpen(true);
+    }
+  };
+
+  const onMouseOver = () => {
     setIsInfoOpen(true);
   };
 
-  const onMoustOut = () => {
+  const onMouseOut = () => {
     setIsInfoOpen(false);
   };
+
   return (
     <div>
       <Map style={{ width: '450px', height: '250px' }} center={center} isPanto level={3}>
-        <MapMarker position={center} clickable onMouseOver={onMoustOver} onMouseOut={onMoustOut}>
+        <MapMarker position={center} clickable onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
           {isInfoOpen && <InfoWindow>{address}</InfoWindow>}
         </MapMarker>
       </Map>
       <AddressContainer>
-        <AddressInput type="text" value={address} readOnly />
-        <AddressButton type="button" onClick={onClick} value="장소 선택" />
+        <AddressInput type="text" onClick={openModal} value={address} readOnly />
+        <AddressButton type="button" onClick={openModal} value="장소 선택" />
       </AddressContainer>
       <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalCustomStyles}>
-        <DaumPostcode onComplete={completeHandler} />
+        <DaumPostcode style={{ height: '100%' }} onComplete={completeHandler} />
+        <CloseButtonWrapper>
+          <CloseButton onClick={closeModal}>닫기</CloseButton>
+        </CloseButtonWrapper>
       </Modal>
     </div>
   );
 };
+
+const CloseButtonWrapper = styled.div`
+  padding: 12px;
+  background-color: #ececec;
+`;
 
 const InfoWindow = styled.div`
   padding: 5px;
@@ -105,6 +122,16 @@ const AddressButton = styled.input`
   right: -10px;
   background-color: white;
   color: ${grayColor};
+  cursor: pointer;
+`;
+
+const CloseButton = styled.button`
+  width: 100%;
+  padding: 16px 0;
+  border-radius: 10px;
+  border: 0;
+  font-size: 20px;
+  background-color: white;
   cursor: pointer;
 `;
 

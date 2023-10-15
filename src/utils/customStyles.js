@@ -5,6 +5,8 @@ const ModalCustomStyles = {
     zIndex: 9999
   },
   content: {
+    display: 'flex',
+    flexFlow: 'column nowrap',
     position: 'absolute',
     left: '0',
     margin: 'auto',
