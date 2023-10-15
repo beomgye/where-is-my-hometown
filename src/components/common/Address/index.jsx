@@ -5,8 +5,9 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import styled from 'styled-components';
 import ModalCustomStyles from '@/utils/customStyles';
 import { grayColor } from '@/styles/variables';
+import InputField from '../InputField';
 
-const Address = ({ address, changeAddress, setBcode }) => {
+const Address = ({ address, changeAddress, setBcode, error }) => {
   const [center, setCenter] = useState({ lat: 33.452613, lng: 126.570888 });
   const [isModalOpen, isSetModalOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -62,15 +63,21 @@ const Address = ({ address, changeAddress, setBcode }) => {
   };
 
   return (
-    <div>
-      <Map style={{ width: '450px', height: '250px' }} center={center} isPanto level={3}>
+    <>
+      <KakaoMap center={center} isPanto level={3}>
         <MapMarker position={center} clickable onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
           {isInfoOpen && <InfoWindow>{address}</InfoWindow>}
         </MapMarker>
-      </Map>
+      </KakaoMap>
       <AddressContainer>
-        <AddressInput type="text" onClick={openModal} value={address} readOnly />
-        <AddressButton type="button" onClick={openModal} value="장소 선택" />
+        <InputField
+          type="text"
+          onClick={openModal}
+          error={error?.message}
+          value={address}
+          readOnly
+        />
+        <AddressButton onClick={openModal}>장소 선택</AddressButton>
       </AddressContainer>
       <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalCustomStyles}>
         <DaumPostcode style={{ height: '100%' }} onComplete={completeHandler} />
@@ -78,13 +85,13 @@ const Address = ({ address, changeAddress, setBcode }) => {
           <CloseButton onClick={closeModal}>닫기</CloseButton>
         </CloseButtonWrapper>
       </Modal>
-    </div>
+    </>
   );
 };
 
-const CloseButtonWrapper = styled.div`
-  padding: 12px;
-  background-color: #ececec;
+const KakaoMap = styled(Map)`
+  width: 100%;
+  height: 250px;
 `;
 
 const InfoWindow = styled.div`
@@ -95,29 +102,24 @@ const InfoWindow = styled.div`
 
 const AddressContainer = styled.div`
   position: relative;
-  margin-top: 45px;
 `;
 
-const AddressInput = styled.input`
-  align-items: center;
-  width: 450px;
-  height: 25px;
-  border-right: 0px;
-  border-left: 0px;
-  border-top: 0px;
-`;
-
-const AddressButton = styled.input`
+const AddressButton = styled.button`
   width: 68px;
+  height: 40px;
   border: 0;
   margin: auto 0;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0px;
+  bottom: 8px;
+  right: 0;
   background-color: transparent;
   color: ${grayColor};
   cursor: pointer;
+`;
+
+const CloseButtonWrapper = styled.div`
+  background-color: #ececec;
+  padding: 16px;
 `;
 
 const CloseButton = styled.button`
@@ -126,8 +128,11 @@ const CloseButton = styled.button`
   border-radius: 10px;
   border: 0;
   font-size: 20px;
-  background-color: white;
+  background-color: #f4f4f4;
   cursor: pointer;
+  &:hover {
+    background-color: white;
+  }
 `;
 
 export default Address;

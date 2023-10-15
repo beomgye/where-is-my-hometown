@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
 import { Form, InputField } from '@/components';
 import { Steps } from '@/types/step';
+import { formatMoney } from '@/utils/formatMoney';
 
 const defaultInputRule = {
   required: 'This field is required'
@@ -31,7 +32,7 @@ const AssetInputForm = ({ control, ...props }) => {
               placeholder="자산을 입력해 주세요."
               error={error?.message}
               ref={field.ref}
-              value={field.value}
+              value={formatMoney(field.value)}
               onChange={(newValue) => {
                 field.onChange(newValue);
               }}

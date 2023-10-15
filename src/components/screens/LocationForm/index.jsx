@@ -3,6 +3,12 @@ import { Controller } from 'react-hook-form';
 import { Address, Form } from '@/components';
 import { Steps } from '@/types/step';
 
+const locationInputRule = {
+  validate: (value) => {
+    return value === '주소를 입력해주세요.' ? 'This field is required' : undefined;
+  }
+};
+
 const LocationForm = ({ control, setBcode, ...props }) => {
   return (
     <Form
@@ -20,10 +26,11 @@ const LocationForm = ({ control, setBcode, ...props }) => {
         <Controller
           name="location"
           control={control}
+          rules={locationInputRule}
           render={({ field, fieldState: { error } }) => (
             <Address
               setBcode={setBcode}
-              error={error?.message}
+              error={error}
               address={field.value}
               changeAddress={(newValue) => {
                 field.onChange(newValue);
@@ -38,7 +45,6 @@ const LocationForm = ({ control, setBcode, ...props }) => {
 
 const Container = styled.div`
   width: 450px;
-
   display: flex;
   flex-direction: column;
   margin-bottom: 64px;

@@ -18,7 +18,7 @@ const OptionContainer = () => {
     }
   });
   const [bcode, setBcode] = useState('');
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [option, setOption] = useState({});
   const [townList, setTownList] = useState([]);
 

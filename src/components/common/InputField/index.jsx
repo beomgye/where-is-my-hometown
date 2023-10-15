@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
 import { denimColor, errorColor, secondaryColor } from '@/styles/variables';
-import { formatMoney } from '@/utils/formatMoney';
 
 const InputField = React.forwardRef(function InputField(
   { label, id, error, value, ...props },
@@ -13,7 +12,7 @@ const InputField = React.forwardRef(function InputField(
         <Label htmlFor={id}>{label}</Label>
         {error && <Error>{error}</Error>}
       </LabelContainer>
-      <Input ref={ref} type="text" id={id} value={formatMoney(value)} {...props} />
+      <Input ref={ref} type="text" id={id} value={value} {...props} />
     </Container>
   );
 });
@@ -46,17 +45,17 @@ const Label = styled.label`
 const Error = styled.span`
   color: ${errorColor};
   text-align: right;
+  transform: translateY(8px);
 `;
 
 const Input = styled.input`
   position: relative;
   padding: 0 16px;
   border: none;
-  width: 418px;
+  width: 100%;
   height: 48px;
   flex-shrink: 0;
-  border-radius: 8px;
-  border: 1px solid rgba(214, 217, 230, 1);
+  border-bottom: 1px solid rgba(214, 217, 230, 1);
   background-color: #fff;
   color: ${denimColor};
   font-size: 16px;

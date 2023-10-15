@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import { OptionContainer } from '@/containers';
 import { backgroundColor } from '@/styles/variables';
 import { SplashScreen } from '@/components';
-import { useBlockScroll } from '@/hooks/useBlockScroll';
 
 const Home = () => {
-  useBlockScroll();
   return (
     <Main>
       <Title>Where is my Hometown</Title>
