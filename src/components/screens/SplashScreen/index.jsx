@@ -62,6 +62,7 @@ const Logo = styled.img`
   width: 478px;
   height: 143px;
   background: url('/icons/vector.svg') no-repeat center;
+  content-visibility: hidden;
 `;
 
 const Title = styled.h1`
