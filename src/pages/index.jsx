@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { OptionContainer } from '@/containers';
 import { backgroundColor } from '@/styles/variables';
 import { SplashScreen } from '@/components';
+import { useBlockScroll } from '@/hooks/useBlockScroll';
 
 const Home = () => {
+  useBlockScroll();
   return (
     <Main>
       <Title>Where is my Hometown</Title>
-
       <SplashScreen>
         <OptionContainer />
       </SplashScreen>
@@ -16,9 +17,9 @@ const Home = () => {
 };
 
 const Main = styled.main`
-  height: 100vh;
   background-color: ${backgroundColor};
-
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -7,7 +7,7 @@ const LocationForm = ({ control, setBcode, ...props }) => {
   return (
     <Form
       title="위치 선택"
-      description="위치를 선택해 주세요"
+      description="위치를 선택해 주세요."
       navbarProps={{
         current: 1,
         steps: Steps

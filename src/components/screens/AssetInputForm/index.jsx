@@ -11,7 +11,7 @@ const AssetInputForm = ({ control, ...props }) => {
   return (
     <Form
       title="자산 입력"
-      description="갖고 있는 자산을 입력해 주세요"
+      description="갖고 있는 자산을 입력해 주세요."
       navbarProps={{
         current: 0,
         steps: Steps
@@ -46,7 +46,6 @@ const AssetInputForm = ({ control, ...props }) => {
 
 const Container = styled.div`
   width: 450px;
-
   display: flex;
   flex-direction: column;
   margin-bottom: 64px;

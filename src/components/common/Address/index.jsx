@@ -12,11 +12,9 @@ const Address = ({ address, changeAddress, setBcode }) => {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   const completeHandler = (data) => {
-    console.log(data);
     changeAddress(data.roadAddress);
     setBcode(data.bcode);
     isSetModalOpen(false);
-
     if (changeAddress) {
       changeAddress(data.roadAddress);
     }
@@ -26,7 +24,6 @@ const Address = ({ address, changeAddress, setBcode }) => {
     window.kakao.maps.load(() => {
       // 주소-좌표 변환 객체를 생성합니다
       const geocoder = new window.kakao.maps.services.Geocoder();
-
       // 주소로 좌표를 검색합니다
       geocoder.addressSearch(address, function (result, status) {
         // 정상적으로 검색이 완료됐으면
@@ -98,7 +95,6 @@ const InfoWindow = styled.div`
 
 const AddressContainer = styled.div`
   position: relative;
-  background-color: red;
   margin-top: 45px;
 `;
 
@@ -113,14 +109,13 @@ const AddressInput = styled.input`
 
 const AddressButton = styled.input`
   width: 68px;
-  height: 14px;
   border: 0;
   margin: auto 0;
   position: absolute;
-  top: -10px;
+  top: 0;
   bottom: 0;
-  right: -10px;
-  background-color: white;
+  right: 0px;
+  background-color: transparent;
   color: ${grayColor};
   cursor: pointer;
 `;

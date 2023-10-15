@@ -18,7 +18,6 @@ const Form = ({
   return (
     <StyledForm {...props}>
       <NavBar navbarProps={navbarProps} />
-
       <Container>
         {title && <Title>{title}</Title>}
         {description && <Description>{description}</Description>}
@@ -53,22 +52,18 @@ const Form = ({
 const StyledForm = styled.form`
   position: relative;
   height: 100%;
-  overflow: auto;
-
   border-radius: 15px;
   background-color: ${whiteColor};
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 16px;
 `;
 
 const Container = styled.div`
   padding: 0 100px;
-  overflow: scroll;
-
   display: flex;
   flex-direction: column;
   height: 100%;

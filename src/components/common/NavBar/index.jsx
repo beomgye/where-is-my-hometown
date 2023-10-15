@@ -24,11 +24,10 @@ const NavBar = ({ navbarProps: { current, steps }, text, ...props }) => {
 
 const StyledNavBar = styled.nav`
   justify-content: flex-start;
-  min-height: 504px;
+  height: 100%;
   width: 226px;
   border-radius: 8px;
   padding: 32px 24px;
-  margin: 16px 0 16px 16px;
   background-color: #483eff;
 
   & .stepContainer {

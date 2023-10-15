@@ -30,11 +30,9 @@ const Container = styled.div`
 
 const LabelContainer = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -57,11 +55,9 @@ const Input = styled.input`
   width: 418px;
   height: 48px;
   flex-shrink: 0;
-
   border-radius: 8px;
   border: 1px solid rgba(214, 217, 230, 1);
   background-color: #fff;
-
   color: ${denimColor};
   font-size: 16px;
   font-weight: 500;
@@ -73,8 +69,6 @@ const Input = styled.input`
     font-style: normal;
     font-weight: 500;
     line-height: 25px;
-
-    position: absolute;
     left: 16px;
   }
 `;
