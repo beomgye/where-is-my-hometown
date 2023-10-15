@@ -56,8 +56,8 @@ const StyledNavBar = styled.nav`
     height: 33px;
     font-weight: 700;
     font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 1px;
+    line-height: 21px;
+    letter-spacing: -1px;
     color: #fff;
     background: transparent;
     border: 1px solid #fff;
@@ -74,8 +74,9 @@ const StyledNavBar = styled.nav`
 
   & .stepDetails {
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     text-transform: uppercase;
+    display: flex;
   }
 
   & .stepText {
