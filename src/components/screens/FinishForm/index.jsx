@@ -2,8 +2,19 @@ import styled from 'styled-components';
 import { Form } from '@/components';
 import { Steps } from '@/types/step';
 import { formatMoney } from '@/utils/formatMoney';
+import { TransactionTypeOptions, BuildingTypeOptions } from '@/types/option';
 
 const FinishForm = ({ option, ...props }) => {
+  const getTransactionTypeName = (id) => {
+    const transactionType = TransactionTypeOptions.find((type) => type.value === id);
+    return transactionType ? transactionType.label : '';
+  };
+
+  const getBuildingTypeName = (id) => {
+    const buildingType = BuildingTypeOptions.find((type) => type.value === id);
+    return buildingType ? buildingType.label : '';
+  };
+
   return (
     <Form
       title="마무리 단계"
@@ -31,11 +42,11 @@ const FinishForm = ({ option, ...props }) => {
             </Location>
             <Trade>
               <TradeTitle>거래 방식</TradeTitle>
-              <TradeValue>{option.transactionType}</TradeValue>
+              <TradeValue>{getTransactionTypeName(option.transactionType)}</TradeValue>
             </Trade>
             <BuildingType>
               <BuildingTitle>건물 유형</BuildingTitle>
-              <BuildingValue>{option.buildingType}</BuildingValue>
+              <BuildingValue>{getBuildingTypeName(option.buildingType)}</BuildingValue>
             </BuildingType>
           </TotalContainer>
         </StyledFinishForm>
@@ -55,10 +66,8 @@ const StyledFinishForm = styled.div`
   margin-top: 21px;
 `;
 const TotalContainer = styled.div`
-  width: 434px;
-  height: 210px;
+  height: 225px;
   padding: 16px 24px;
-  margin-top: 30px;
   background-color: #eceefd;
 `;
 const Asset = styled.div`
