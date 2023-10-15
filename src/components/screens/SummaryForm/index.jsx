@@ -3,8 +3,9 @@ import { Form } from '@/components';
 import { Steps } from '@/types/step';
 import { formatMoney } from '@/utils/formatMoney';
 import { TransactionTypeOptions, BuildingTypeOptions } from '@/types/option';
+import { Step } from '@/constants';
 
-const FinishForm = ({ option, ...props }) => {
+const SummaryForm = ({ option, ...props }) => {
   const getTransactionTypeName = (id) => {
     const transactionType = TransactionTypeOptions.find((type) => type.value === id);
     return transactionType ? transactionType.label : '';
@@ -18,9 +19,9 @@ const FinishForm = ({ option, ...props }) => {
   return (
     <Form
       title="마무리 단계"
-      description="총 마무리 단계 입니다"
+      description="총 마무리 단계 입니다."
       navbarProps={{
-        current: 4,
+        current: Step.SummaryForm,
         steps: Steps
       }}
       buttonText="확인"
@@ -29,7 +30,7 @@ const FinishForm = ({ option, ...props }) => {
       {...props}
     >
       <Container>
-        <StyledFinishForm>
+        <StyledSummaryForm>
           <TotalContainer>
             <Asset>
               <AssetTitle>자산</AssetTitle>
@@ -49,7 +50,7 @@ const FinishForm = ({ option, ...props }) => {
               <BuildingValue>{getBuildingTypeName(option.buildingType)}</BuildingValue>
             </BuildingType>
           </TotalContainer>
-        </StyledFinishForm>
+        </StyledSummaryForm>
       </Container>
     </Form>
   );
@@ -60,15 +61,19 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 64px;
+  gap: 16px;
 `;
 
-const StyledFinishForm = styled.div`
+const StyledSummaryForm = styled.div`
   margin-top: 21px;
 `;
 const TotalContainer = styled.div`
   height: 225px;
   padding: 16px 24px;
   background-color: #eceefd;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 8px;
 `;
 const Asset = styled.div`
   display: flex;
@@ -115,4 +120,4 @@ const BuildingValue = styled.p`
   margin-left: auto;
 `;
 
-export default FinishForm;
+export default SummaryForm;

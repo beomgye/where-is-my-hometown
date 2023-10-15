@@ -4,17 +4,20 @@ import axios from 'axios';
 import {
   AssetInputForm,
   BuildingTypeForm,
-  FinishForm,
   LocationForm,
   SelectInfo,
+  SummaryForm,
   TransactionTypeForm
 } from '@/components';
+import { Step } from '@/constants';
 
 const OptionContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm({
     defaultValues: {
       assets: '',
-      location: '주소를 입력해주세요.'
+      location: '주소를 입력해주세요.',
+      transactionType: 0,
+      buildingType: 0
     }
   });
   const [bcode, setBcode] = useState('');
@@ -31,7 +34,7 @@ const OptionContainer = () => {
       const nextStep = step + 1;
       const assets = data.assets.replace(/,/g, '');
 
-      if (nextStep === 4) {
+      if (nextStep === Step.SUMMARY) {
         setOption({
           isKBApi: 0,
           property: assets,
@@ -43,9 +46,8 @@ const OptionContainer = () => {
         });
       }
 
-      if (nextStep === 5) {
+      if (nextStep === Step.FINAL) {
         const { location, ...restOfOption } = option;
-
         console.log(restOfOption);
         axios
           .post('/whereismyneighborhood', restOfOption, {
@@ -63,8 +65,7 @@ const OptionContainer = () => {
             console.log(err);
           });
       }
-
-      if (nextStep !== 5) {
+      if (nextStep !== Step.FINAL) {
         setStep(nextStep);
       }
     },
@@ -83,8 +84,10 @@ const OptionContainer = () => {
 
   return (
     <>
-      {step === 0 && <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />}
-      {step === 1 && (
+      {step === Step.ASSET && (
+        <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />
+      )}
+      {step === Step.LOCATION && (
         <LocationForm
           control={control}
           setBcode={setBcode}
@@ -92,7 +95,7 @@ const OptionContainer = () => {
           onGoBack={onGoBack}
         />
       )}
-      {step === 2 && (
+      {step === Step.TRANSACTION && (
         <TransactionTypeForm
           control={control}
           watch={watch}
@@ -100,7 +103,7 @@ const OptionContainer = () => {
           onGoBack={onGoBack}
         />
       )}
-      {step === 3 && (
+      {step === Step.BUILDING && (
         <BuildingTypeForm
           control={control}
           watch={watch}
@@ -108,15 +111,15 @@ const OptionContainer = () => {
           onGoBack={onGoBack}
         />
       )}
-      {step === 4 && (
-        <FinishForm
+      {step === Step.SUMMARY && (
+        <SummaryForm
           option={option}
           onSubmit={handleSubmit(onSubmit)}
           onGoBack={onGoBack}
           onRefresh={onRefresh}
         />
       )}
-      {step === 5 && (
+      {step === Step.FINAL && (
         <SelectInfo townList={townList} onGoBack={onGoBack} onRefreshButton={onRefresh} />
       )}
     </>

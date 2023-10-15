@@ -17,7 +17,7 @@ const StyledButton = styled.button`
   width: 123px;
   height: 48px;
   cursor: pointer;
-
+  font-weight: 500;
   ${({ size }) => {
     if (size === 'small') {
       return css`

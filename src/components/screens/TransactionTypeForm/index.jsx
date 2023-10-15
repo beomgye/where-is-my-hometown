@@ -1,7 +1,22 @@
 import { Controller } from 'react-hook-form';
+import { FaMoneyBill, FaKey, FaHome } from 'react-icons/fa';
 import { Form, Container, Radio } from '@/components';
 import { TransactionTypeOptions } from '@/types/option';
 import { Steps } from '@/types/step';
+import { Step, Transaction } from '@/constants';
+
+const getTransactionIcon = (type) => {
+  switch (type) {
+    case Transaction.MONTHLY:
+      return <FaMoneyBill />;
+    case Transaction.JEONSE:
+      return <FaKey />;
+    case Transaction.SALE:
+      return <FaHome />;
+    default:
+      return null;
+  }
+};
 
 const TransactionTypeForm = ({ control, watch, ...props }) => {
   const selectedValue = watch('transactionType');
@@ -11,7 +26,7 @@ const TransactionTypeForm = ({ control, watch, ...props }) => {
       title="거래 방식"
       description="전세, 월세, 매매를 선택해 주세요."
       navbarProps={{
-        current: 2,
+        current: Step.TRANSACTION,
         steps: Steps
       }}
       buttonText="다음 단계"
@@ -33,6 +48,7 @@ const TransactionTypeForm = ({ control, watch, ...props }) => {
                     value={type.value}
                     onChange={() => field.onChange(type.value)}
                     checked={selectedValue === type.value}
+                    icon={getTransactionIcon(type.value)}
                   />
                 )}
               />

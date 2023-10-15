@@ -72,7 +72,6 @@ const Container = styled.div`
 
 const Title = styled.h2`
   margin: 40px 0 11px;
-
   font-weight: 700;
   font-size: 32px;
   line-height: normal;
@@ -91,7 +90,6 @@ const Description = styled.span`
 const Content = styled.div`
   flex: 1;
   max-height: calc(100% - 56px - 32px);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,7 +97,6 @@ const Content = styled.div`
 
 const Footer = styled.footer`
   margin: 0 0 16px;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;

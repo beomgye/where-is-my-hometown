@@ -12,5 +12,5 @@ export { default as AssetInputForm } from './screens/AssetInputForm';
 export { default as LocationForm } from './screens/LocationForm';
 export { default as TransactionTypeForm } from './screens/TransactionTypeForm';
 export { default as BuildingTypeForm } from './screens/BuildingTypeForm';
-export { default as FinishForm } from './screens/FinishForm';
+export { default as SummaryForm } from './screens/SummaryForm';
 export { default as SelectInfo } from './screens/SelectInfo';
