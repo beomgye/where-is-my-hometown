@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import {
   AssetInputForm,
   BuildingTypeForm,
@@ -10,6 +9,7 @@ import {
   TransactionTypeForm
 } from '@/components';
 import { Step } from '@/constants';
+import useFindMyHome from '@/hooks/useFindMyHome';
 
 const OptionContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm({
@@ -22,65 +22,53 @@ const OptionContainer = () => {
   });
   const [bcode, setBcode] = useState('');
   const [step, setStep] = useState(0);
-  const [option, setOption] = useState({});
-  const [townList, setTownList] = useState([]);
+  const { result, isLoading, findMyHome } = useFindMyHome();
 
   const onGoBack = useCallback(() => {
     setStep(step - 1);
   }, [step]);
 
-  const onSubmit = useCallback(
-    async (data) => {
-      const nextStep = step + 1;
-      const assets = data.assets.replace(/,/g, '');
-
-      if (nextStep === Step.SUMMARY) {
-        setOption({
-          isKBApi: 0,
-          property: assets,
-          location: data.location,
-          neighborhoodCode: bcode,
-          transactionType: data.transactionType,
-          buildingType: data.buildingType,
-          recommendedNumber: 1
-        });
-      }
-
-      if (nextStep === Step.FINAL) {
-        const { location, ...restOfOption } = option;
-        console.log(restOfOption);
-        axios
-          .post('/whereismyneighborhood', restOfOption, {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then((res) => {
-            setTownList(res.data);
-            console.log(res.data);
-            setStep(nextStep);
-          })
-          .catch((err) => {
-            alert('추천 동네를 불러오는 데 실패했습니다.');
-            console.log(err);
-          });
-      }
-      if (nextStep !== Step.FINAL) {
-        setStep(nextStep);
-      }
-    },
-    [step, bcode]
-  );
+  const increaseStep = () => {
+    setStep((prev) => prev + 1);
+  };
 
   useEffect(() => {
-    console.log(option);
-  }, [option]);
+    console.info('step: ', step);
+  }, [step]);
+
+  const onSubmit = useCallback(async (data) => {
+    console.info('data: ', data);
+    console.info('step: ', step);
+    if (step !== Step.SUMMARY && step !== Step.FINAL) {
+      increaseStep();
+      return;
+    }
+    try {
+      console.info('step: ', step);
+      const response = await findMyHome({
+        isKBApi: 0,
+        property: watch('assets').replace(/,/g, ''),
+        location: watch('location'),
+        neighborhoodCode: bcode,
+        transactionType: watch('transactionType'),
+        buildingType: watch('buildingType'),
+        recommendedNumber: 1
+      });
+      console.info('response: ', response);
+    } catch (error) {
+      alert('추천 동네를 불러오는 데 실패했습니다.');
+    }
+    // [step, bcode]
+  }, []);
 
   const onRefresh = () => {
     setStep(0);
-    setOption({});
     reset();
   };
+
+  if (isLoading) {
+    return <div>isLoading</div>;
+  }
 
   return (
     <>
@@ -113,14 +101,14 @@ const OptionContainer = () => {
       )}
       {step === Step.SUMMARY && (
         <SummaryForm
-          option={option}
+          watch={watch}
           onSubmit={handleSubmit(onSubmit)}
           onGoBack={onGoBack}
           onRefresh={onRefresh}
         />
       )}
       {step === Step.FINAL && (
-        <SelectInfo townList={townList} onGoBack={onGoBack} onRefreshButton={onRefresh} />
+        <SelectInfo townList={result} onGoBack={onGoBack} onRefreshButton={onRefresh} />
       )}
     </>
   );

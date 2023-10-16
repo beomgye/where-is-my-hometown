@@ -5,7 +5,7 @@ import { formatMoney } from '@/utils/formatMoney';
 import { TransactionTypeOptions, BuildingTypeOptions } from '@/types/option';
 import { Step } from '@/constants';
 
-const SummaryForm = ({ option, ...props }) => {
+const SummaryForm = ({ watch, ...props }) => {
   const getTransactionTypeName = (id) => {
     const transactionType = TransactionTypeOptions.find((type) => type.value === id);
     return transactionType ? transactionType.label : '';
@@ -15,6 +15,11 @@ const SummaryForm = ({ option, ...props }) => {
     const buildingType = BuildingTypeOptions.find((type) => type.value === id);
     return buildingType ? buildingType.label : '';
   };
+
+  const property = watch('assets');
+  const location = watch('location');
+  const transactionType = watch('transactionType');
+  const buildingType = watch('buildingType');
 
   return (
     <Form
@@ -34,20 +39,20 @@ const SummaryForm = ({ option, ...props }) => {
           <TotalContainer>
             <Asset>
               <AssetTitle>자산</AssetTitle>
-              <AssetValue>{`${formatMoney(option.property)} 원`}</AssetValue>
+              <AssetValue>{`${formatMoney(property)} 원`}</AssetValue>
             </Asset>
             <hr />
             <Location>
               <LocationTitle>위치</LocationTitle>
-              <LocationValue>{option.location}</LocationValue>
+              <LocationValue>{location}</LocationValue>
             </Location>
             <Trade>
               <TradeTitle>거래 방식</TradeTitle>
-              <TradeValue>{getTransactionTypeName(option.transactionType)}</TradeValue>
+              <TradeValue>{getTransactionTypeName(transactionType)}</TradeValue>
             </Trade>
             <BuildingType>
               <BuildingTitle>건물 유형</BuildingTitle>
-              <BuildingValue>{getBuildingTypeName(option.buildingType)}</BuildingValue>
+              <BuildingValue>{getBuildingTypeName(buildingType)}</BuildingValue>
             </BuildingType>
           </TotalContainer>
         </StyledSummaryForm>
