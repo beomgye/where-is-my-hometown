@@ -13,6 +13,9 @@ jobs:
       - name: Check Node v
         run: node -v
 
+      - name: .env setting
+        run: echo "NEXT_PUBLIC_KAKAO_APP_JS_KEY=${{secrets.NEXT_PUBLIC_KAKAO_APP_JS_KEY}}" >> .env
+
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
