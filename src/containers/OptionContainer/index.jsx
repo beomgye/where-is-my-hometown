@@ -9,7 +9,7 @@ import {
   SummaryForm,
   TransactionTypeForm
 } from '@/components';
-import { Step } from '@/constants';
+
 import useFindMyHome from '@/hooks/useFindMyHome';
 import useStepControl from '@/hooks/useStepControl';
 
@@ -24,14 +24,14 @@ const OptionContainer = () => {
   const { result, setResult, isLoading, findMyHome } = useFindMyHome();
   const { step, decreaseStep, increaseStep, resetStep } = useStepControl();
 
-  const onSubmit = useCallback(() => {
-    if (step !== Step.SUMMARY && step !== Step.FINAL) {
+  const onSubmit = useCallback(async () => {
+    if (step < 4) {
       increaseStep();
       return;
     }
 
     try {
-      findMyHome({
+      const response = await findMyHome({
         isKBApi: 0,
         property: watch('assets').replace(/,/g, ''),
         location: watch('location'),
@@ -40,12 +40,17 @@ const OptionContainer = () => {
         buildingType: watch('buildingType'),
         recommendedNumber: 1
       });
-      increaseStep();
+
+      if (response.status === 200) {
+        increaseStep();
+      } else {
+        alert('추천 동네를 불러오는 데 실패했습니다.');
+      }
     } catch (error) {
       console.log(error);
       alert('추천 동네를 불러오는 데 실패했습니다.');
     }
-  }, [bcode, findMyHome, step, watch]);
+  }, [bcode, findMyHome, step, watch, increaseStep]);
 
   const onReset = () => {
     setResult('');
@@ -56,10 +61,8 @@ const OptionContainer = () => {
   return (
     <>
       {isLoading && <Loading />}
-      {step === Step.ASSET && (
-        <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />
-      )}
-      {step === Step.LOCATION && (
+      {step === 0 && <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />}
+      {step === 1 && (
         <LocationForm
           control={control}
           setBcode={setBcode}
@@ -67,7 +70,7 @@ const OptionContainer = () => {
           onGoBack={decreaseStep}
         />
       )}
-      {step === Step.TRANSACTION && (
+      {step === 2 && (
         <TransactionTypeForm
           control={control}
           watch={watch}
@@ -75,7 +78,7 @@ const OptionContainer = () => {
           onGoBack={decreaseStep}
         />
       )}
-      {step === Step.BUILDING && (
+      {step === 3 && (
         <BuildingTypeForm
           control={control}
           watch={watch}
@@ -83,7 +86,7 @@ const OptionContainer = () => {
           onGoBack={decreaseStep}
         />
       )}
-      {step === Step.SUMMARY && (
+      {step === 4 && (
         <SummaryForm
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
@@ -91,11 +94,7 @@ const OptionContainer = () => {
           onGoBack={decreaseStep}
         />
       )}
-      {step === Step.FINAL && result ? (
-        <SelectInfo townList={result} onRefreshButton={onReset} />
-      ) : (
-        ''
-      )}
+      {step === 5 && result ? <SelectInfo townList={result} onRefreshButton={onReset} /> : ''}
     </>
   );
 };
