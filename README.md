@@ -43,3 +43,38 @@ $ npm run dev
 - Rename | 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
 - Remove | 파일을 삭제하는 작업만 수행한 경우
 ```
+
+### FrontEnd
+
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white">
+<img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
+<img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white">
+<img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
+
+### BackEnd
+<img src="https://img.shields.io/badge/syncTree-green?style=for-the-badge&logo=syncTree&logoColor=white">
+<br/>
+
+
+### 실행 결과
+
+
+**초기 로딩화면**
+![초기화면](https://github.com/beomgye/where-is-my-hometown/assets/109938280/5bf7ec4a-101e-491b-b19f-e5f50be09224)
+<br/>
+
+**지도선택 단계**
+![지도선택](https://github.com/beomgye/where-is-my-hometown/assets/109938280/cf8a6014-8246-45a3-8b39-4568b3e76c16)
+<br/>
+
+**거래형식 및 결과화면**
+![마무리단계](https://github.com/beomgye/where-is-my-hometown/assets/109938280/7b7d2aa8-d770-4fab-b6b9-4d36722cfc50)
+<br/>
+
+**AI가 추천해주는 결과**
+![ChatGP결과](https://github.com/beomgye/where-is-my-hometown/assets/109938280/9a9e4a58-19c5-49ad-b2d7-bb8a823278ac)
+
