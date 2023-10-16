@@ -9,13 +9,13 @@ import {
 } from '@/styles/variables';
 
 const Radio = React.forwardRef(function Checkbox(
-  { radioProps: { label }, onChange, checked, icon, ...props },
+  { radioProps: { value }, onChange, checked, icon, ...props },
   ref
 ) {
   return (
     <Container checked={checked} onClick={() => onChange(() => onChange(!checked))}>
       <Input type="radio" ref={ref} defaultChecked={checked} {...props} />
-      <Label>{label}</Label>
+      <Label>{value}</Label>
       <Icon>{icon}</Icon>
     </Container>
   );
