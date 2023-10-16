@@ -3,13 +3,23 @@ import { useState, useCallback } from 'react';
 
 const useFindMyHome = () => {
   const [result, setResult] = useState('');
+  const [status, setStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  // eslint-disable-next-line no-shadow
+
   const findMyHome = useCallback(async (info) => {
+    const { location, ...requestInfo } = info;
+
     setIsLoading(true);
+
     try {
-      const response = axios.post('/whereismyneighborhood', info);
+      const response = await axios.post('/whereismyneighborhood', requestInfo, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
       setResult(response.data);
+      setStatus(response.status);
     } catch (e) {
       console.info('e: ', e);
     } finally {
@@ -19,6 +29,7 @@ const useFindMyHome = () => {
 
   return {
     result,
+    status,
     isLoading,
     findMyHome
   };
