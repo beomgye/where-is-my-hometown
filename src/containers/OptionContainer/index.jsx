@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   AssetInputForm,
@@ -10,42 +10,27 @@ import {
 } from '@/components';
 import { Step } from '@/constants';
 import useFindMyHome from '@/hooks/useFindMyHome';
+import useStepControl from '@/hooks/useStepControl';
 
 const OptionContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm({
     defaultValues: {
       assets: '',
-      location: '주소를 입력해주세요.',
-      transactionType: 0,
-      buildingType: 0
+      location: '주소를 입력해주세요.'
     }
   });
   const [bcode, setBcode] = useState('');
-  const [step, setStep] = useState(0);
   const { result, isLoading, findMyHome } = useFindMyHome();
+  const { step, decreaseStep, increaseStep, resetStep } = useStepControl();
 
-  const onGoBack = useCallback(() => {
-    setStep(step - 1);
-  }, [step]);
-
-  const increaseStep = () => {
-    setStep((prev) => prev + 1);
-  };
-
-  useEffect(() => {
-    console.info('step: ', step);
-  }, [step]);
-
-  const onSubmit = useCallback(async (data) => {
-    console.info('data: ', data);
-    console.info('step: ', step);
+  const onSubmit = useCallback(() => {
     if (step !== Step.SUMMARY && step !== Step.FINAL) {
       increaseStep();
       return;
     }
+
     try {
-      console.info('step: ', step);
-      const response = await findMyHome({
+      findMyHome({
         isKBApi: 0,
         property: watch('assets').replace(/,/g, ''),
         location: watch('location'),
@@ -54,15 +39,15 @@ const OptionContainer = () => {
         buildingType: watch('buildingType'),
         recommendedNumber: 1
       });
-      console.info('response: ', response);
+      increaseStep();
     } catch (error) {
+      console.log(error);
       alert('추천 동네를 불러오는 데 실패했습니다.');
     }
-    // [step, bcode]
-  }, []);
+  }, [bcode, findMyHome, step, watch]);
 
-  const onRefresh = () => {
-    setStep(0);
+  const onReset = () => {
+    resetStep();
     reset();
   };
 
@@ -80,7 +65,7 @@ const OptionContainer = () => {
           control={control}
           setBcode={setBcode}
           onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
+          onGoBack={decreaseStep}
         />
       )}
       {step === Step.TRANSACTION && (
@@ -88,7 +73,7 @@ const OptionContainer = () => {
           control={control}
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
+          onGoBack={decreaseStep}
         />
       )}
       {step === Step.BUILDING && (
@@ -96,20 +81,18 @@ const OptionContainer = () => {
           control={control}
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
+          onGoBack={decreaseStep}
         />
       )}
       {step === Step.SUMMARY && (
         <SummaryForm
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
-          onRefresh={onRefresh}
+          onRefresh={onReset}
+          onGoBack={decreaseStep}
         />
       )}
-      {step === Step.FINAL && (
-        <SelectInfo townList={result} onGoBack={onGoBack} onRefreshButton={onRefresh} />
-      )}
+      {step === Step.FINAL && <SelectInfo townList={result} onRefreshButton={onReset} />}
     </>
   );
 };
