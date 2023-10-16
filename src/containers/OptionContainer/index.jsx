@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import {
   AssetInputForm,
   BuildingTypeForm,
+  Loading,
   LocationForm,
   SelectInfo,
   SummaryForm,
@@ -20,7 +21,7 @@ const OptionContainer = () => {
     }
   });
   const [bcode, setBcode] = useState('');
-  const { result, isLoading, findMyHome } = useFindMyHome();
+  const { result, setResult, isLoading, findMyHome } = useFindMyHome();
   const { step, decreaseStep, increaseStep, resetStep } = useStepControl();
 
   const onSubmit = useCallback(() => {
@@ -47,16 +48,14 @@ const OptionContainer = () => {
   }, [bcode, findMyHome, step, watch]);
 
   const onReset = () => {
+    setResult('');
     resetStep();
     reset();
   };
 
-  if (isLoading) {
-    return <div>isLoading</div>;
-  }
-
   return (
     <>
+      {isLoading && <Loading />}
       {step === Step.ASSET && (
         <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />
       )}
@@ -92,7 +91,11 @@ const OptionContainer = () => {
           onGoBack={decreaseStep}
         />
       )}
-      {step === Step.FINAL && <SelectInfo townList={result} onRefreshButton={onReset} />}
+      {step === Step.FINAL && result ? (
+        <SelectInfo townList={result} onRefreshButton={onReset} />
+      ) : (
+        ''
+      )}
     </>
   );
 };

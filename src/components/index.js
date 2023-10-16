@@ -6,6 +6,7 @@ export { default as InputField } from './common/InputField';
 export { default as Radio } from './common/Radio';
 export { default as Container } from './common/Container';
 export { default as Address } from './common/Address';
+export { default as Loading } from './common/Loading';
 
 export { default as SplashScreen } from './screens/SplashScreen';
 export { default as AssetInputForm } from './screens/AssetInputForm';
