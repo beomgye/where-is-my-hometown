@@ -44,8 +44,11 @@ $ npm run dev
 - Remove | 파일을 삭제하는 작업만 수행한 경우
 ```
 
-### FrontEnd
 
+<div align=left><h1>📚 FrontEnd</h1></div>
+
+
+<div align=left>
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white">
@@ -54,8 +57,9 @@ $ npm run dev
 <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
 <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
+</div>
 
-### BackEnd
+<div align=left><h1>📚 BackEnd</h1></div>
 <img src="https://img.shields.io/badge/syncTree-green?style=for-the-badge&logo=syncTree&logoColor=white">
 <br/>
 
