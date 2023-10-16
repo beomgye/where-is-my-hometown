@@ -76,7 +76,7 @@ const TotalContainer = styled.div`
   background-color: #eceefd;
   display: flex;
   flex-flow: column nowrap;
-  gap: 8px;
+  gap: 27px;
 `;
 const Asset = styled.div`
   display: flex;
