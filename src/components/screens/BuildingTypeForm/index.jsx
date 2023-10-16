@@ -1,17 +1,17 @@
 import { Controller } from 'react-hook-form';
 import { FaBuilding, FaHome, FaHouseUser, FaCity } from 'react-icons/fa';
 import { Container, Form, Radio } from '@/components';
-import { Building, BuildingTypeOptions, Step, StepOptions } from '@/constants';
+import { BuildingTypeOptions, StepOptions } from '@/constants';
 
 const getBuildingIcon = (type) => {
   switch (type) {
-    case Building.APRARTMENT:
+    case '아파트':
       return <FaBuilding />;
-    case Building.TOWNHOUSE:
+    case '연립':
       return <FaHouseUser />;
-    case Building.SINGLE_FAMILY_HOME:
+    case '단독':
       return <FaHome />;
-    case Building.HOUSING_COMPLEX:
+    case '주택종합':
       return <FaCity />;
     default:
       return null;
@@ -26,7 +26,7 @@ const BuildingTypeForm = ({ control, watch, ...props }) => {
       title="건물 유형"
       description="아파트, 빌라, 오피스텔을 선택하세요"
       navbarProps={{
-        current: Step.BUILDING,
+        current: 3,
         stepOptions: StepOptions
       }}
       buttonText="다음 단계"
@@ -46,8 +46,8 @@ const BuildingTypeForm = ({ control, watch, ...props }) => {
                     name="buildingType"
                     radioProps={type}
                     value={type.value}
-                    onChange={() => field.onChange(type.value)}
-                    checked={selectedValue === type.value}
+                    onChange={() => field.onChange(type.id)}
+                    checked={selectedValue === type.id}
                     icon={getBuildingIcon(type.value)}
                   />
                 )}
