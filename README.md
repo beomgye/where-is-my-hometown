@@ -2,13 +2,15 @@
 
 ![readme-logo](https://github.com/ukssss/clinical-trial-search/assets/86929961/4b324661-ff36-4c7c-8685-b3b8afe905eb)
 
-### 프로젝트 소개
+## 프로젝트 소개
 
 - 주제 : **"내가 살만한 동네는 어디일까?"** 라는 주제로 시작된 **동네 추천** 웹 애플리케이션 프로젝트
 - 개발 기간 : 2023.10.02 - 2023.10.17
 - 배포 URL : [배포 URL 바로가기](https://d73klmvqn1x8b.cloudfront.net)
 
-### 기술 스택
+</br>
+
+## 기술 스택
 
 **Front**
 
@@ -22,8 +24,9 @@
 
 ![amazon s3](https://img.shields.io/badge/amazon--s3-000000?logo=amazons3) ![amazon cloudfront](https://img.shields.io/badge/amazon--cloud--front-000000?logo=amazoncloudwatch)
 
+</br>
 
-### 설치 및 실행
+## 설치 및 실행
 
 1. 저장소 복제 (Clone Repository)
 
@@ -43,7 +46,9 @@ $ npm install
 $ npm run dev
 ```
 
-### 폴더 구조
+</br>
+
+## 폴더 구조
 
 ```base
 src
@@ -89,7 +94,9 @@ src
 
 ```
 
-### 실행 결과
+</br>
+
+## 실행 결과
 
 | 초기 로딩화면 |
 | ---------- |
@@ -109,8 +116,9 @@ src
 | --------------- |
 | ![ChatGP결과](https://github.com/beomgye/where-is-my-hometown/assets/109938280/9a9e4a58-19c5-49ad-b2d7-bb8a823278ac) |
 
+</br>
 
-### 커밋 컨벤션
+## 커밋 컨벤션
 
 ```base
 - Feat | 새로운 기능을 추가
