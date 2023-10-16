@@ -1,13 +1,11 @@
-import { ThemeProvider } from "styled-components";
-import GlobalStyle from "@/styles/globalStyle";
-import { darkTheme } from "@/styles/theme";
+import Global from '@/styles/global';
 
 const App = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <GlobalStyle />
+    <>
+      <Global />
       <Component {...pageProps} />
-    </ThemeProvider>
+    </>
   );
 };
 
