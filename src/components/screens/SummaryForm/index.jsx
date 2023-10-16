@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { Form } from '@/components';
-import { Steps } from '@/types/step';
 import { formatMoney } from '@/utils/formatMoney';
-import { TransactionTypeOptions, BuildingTypeOptions } from '@/types/option';
-import { Step } from '@/constants';
+import { BuildingTypeOptions, Step, StepOptions, TransactionTypeOptions } from '@/constants';
 
 const SummaryForm = ({ watch, ...props }) => {
   const getTransactionTypeName = (id) => {
@@ -26,8 +24,8 @@ const SummaryForm = ({ watch, ...props }) => {
       title="마무리 단계"
       description="총 마무리 단계 입니다."
       navbarProps={{
-        current: Step.SummaryForm,
-        steps: Steps
+        current: Step.SUMMARY,
+        stepOptions: StepOptions
       }}
       buttonText="확인"
       goBackButton
