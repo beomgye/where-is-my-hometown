@@ -1,9 +1,7 @@
 import { Controller } from 'react-hook-form';
 import { FaMoneyBill, FaKey, FaHome } from 'react-icons/fa';
 import { Form, Container, Radio } from '@/components';
-import { TransactionTypeOptions } from '@/types/option';
-import { Steps } from '@/types/step';
-import { Step, Transaction } from '@/constants';
+import { Step, StepOptions, Transaction, TransactionTypeOptions } from '@/constants';
 
 const getTransactionIcon = (type) => {
   switch (type) {
@@ -27,7 +25,7 @@ const TransactionTypeForm = ({ control, watch, ...props }) => {
       description="전세, 월세, 매매를 선택해 주세요."
       navbarProps={{
         current: Step.TRANSACTION,
-        steps: Steps
+        stepOptions: StepOptions
       }}
       buttonText="다음 단계"
       goBackButton

@@ -1,9 +1,7 @@
 import { Controller } from 'react-hook-form';
 import { FaBuilding, FaHome, FaHouseUser, FaCity } from 'react-icons/fa';
 import { Container, Form, Radio } from '@/components';
-import { BuildingTypeOptions } from '@/types/option';
-import { Steps } from '@/types/step';
-import { Building, Step } from '@/constants';
+import { Building, BuildingTypeOptions, Step, StepOptions } from '@/constants';
 
 const getBuildingIcon = (type) => {
   switch (type) {
@@ -29,7 +27,7 @@ const BuildingTypeForm = ({ control, watch, ...props }) => {
       description="아파트, 빌라, 오피스텔을 선택하세요"
       navbarProps={{
         current: Step.BUILDING,
-        steps: Steps
+        stepOptions: StepOptions
       }}
       buttonText="다음 단계"
       goBackButton

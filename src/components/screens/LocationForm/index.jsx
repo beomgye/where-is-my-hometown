@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
 import { Address, Form } from '@/components';
-import { Steps } from '@/types/step';
-import { Step } from '@/constants';
+import { Step, StepOptions } from '@/constants';
 
 const locationInputRule = {
   validate: (value) => {
@@ -17,7 +16,7 @@ const LocationForm = ({ control, setBcode, ...props }) => {
       description="위치를 선택해 주세요."
       navbarProps={{
         current: Step.LOCATION,
-        steps: Steps
+        stepOptions: StepOptions
       }}
       buttonText="다음 단계"
       goBackButton

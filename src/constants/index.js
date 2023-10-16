@@ -19,3 +19,18 @@ export const Building = Object.freeze({
   SINGLE_FAMILY_HOME: 2,
   HOUSING_COMPLEX: 3
 });
+
+export const StepOptions = Object.entries(Step).map(([step, index]) => ({
+  step,
+  index
+}));
+
+export const TransactionTypeOptions = Object.entries(Transaction).map(([label, value]) => ({
+  label,
+  value
+}));
+
+export const BuildingTypeOptions = Object.entries(Building).map(([label, value]) => ({
+  label,
+  value
+}));

@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { Button } from '@/components';
 
-const SelectInfo = ({ onRefreshButton }) => {
+const SelectInfo = ({ townList, onRefreshButton }) => {
+  const answer = townList.gptAnswer[0].message;
+  const { content } = answer;
+
   return (
     <StyledSelect>
       <InfoTitle>정보 선택</InfoTitle>
       <InfoBox>
-        <Info />
+        <Info>{content}</Info>
       </InfoBox>
       <Button type="reset" onClick={onRefreshButton}>
         초기화

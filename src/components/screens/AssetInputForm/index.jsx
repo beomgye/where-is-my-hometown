@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { Controller } from 'react-hook-form';
 import { Form, InputField } from '@/components';
-import { Steps } from '@/types/step';
 import { formatMoney } from '@/utils/formatMoney';
-import { Step } from '@/constants';
+import { Step, StepOptions } from '@/constants';
 
 const defaultInputRule = {
   required: 'This field is required'
@@ -16,7 +15,7 @@ const AssetInputForm = ({ control, ...props }) => {
       description="갖고 있는 자산을 입력해 주세요."
       navbarProps={{
         current: Step.ASSET,
-        steps: Steps
+        stepOptions: StepOptions
       }}
       buttonText="다음 단계"
       {...props}

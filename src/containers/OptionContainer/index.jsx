@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import {
   AssetInputForm,
   BuildingTypeForm,
@@ -10,77 +9,51 @@ import {
   TransactionTypeForm
 } from '@/components';
 import { Step } from '@/constants';
+import useFindMyHome from '@/hooks/useFindMyHome';
+import useStepControl from '@/hooks/useStepControl';
 
 const OptionContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm({
     defaultValues: {
       assets: '',
-      location: '주소를 입력해주세요.',
-      transactionType: 0,
-      buildingType: 0
+      location: '주소를 입력해주세요.'
     }
   });
   const [bcode, setBcode] = useState('');
-  const [step, setStep] = useState(0);
-  const [option, setOption] = useState({});
-  const [townList, setTownList] = useState([]);
+  const { result, isLoading, findMyHome } = useFindMyHome();
+  const { step, decreaseStep, increaseStep, resetStep } = useStepControl();
 
-  const onGoBack = useCallback(() => {
-    setStep(step - 1);
-  }, [step]);
+  const onSubmit = useCallback(() => {
+    if (step !== Step.SUMMARY && step !== Step.FINAL) {
+      increaseStep();
+      return;
+    }
 
-  const onSubmit = useCallback(
-    async (data) => {
-      const nextStep = step + 1;
-      const assets = data.assets.replace(/,/g, '');
+    try {
+      findMyHome({
+        isKBApi: 0,
+        property: watch('assets').replace(/,/g, ''),
+        location: watch('location'),
+        neighborhoodCode: bcode,
+        transactionType: watch('transactionType'),
+        buildingType: watch('buildingType'),
+        recommendedNumber: 1
+      });
+      increaseStep();
+    } catch (error) {
+      console.log(error);
+      alert('추천 동네를 불러오는 데 실패했습니다.');
+    }
+  }, [bcode, findMyHome, step, watch]);
 
-      if (nextStep === Step.SUMMARY) {
-        setOption({
-          isKBApi: 0,
-          property: assets,
-          location: data.location,
-          neighborhoodCode: bcode,
-          transactionType: data.transactionType,
-          buildingType: data.buildingType,
-          recommendedNumber: 1
-        });
-      }
-
-      if (nextStep === Step.FINAL) {
-        const { location, ...restOfOption } = option;
-        console.log(restOfOption);
-        axios
-          .post('/whereismyneighborhood', restOfOption, {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then((res) => {
-            setTownList(res.data);
-            console.log(res.data);
-            setStep(nextStep);
-          })
-          .catch((err) => {
-            alert('추천 동네를 불러오는 데 실패했습니다.');
-            console.log(err);
-          });
-      }
-      if (nextStep !== Step.FINAL) {
-        setStep(nextStep);
-      }
-    },
-    [step, bcode]
-  );
-
-  useEffect(() => {
-    console.log(option);
-  }, [option]);
-
-  const onRefresh = () => {
-    setStep(0);
-    setOption({});
+  const onReset = () => {
+    resetStep();
     reset();
   };
+
+  if (isLoading) {
+    return <div>isLoading</div>;
+  }
 
   return (
     <>
@@ -92,7 +65,7 @@ const OptionContainer = () => {
           control={control}
           setBcode={setBcode}
           onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
+          onGoBack={decreaseStep}
         />
       )}
       {step === Step.TRANSACTION && (
@@ -100,7 +73,7 @@ const OptionContainer = () => {
           control={control}
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
+          onGoBack={decreaseStep}
         />
       )}
       {step === Step.BUILDING && (
@@ -108,20 +81,18 @@ const OptionContainer = () => {
           control={control}
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
+          onGoBack={decreaseStep}
         />
       )}
       {step === Step.SUMMARY && (
         <SummaryForm
-          option={option}
+          watch={watch}
           onSubmit={handleSubmit(onSubmit)}
-          onGoBack={onGoBack}
-          onRefresh={onRefresh}
+          onRefresh={onReset}
+          onGoBack={decreaseStep}
         />
       )}
-      {step === Step.FINAL && (
-        <SelectInfo townList={townList} onGoBack={onGoBack} onRefreshButton={onRefresh} />
-      )}
+      {step === Step.FINAL && <SelectInfo townList={result} onRefreshButton={onReset} />}
     </>
   );
 };

@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 import { Form } from '@/components';
-import { Steps } from '@/types/step';
 import { formatMoney } from '@/utils/formatMoney';
-import { TransactionTypeOptions, BuildingTypeOptions } from '@/types/option';
-import { Step } from '@/constants';
+import { BuildingTypeOptions, Step, StepOptions, TransactionTypeOptions } from '@/constants';
 
-const SummaryForm = ({ option, ...props }) => {
+const SummaryForm = ({ watch, ...props }) => {
   const getTransactionTypeName = (id) => {
     const transactionType = TransactionTypeOptions.find((type) => type.value === id);
     return transactionType ? transactionType.label : '';
@@ -16,13 +14,18 @@ const SummaryForm = ({ option, ...props }) => {
     return buildingType ? buildingType.label : '';
   };
 
+  const property = watch('assets');
+  const location = watch('location');
+  const transactionType = watch('transactionType');
+  const buildingType = watch('buildingType');
+
   return (
     <Form
       title="마무리 단계"
       description="총 마무리 단계 입니다."
       navbarProps={{
-        current: Step.SummaryForm,
-        steps: Steps
+        current: Step.SUMMARY,
+        stepOptions: StepOptions
       }}
       buttonText="확인"
       goBackButton
@@ -34,20 +37,20 @@ const SummaryForm = ({ option, ...props }) => {
           <TotalContainer>
             <Asset>
               <AssetTitle>자산</AssetTitle>
-              <AssetValue>{`${formatMoney(option.property)} 원`}</AssetValue>
+              <AssetValue>{`${formatMoney(property)} 원`}</AssetValue>
             </Asset>
             <hr />
             <Location>
               <LocationTitle>위치</LocationTitle>
-              <LocationValue>{option.location}</LocationValue>
+              <LocationValue>{location}</LocationValue>
             </Location>
             <Trade>
               <TradeTitle>거래 방식</TradeTitle>
-              <TradeValue>{getTransactionTypeName(option.transactionType)}</TradeValue>
+              <TradeValue>{getTransactionTypeName(transactionType)}</TradeValue>
             </Trade>
             <BuildingType>
               <BuildingTitle>건물 유형</BuildingTitle>
-              <BuildingValue>{getBuildingTypeName(option.buildingType)}</BuildingValue>
+              <BuildingValue>{getBuildingTypeName(buildingType)}</BuildingValue>
             </BuildingType>
           </TotalContainer>
         </StyledSummaryForm>
