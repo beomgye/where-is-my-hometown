@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { Form } from '@/components';
 import { formatMoney } from '@/utils/formatMoney';
-import { BuildingTypeOptions, Step, StepOptions, TransactionTypeOptions } from '@/constants';
+import { StepOptions, BuildingTypeOptions, TransactionTypeOptions } from '@/constants';
 
 const SummaryForm = ({ watch, ...props }) => {
   const getTransactionTypeName = (id) => {
-    const transactionType = TransactionTypeOptions.find((type) => type.value === id);
-    return transactionType ? transactionType.label : '';
+    const transactionType = TransactionTypeOptions.find((type) => type.id === id);
+    return transactionType ? transactionType.value : '';
   };
 
   const getBuildingTypeName = (id) => {
-    const buildingType = BuildingTypeOptions.find((type) => type.value === id);
-    return buildingType ? buildingType.label : '';
+    const buildingType = BuildingTypeOptions.find((type) => type.id === id);
+    return buildingType ? buildingType.value : '';
   };
 
   const property = watch('assets');
@@ -24,7 +24,7 @@ const SummaryForm = ({ watch, ...props }) => {
       title="마무리 단계"
       description="총 마무리 단계 입니다."
       navbarProps={{
-        current: Step.SUMMARY,
+        current: 4,
         stepOptions: StepOptions
       }}
       buttonText="확인"

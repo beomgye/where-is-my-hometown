@@ -7,14 +7,14 @@ const NavBar = ({ navbarProps: { current, stepOptions }, text, ...props }) => {
       <ul className="stepContainer">
         {stepOptions &&
           stepOptions.map((step, index) => (
-            <li className={current === index ? 'active' : ''} key={step.step}>
+            <li className={current === index ? 'active' : ''} key={step.id}>
               <div className="circle">{index + 1}</div>
               <div className="stepDetails">
                 <div className="stepText">
                   Step
                   {index + 1}
                 </div>
-                <div className="stepName">{step.step}</div>
+                <div className="stepName">{step.value}</div>
               </div>
             </li>
           ))}

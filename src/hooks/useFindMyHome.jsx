@@ -3,7 +3,6 @@ import { useState, useCallback } from 'react';
 
 const useFindMyHome = () => {
   const [result, setResult] = useState('');
-  const [status, setStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const findMyHome = useCallback(async (info) => {
@@ -19,9 +18,10 @@ const useFindMyHome = () => {
       });
 
       setResult(response.data);
-      setStatus(response.status);
-    } catch (e) {
-      console.info('e: ', e);
+      return response;
+    } catch (error) {
+      console.info('error: ', error);
+      return error;
     } finally {
       setIsLoading(false);
     }
@@ -30,7 +30,6 @@ const useFindMyHome = () => {
   return {
     result,
     setResult,
-    status,
     isLoading,
     findMyHome
   };
