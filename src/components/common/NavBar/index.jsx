@@ -1,22 +1,23 @@
 import styled from 'styled-components';
 import { highlightColor, secondaryColor } from '@/styles/variables';
 
-const NavBar = ({ navbarProps: { current, steps }, text, ...props }) => {
+const NavBar = ({ navbarProps: { current, stepOptions }, text, ...props }) => {
   return (
     <StyledNavBar {...props}>
       <ul className="stepContainer">
-        {steps.map((step, index) => (
-          <li className={current === index ? 'active' : ''} key={step}>
-            <div className="circle">{index + 1}</div>
-            <div className="stepDetails">
-              <div className="stepText">
-                Step
-                {index + 1}
+        {stepOptions &&
+          stepOptions.map((step, index) => (
+            <li className={current === index ? 'active' : ''} key={step.step}>
+              <div className="circle">{index + 1}</div>
+              <div className="stepDetails">
+                <div className="stepText">
+                  Step
+                  {index + 1}
+                </div>
+                <div className="stepName">{step.step}</div>
               </div>
-              <div className="stepName">{steps[index]}</div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))}
       </ul>
     </StyledNavBar>
   );
