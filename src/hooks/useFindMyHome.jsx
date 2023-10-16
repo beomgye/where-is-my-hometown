@@ -29,6 +29,7 @@ const useFindMyHome = () => {
 
   return {
     result,
+    setResult,
     status,
     isLoading,
     findMyHome
