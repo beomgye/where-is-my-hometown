@@ -7,12 +7,18 @@ const SelectInfo = ({ townList, onRefreshButton }) => {
 
   return (
     <StyledSelect>
-      <InfoTitle>정보 선택</InfoTitle>
+      <InfoTitle>정보</InfoTitle>
       <InfoBox>
         <Info>{content}</Info>
       </InfoBox>
-      <Button type="reset" onClick={onRefreshButton}>
-        초기화
+      <Button
+        type="button"
+        size="default"
+        color="primary"
+        onClick={onRefreshButton}
+        style={{ marginLeft: '75%' }}
+      >
+        Refresh
       </Button>
     </StyledSelect>
   );
@@ -47,8 +53,9 @@ const InfoBox = styled.div`
 
 const Info = styled.p`
   width: 574px;
-  height: 102px;
-  border-radius: 5px;
+  border-radius: 0 30px 30px 30px;
+  line-height: 1.5;
+  padding: 15px;
   border: 2px solid rgba(214, 217, 230, 1);
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
 `;
