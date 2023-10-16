@@ -71,6 +71,7 @@ const Address = ({ address, changeAddress, setBcode, error }) => {
       </KakaoMap>
       <AddressContainer>
         <InputField
+          id="location"
           type="text"
           onClick={openModal}
           error={error?.message}
