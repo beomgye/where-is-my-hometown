@@ -1,37 +1,43 @@
-name: Deploy 
-on: 
+name: Deploy
+
+on:
   push:
     branches:
-      - main 
-jobs: 
+      - main
+
+jobs:
   build:
-    runs-on: ubuntu-20.04 
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Git Checkout 
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Check Node v
-        run: node -v
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
-      - name: .env setting
-        run: echo "NEXT_PUBLIC_KAKAO_APP_JS_KEY=${{secrets.NEXT_PUBLIC_KAKAO_APP_JS_KEY}}" >> .env
+      - name: Install dependencies
+        run: yarn install
 
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+      - name: Create .env file
+        run: echo "NEXT_PUBLIC_KAKAO_APP_JS_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_APP_JS_KEY }}" >> .env
 
-      - name: Build
+      - name: Build the app
         run: yarn build
 
-      - name: Configure AWS credentials 
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
-          aws-region: ${{ secrets.AWS_REGION }} 
-
-      - name: Deploy to S3 
-        run: | 
-          aws s3 sync ./${{ secrets.BUILD_DIRECTORY }} ${{ secrets.AWS_S3_BUCKET_NAME }} --acl public-read --delete
-
+      - name: Deploy to AWS S3
+        run: |
+          aws s3 sync ./out s3://${{ secrets.AWS_S3_BUCKET_NAME }} --acl public-read --delete
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ secrets.AWS_REGION }}
+          aws s3 cp .env s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+          
       - name: CloudFront Invalidate Cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ secrets.AWS_REGION }}
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
