@@ -11,18 +11,7 @@ const nextConfig = {
       use: ['@svgr/webpack']
     });
     return config;
-  },
-
-  async rewrites() {
-    return [
-      {
-        source: '/:path*',
-        destination: 'https://5394192439.for-seoul.synctreengine.com/:path*'
-      }
-    ];
-  },
-
-  crossOrigin: 'anonymous'
+  }
 };
 
 module.exports = nextConfig;
