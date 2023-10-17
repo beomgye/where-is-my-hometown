@@ -20,7 +20,9 @@ const nextConfig = {
         destination: 'https://5394192439.for-seoul.synctreengine.com/:path*'
       }
     ];
-  }
+  },
+
+  crossOrigin: 'anonymous'
 };
 
 module.exports = nextConfig;
