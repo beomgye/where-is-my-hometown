@@ -102,15 +102,18 @@ src
 | ---------- |
 |![초기화면](https://github.com/beomgye/where-is-my-hometown/assets/109938280/5bf7ec4a-101e-491b-b19f-e5f50be09224) |
 
+| 자산 입력 단계 | 
+| ---------- |
+|![자산입력](https://github.com/beomgye/where-is-my-hometown/assets/109938280/bb6edd5b-4a85-4446-9b17-cef2518b95f1)|
 
 | 지도선택 단계 |
 | ---------- |
-|![지도선택](https://github.com/beomgye/where-is-my-hometown/assets/109938280/cf8a6014-8246-45a3-8b39-4568b3e76c16)|
+|![위치선택](https://github.com/beomgye/where-is-my-hometown/assets/109938280/dc953c49-b647-416e-87ea-662646f4f0a7)|
 
 
 | 거래형식 및 결과화면 |
 | -------------- |
-| ![마무리단계](https://github.com/beomgye/where-is-my-hometown/assets/109938280/7b7d2aa8-d770-4fab-b6b9-4d36722cfc50) |
+| ![마무리단계확인](https://github.com/beomgye/where-is-my-hometown/assets/109938280/d7c15b80-34a5-4d0b-9306-9cd4b271092e) |
 
 | AI가 추천해주는 결과 |
 | --------------- |
