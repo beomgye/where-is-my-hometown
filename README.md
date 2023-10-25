@@ -96,7 +96,7 @@ src
 
 </br>
 
-## 실행 결과
+## 레이아웃
 
 | 초기 로딩화면 |
 | ---------- |
@@ -117,6 +117,109 @@ src
 | ![ChatGP결과](https://github.com/beomgye/where-is-my-hometown/assets/109938280/9a9e4a58-19c5-49ad-b2d7-bb8a823278ac) |
 
 </br>
+
+## 기능 구현
+
+### react-hook-form 활용
+각 페이지 별 여러개의 form을 하나로 합쳐 불필요한 렌더링 문제를 막고자하여 이에 관한 방법을 찾던 중, react-hook-form을 사용하여 여러 개의 form을 하나로 컨트롤 하여 불필요한 렌더링 문제를 해결하였다.
+
+useForm을 사용해 하나의 form을 만들어주고, 이에 사용할 수 있는 control, watch, handleSubmit, reset을 컴포넌트에 전달하여 하나의 form을 공유할 수 있도록 제작하였다.
+
+```jsx
+// OptionContainer.jsx
+
+import { useForm } from 'react-hook-form';
+
+const OptionContainer = () => {
+  const { control, watch, handleSubmit, reset } = useForm({
+    defaultValues: {
+      assets: '',
+      location: '주소를 입력해주세요.'
+    }
+  });
+
+  return (
+    <>
+      {isLoading && <Loading />}
+      {step === 0 && <AssetInputForm control={control} onSubmit={handleSubmit(onSubmit)} />}
+      {step === 1 && (
+        <LocationForm
+          control={control}
+          setBcode={setBcode}
+          onSubmit={handleSubmit(onSubmit)}
+          onGoBack={decreaseStep}
+        />
+      )}
+
+      ...
+
+      {step === 5 && result ? <SelectInfo townList={result} onRefreshButton={onReset} /> : ''}
+    </>
+  );
+};
+
+export default OptionContainer;
+
+```
+
+자산 입력 창에서 react-hook-form에 입력값을 전달하는 코드
+
+```jsx
+// AssetInputForm.jsx
+
+const AssetInputForm = ({ control, ...props }) => {
+  return (
+    <Form
+      title="자산 입력"
+      description="갖고 있는 자산을 입력해 주세요."
+      navbarProps={{
+        current: 0,
+        stepOptions: StepOptions
+      }}
+      buttonText="다음 단계"
+      {...props}
+    >
+      <Container>
+        <Controller
+          name="assets"
+          control={control}
+          rules={defaultInputRule}
+          render={({ field, fieldState: { error } }) => (
+            <InputField
+              id="assets"
+              label="자산"
+              placeholder="자산을 입력해 주세요."
+              error={error?.message}
+              ref={field.ref}
+              value={formatMoney(field.value)}
+              onChange={(newValue) => {
+                field.onChange(newValue);
+              }}
+              {...field}
+            />
+          )}
+        />
+      </Container>
+    </Form>
+  );
+};
+```
+
+react-hook-form 을 사용하여 단계별로 옵션을 선택하면 다음과 같이 하나의 form에 담긴 모습을 볼 수 있었다.
+
+![data](https://github.com/beomgye/where-is-my-hometown/assets/86929961/fcf5c423-7215-48e8-aff0-698a5e618ee6)
+
+### Daum 우편번호 서비스를 활용한 위치 검색 기능
+
+[Daum 우편번호 서비스](https://postcode.map.daum.net/guide)를 활용하여 원하는 주소를 검색할 수 있게 만들었으며, 검색 결과값을 통해 [Kakao Map]()에 위치값 좌표를 나타내고, 이에 bcode를 
+
+### Axios 통신을 통한 백엔드 서버와의 연결
+
+내용
+
+### 제목
+
+내용
 
 ## 커밋 컨벤션
 
