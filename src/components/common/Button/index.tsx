@@ -1,14 +1,23 @@
 import styled, { css } from 'styled-components';
 
-const Button = ({ type, size = 'default', color, children, ...props }) => {
+interface ButtonProps {
+  type: "submit" | "reset" | "button";
+  size?: "default" | "small" | "large";
+  color?: "primary" | "secondary";
+  disabled?: boolean;
+  onClick?: () => void; 
+  children: React.ReactNode;
+}
+
+const Button = ({ type, size = 'default', color, disabled = false, onClick, children }: ButtonProps) => {
   return (
-    <StyledButton type={type} size={size} color={color} {...props}>
+    <StyledButton type={type} size={size} color={color} disabled={disabled} onClick={onClick} >
       {children}
     </StyledButton>
   );
 };
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,6 +27,7 @@ const StyledButton = styled.button`
   height: 48px;
   cursor: pointer;
   font-weight: 500;
+
   ${({ size }) => {
     if (size === 'small') {
       return css`
@@ -39,6 +49,7 @@ const StyledButton = styled.button`
       font-size: medium;
     `;
   }}
+
   ${({ color }) => {
     if (color === 'primary') {
       return css`
@@ -66,6 +77,7 @@ const StyledButton = styled.button`
       color: white;
     `;
   }}
+
     ${({ disabled }) => {
     if (disabled) {
       return css`

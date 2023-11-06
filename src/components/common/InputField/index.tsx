@@ -1,11 +1,14 @@
-import styled from 'styled-components';
-import React from 'react';
 import { denimColor, errorColor, secondaryColor } from '@/styles/variables';
+import { InputHTMLAttributes, forwardRef } from 'react';
+import styled from 'styled-components';
 
-const InputField = React.forwardRef(function InputField(
-  { label, id, error, value, ...props },
-  ref
-) {
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error: string;
+}
+
+const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
+  ({ label, id, error, value, ...props }, ref) => {
   return (
     <Container>
       <LabelContainer>
