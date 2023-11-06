@@ -1,5 +1,3 @@
-import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import {
   AssetInputForm,
   BuildingTypeForm,
@@ -9,48 +7,64 @@ import {
   SummaryForm,
   TransactionTypeForm
 } from '@/components';
+import { useCallback, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import useFindMyHome from '@/hooks/useFindMyHome';
 import useStepControl from '@/hooks/useStepControl';
 
-const OptionContainer = () => {
-  const { control, watch, handleSubmit, reset } = useForm({
+export interface MultiFormProps {
+  assets: number;
+  buildingType: number;
+  location: string;
+  transactionType: number
+}
+
+const MultiFormContainer = () => {
+  const { control, watch, handleSubmit, reset } = useForm<MultiFormProps>({
     defaultValues: {
-      assets: '',
-      location: '주소를 입력해주세요.'
+      assets: 0,
+      buildingType: 0,
+      location: '주소를 입력해주세요.',
+      transactionType: 0,
     }
   });
+
   const [bcode, setBcode] = useState('');
   const { result, setResult, isLoading, findMyHome } = useFindMyHome();
   const { step, decreaseStep, increaseStep, resetStep } = useStepControl();
 
-  const onSubmit = useCallback(async () => {
-    if (step < 4) {
-      increaseStep();
-      return;
-    }
-
-    try {
-      const response = await findMyHome({
-        isKBApi: 0,
-        property: watch('assets').replace(/,/g, ''),
-        location: watch('location'),
-        neighborhoodCode: bcode,
-        transactionType: watch('transactionType'),
-        buildingType: watch('buildingType'),
-        recommendedNumber: 1
-      });
-
-      if (response.status === 200) {
+  const onSubmit: SubmitHandler<MultiFormProps> = useCallback(
+    async (data) => {
+      if (step < 4) {
         increaseStep();
-      } else {
+        console.log('data', data);
+        return;
+      }
+
+      try {
+        const response = await findMyHome({
+          isKBApi: 0,
+          property: watch('assets'),
+          location: watch('location'),
+          neighborhoodCode: bcode,
+          transactionType: watch('transactionType'),
+          buildingType: watch('buildingType'),
+          recommendedNumber: 1
+        });
+
+        if (response.status === 200) {
+          increaseStep();
+        } else {
+          alert('추천 동네를 불러오는 데 실패했습니다.');
+        }
+      } catch (error) {
+        console.log(error);
         alert('추천 동네를 불러오는 데 실패했습니다.');
       }
-    } catch (error) {
-      console.log(error);
-      alert('추천 동네를 불러오는 데 실패했습니다.');
-    }
-  }, [bcode, findMyHome, step, watch, increaseStep]);
+    },
+    [bcode, findMyHome, step, watch, increaseStep]
+  );
 
   const onReset = () => {
     setResult('');
@@ -99,4 +113,4 @@ const OptionContainer = () => {
   );
 };
 
-export default OptionContainer;
+export default MultiFormContainer;
