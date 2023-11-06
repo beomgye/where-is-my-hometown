@@ -1,7 +1,7 @@
-import { Controller } from 'react-hook-form';
-import { FaMoneyBill, FaKey, FaHome } from 'react-icons/fa';
-import { Form, Container, Radio } from '@/components';
+import { Container, Form, Radio } from '@/components';
 import { StepOptions, TransactionTypeOptions } from '@/constants';
+import { Controller } from 'react-hook-form';
+import { FaHome, FaKey, FaMoneyBill } from 'react-icons/fa';
 
 const getTransactionIcon = (type) => {
   switch (type) {
@@ -42,7 +42,6 @@ const TransactionTypeForm = ({ control, watch, ...props }) => {
                   <Radio
                     id={`transactionType[${type.id}]`}
                     name="transactionType"
-                    radioProps={type}
                     value={type.value}
                     onChange={() => field.onChange(type.id)}
                     checked={selectedValue === type.id}

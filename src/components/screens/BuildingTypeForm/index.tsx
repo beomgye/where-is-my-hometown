@@ -1,7 +1,7 @@
-import { Controller } from 'react-hook-form';
-import { FaBuilding, FaHome, FaHouseUser, FaCity } from 'react-icons/fa';
 import { Container, Form, Radio } from '@/components';
 import { BuildingTypeOptions, StepOptions } from '@/constants';
+import { Controller } from 'react-hook-form';
+import { FaBuilding, FaCity, FaHome, FaHouseUser } from 'react-icons/fa';
 
 const getBuildingIcon = (type) => {
   switch (type) {
@@ -44,7 +44,6 @@ const BuildingTypeForm = ({ control, watch, ...props }) => {
                   <Radio
                     id={`buildingType[${type.id}]`}
                     name="buildingType"
-                    radioProps={type}
                     value={type.value}
                     onChange={() => field.onChange(type.id)}
                     checked={selectedValue === type.id}
