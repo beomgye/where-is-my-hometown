@@ -1,7 +1,7 @@
-import styled from 'styled-components';
 import { Form } from '@/components';
+import { BuildingTypeOptions, StepOptions, TransactionTypeOptions } from '@/constants';
 import { formatMoney } from '@/utils/formatMoney';
-import { StepOptions, BuildingTypeOptions, TransactionTypeOptions } from '@/constants';
+import styled from 'styled-components';
 
 const SummaryForm = ({ watch, ...props }) => {
   const getTransactionTypeName = (id) => {

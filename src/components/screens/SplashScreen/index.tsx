@@ -1,6 +1,10 @@
+import { purpleColor, whiteColor } from '@/styles/variables';
 import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { purpleColor, whiteColor } from '@/styles/variables';
+
+interface SplashScreenProps {
+  children: React.ReactNode;
+}
 
 const fadeOut = keyframes`
     from {
@@ -11,7 +15,7 @@ const fadeOut = keyframes`
     }
 `;
 
-const SplashScreen = ({ children }) => {
+const SplashScreen = ({ children }:SplashScreenProps) => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
