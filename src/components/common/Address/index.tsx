@@ -7,12 +7,36 @@ import ModalCustomStyles from '@/utils/customStyles';
 import { grayColor } from '@/styles/variables';
 import InputField from '../InputField';
 
-const Address = ({ address, changeAddress, setBcode, error }) => {
-  const [center, setCenter] = useState({ lat: 33.452613, lng: 126.570888 });
-  const [isModalOpen, isSetModalOpen] = useState(false);
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
+declare global {
+  interface Window {
+    kakao : any;
+  }
+}
 
-  const completeHandler = (data) => {
+interface CallbackData {
+  result : window.kakao.maps.services.GeocoderResponse[];
+  status : number;
+}
+
+interface HandlerData {
+  roadAddress : string;
+  bcode : number; 
+}
+
+interface AddrData {
+  address : string;
+  changeAddress : string;
+  setBcode : number;
+  error : string;
+}
+
+
+const Address = ({ address, changeAddress, setBcode, error }) => {
+  const [center, setCenter] = useState<{lat : number, lng : number}>({ lat: 33.452613, lng: 126.570888 });
+  const [isModalOpen, isSetModalOpen] = useState<boolean>(false);
+  const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false);
+
+  const completeHandler = (data : HandlerData) => {
     changeAddress(data.roadAddress);
     setBcode(data.bcode);
     isSetModalOpen(false);
@@ -26,7 +50,7 @@ const Address = ({ address, changeAddress, setBcode, error }) => {
       // 주소-좌표 변환 객체를 생성합니다
       const geocoder = new window.kakao.maps.services.Geocoder();
       // 주소로 좌표를 검색합니다
-      geocoder.addressSearch(address, function (result, status) {
+      geocoder.addressSearch(address, function (result:CallbackData, status:CallbackData) {
         // 정상적으로 검색이 완료됐으면
         if (status === window.kakao.maps.services.Status.OK) {
           setCenter({
