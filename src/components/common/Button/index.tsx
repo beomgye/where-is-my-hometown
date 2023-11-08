@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components';
 
 interface ButtonProps {
   type: 'submit' | 'reset' | 'button';
-  size: 'default' | 'small' | 'large';
+  size?: 'default' | 'small' | 'large';
   color: 'primary' | 'secondary';
-  disabled: boolean;
-  onClick: () => void;
+  disabled?: boolean;
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
