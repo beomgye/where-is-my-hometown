@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import DaumPostcode from 'react-daum-postcode';
-import Modal from 'react-modal';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import styled from 'styled-components';
-import ModalCustomStyles from '@/utils/customStyles';
 import { grayColor } from '@/styles/variables';
+import ModalCustomStyles from '@/utils/customStyles';
+import { useEffect, useState } from 'react';
+import DaumPostcode from 'react-daum-postcode';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import Modal from 'react-modal';
+import styled from 'styled-components';
 import InputField from '../InputField';
 
 declare global {

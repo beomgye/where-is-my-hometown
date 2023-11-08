@@ -1,9 +1,9 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
+import { Header } from '@/components';
 import Script from 'next/script';
 import React from 'react';
-import { Header } from '@/components';
 
 const API = process.env.NEXT_PUBLIC_KAKAO_APP_JS_KEY;
 const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${API}&libraries=services,clusterer&autoload=false`;

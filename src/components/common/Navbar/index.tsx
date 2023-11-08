@@ -1,7 +1,11 @@
-import styled from 'styled-components';
 import { highlightColor, secondaryColor } from '@/styles/variables';
+import styled from 'styled-components';
 
-const NavBar = ({ navbarProps: { current, stepOptions }, text, ...props }) => {
+interface NavbarProps {
+  navbarProps: NavbarType
+}
+
+const NavBar = ({navbarProps: {current, stepOptions}, ...props}: NavbarProps) => {
   return (
     <StyledNavBar {...props}>
       <ul className="stepContainer">

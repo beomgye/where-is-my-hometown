@@ -31,7 +31,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/pages/_app.jsx", "src/components/common/Address/index.tsx", "src/components/screens/AssetInputForm/index.jsx"  ],
+, "src/pages/_app.tsx", "src/components/common/Address/index.tsx", "src/components/screens/AssetInputForm/index.tsx"  ],
   "exclude": [
     "node_modules"
   ]

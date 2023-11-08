@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Button } from '@/components';
+import styled from 'styled-components';
 
 const SelectInfo = ({ townList, onRefreshButton }) => {
   const answer = townList.gptAnswer[0].message;
@@ -16,7 +16,6 @@ const SelectInfo = ({ townList, onRefreshButton }) => {
         size="default"
         color="primary"
         onClick={onRefreshButton}
-        style={{ marginLeft: '75%' }}
       >
         Refresh
       </Button>
