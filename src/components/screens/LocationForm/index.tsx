@@ -1,13 +1,20 @@
-import { Address, Form } from '@/components';
-import { StepOptions } from '@/constants';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
+import { Address, Form } from '@/components';
+import { StepOptions } from '@/constants';
 
 const locationInputRule = {
   validate: (value) => {
     return value === '주소를 입력해주세요.' ? 'This field is required' : undefined;
   }
 };
+
+const Container = styled.div`
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 64px;
+`;
 
 const LocationForm = ({ control, setBcode, ...props }) => {
   return (
@@ -42,12 +49,5 @@ const LocationForm = ({ control, setBcode, ...props }) => {
     </Form>
   );
 };
-
-const Container = styled.div`
-  width: 450px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 64px;
-`;
 
 export default LocationForm;
