@@ -12,13 +12,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import useFindMyHome from '@/hooks/useFindMyHome';
 import useStepControl from '@/hooks/useStepControl';
-
-export interface MultiFormProps {
-  assets: number;
-  buildingType: number;
-  location: string;
-  transactionType: number
-}
+import { MultiFormProps } from '@/types/form';
 
 const MultiFormContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm<MultiFormProps>({
