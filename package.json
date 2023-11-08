@@ -29,6 +29,7 @@
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20.8.10",
     "@types/react": "^18.2.34",
+    "@types/styled-components": "^5.1.30",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "eslint": "^8.50.0",
