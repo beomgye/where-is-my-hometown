@@ -1,27 +1,5 @@
-import { Button } from '@/components';
 import styled from 'styled-components';
-
-const SelectInfo = ({ townList, onRefreshButton }) => {
-  const answer = townList.gptAnswer[0].message;
-  const { content } = answer;
-
-  return (
-    <StyledSelect>
-      <InfoTitle>정보</InfoTitle>
-      <InfoBox>
-        <Info>{content}</Info>
-      </InfoBox>
-      <Button
-        type="button"
-        size="default"
-        color="primary"
-        onClick={onRefreshButton}
-      >
-        Refresh
-      </Button>
-    </StyledSelect>
-  );
-};
+import { Button } from '@/components';
 
 const StyledSelect = styled.form`
   position: relative;
@@ -58,5 +36,22 @@ const Info = styled.p`
   border: 2px solid rgba(214, 217, 230, 1);
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
 `;
+
+const SelectInfo = ({ townList, onRefreshButton }) => {
+  const answer = townList.gptAnswer[0].message;
+  const { content } = answer;
+
+  return (
+    <StyledSelect>
+      <InfoTitle>정보</InfoTitle>
+      <InfoBox>
+        <Info>{content}</Info>
+      </InfoBox>
+      <Button type="button" size="default" color="primary" onClick={onRefreshButton}>
+        Refresh
+      </Button>
+    </StyledSelect>
+  );
+};
 
 export default SelectInfo;

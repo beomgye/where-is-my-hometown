@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import { Button, Navbar } from '@/components';
 import { grayColor, secondaryColor, whiteColor } from '@/styles/variables';
-import styled from 'styled-components';
 
 interface FormProps {
   navbarProps: NavbarType;

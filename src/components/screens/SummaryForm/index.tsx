@@ -1,63 +1,7 @@
+import styled from 'styled-components';
 import { Form } from '@/components';
 import { BuildingTypeOptions, StepOptions, TransactionTypeOptions } from '@/constants';
 import { formatMoney } from '@/utils/formatMoney';
-import styled from 'styled-components';
-
-const SummaryForm = ({ watch, ...props }) => {
-  const getTransactionTypeName = (id) => {
-    const transactionType = TransactionTypeOptions.find((type) => type.id === id);
-    return transactionType ? transactionType.value : '';
-  };
-
-  const getBuildingTypeName = (id) => {
-    const buildingType = BuildingTypeOptions.find((type) => type.id === id);
-    return buildingType ? buildingType.value : '';
-  };
-
-  const property = watch('assets');
-  const location = watch('location');
-  const transactionType = watch('transactionType');
-  const buildingType = watch('buildingType');
-
-  return (
-    <Form
-      title="마무리 단계"
-      description="총 마무리 단계 입니다."
-      navbarProps={{
-        current: 4,
-        stepOptions: StepOptions
-      }}
-      buttonText="확인"
-      goBackButton
-      refreshButton
-      {...props}
-    >
-      <Container>
-        <StyledSummaryForm>
-          <TotalContainer>
-            <Asset>
-              <AssetTitle>자산</AssetTitle>
-              <AssetValue>{`${formatMoney(property)} 원`}</AssetValue>
-            </Asset>
-            <hr />
-            <Location>
-              <LocationTitle>위치</LocationTitle>
-              <LocationValue>{location}</LocationValue>
-            </Location>
-            <Trade>
-              <TradeTitle>거래 방식</TradeTitle>
-              <TradeValue>{getTransactionTypeName(transactionType)}</TradeValue>
-            </Trade>
-            <BuildingType>
-              <BuildingTitle>건물 유형</BuildingTitle>
-              <BuildingValue>{getBuildingTypeName(buildingType)}</BuildingValue>
-            </BuildingType>
-          </TotalContainer>
-        </StyledSummaryForm>
-      </Container>
-    </Form>
-  );
-};
 
 const Container = styled.div`
   width: 450px;
@@ -122,5 +66,61 @@ const BuildingTitle = styled.p`
 const BuildingValue = styled.p`
   margin-left: auto;
 `;
+
+const SummaryForm = ({ watch, ...props }) => {
+  const getTransactionTypeName = (id) => {
+    const transactionType = TransactionTypeOptions.find((type) => type.id === id);
+    return transactionType ? transactionType.value : '';
+  };
+
+  const getBuildingTypeName = (id) => {
+    const buildingType = BuildingTypeOptions.find((type) => type.id === id);
+    return buildingType ? buildingType.value : '';
+  };
+
+  const property = watch('assets');
+  const location = watch('location');
+  const transactionType = watch('transactionType');
+  const buildingType = watch('buildingType');
+
+  return (
+    <Form
+      title="마무리 단계"
+      description="총 마무리 단계 입니다."
+      navbarProps={{
+        current: 4,
+        stepOptions: StepOptions
+      }}
+      buttonText="확인"
+      goBackButton
+      refreshButton
+      {...props}
+    >
+      <Container>
+        <StyledSummaryForm>
+          <TotalContainer>
+            <Asset>
+              <AssetTitle>자산</AssetTitle>
+              <AssetValue>{`${formatMoney(property)} 원`}</AssetValue>
+            </Asset>
+            <hr />
+            <Location>
+              <LocationTitle>위치</LocationTitle>
+              <LocationValue>{location}</LocationValue>
+            </Location>
+            <Trade>
+              <TradeTitle>거래 방식</TradeTitle>
+              <TradeValue>{getTransactionTypeName(transactionType)}</TradeValue>
+            </Trade>
+            <BuildingType>
+              <BuildingTitle>건물 유형</BuildingTitle>
+              <BuildingValue>{getBuildingTypeName(buildingType)}</BuildingValue>
+            </BuildingType>
+          </TotalContainer>
+        </StyledSummaryForm>
+      </Container>
+    </Form>
+  );
+};
 
 export default SummaryForm;

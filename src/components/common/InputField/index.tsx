@@ -1,6 +1,6 @@
-import { denimColor, errorColor, secondaryColor } from '@/styles/variables';
 import { InputHTMLAttributes, forwardRef } from 'react';
 import styled from 'styled-components';
+import { denimColor, errorColor, secondaryColor } from '@/styles/variables';
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;

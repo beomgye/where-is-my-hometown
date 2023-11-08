@@ -1,3 +1,5 @@
+import { useCallback, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   AssetInputForm,
   BuildingTypeForm,
@@ -7,8 +9,6 @@ import {
   SummaryForm,
   TransactionTypeForm
 } from '@/components';
-import { useCallback, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
 import useFindMyHome from '@/hooks/useFindMyHome';
 import useStepControl from '@/hooks/useStepControl';
@@ -20,7 +20,7 @@ const MultiFormContainer = () => {
       assets: 0,
       buildingType: 0,
       location: '주소를 입력해주세요.',
-      transactionType: 0,
+      transactionType: 0
     }
   });
 
