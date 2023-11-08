@@ -2,30 +2,8 @@ import { highlightColor, secondaryColor } from '@/styles/variables';
 import styled from 'styled-components';
 
 interface NavbarProps {
-  navbarProps: NavbarType
+  navbarProps: NavbarType;
 }
-
-const NavBar = ({navbarProps: {current, stepOptions}, ...props}: NavbarProps) => {
-  return (
-    <StyledNavBar {...props}>
-      <ul className="stepContainer">
-        {stepOptions &&
-          stepOptions.map((step, index) => (
-            <li className={current === index ? 'active' : ''} key={step.id}>
-              <div className="circle">{index + 1}</div>
-              <div className="stepDetails">
-                <div className="stepText">
-                  Step
-                  {index + 1}
-                </div>
-                <div className="stepName">{step.value}</div>
-              </div>
-            </li>
-          ))}
-      </ul>
-    </StyledNavBar>
-  );
-};
 
 const StyledNavBar = styled.nav`
   justify-content: flex-start;
@@ -97,5 +75,27 @@ const StyledNavBar = styled.nav`
     color: #ffff;
   }
 `;
+
+const NavBar = ({ navbarProps: { current, stepOptions }, ...props }: NavbarProps) => {
+  return (
+    <StyledNavBar {...props}>
+      <ul className="stepContainer">
+        {stepOptions &&
+          stepOptions.map((step, index) => (
+            <li className={current === index ? 'active' : ''} key={step.id}>
+              <div className="circle">{index + 1}</div>
+              <div className="stepDetails">
+                <div className="stepText">
+                  Step
+                  {index + 1}
+                </div>
+                <div className="stepName">{step.value}</div>
+              </div>
+            </li>
+          ))}
+      </ul>
+    </StyledNavBar>
+  );
+};
 
 export default NavBar;

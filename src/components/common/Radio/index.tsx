@@ -12,22 +12,12 @@ interface RadioProps {
   id: string;
   name: string;
   value: string;
-  onChange: (checked) => void
+  onChange: (checked) => void;
   checked: boolean;
   icon: React.ReactNode;
 }
 
-const Radio = forwardRef<HTMLInputElement, RadioProps>(({ id, name, value , onChange, checked, icon, ...props }, ref) => {
-  return (
-    <Container checked={checked} onClick={() => onChange(() => onChange(!checked))}>
-      <Input id={id} name={name} type="radio" ref={ref} defaultChecked={checked} {...props} />
-      <Label>{value}</Label>
-      <Icon>{icon}</Icon>
-    </Container>
-  );
-});
-
-const Container = styled.div<{checked: boolean}>`
+const Container = styled.div<{ checked: boolean }>`
   background-color: ${(props) => (props.checked ? activeColor : whiteColor)};
   border: 1px solid ${(props) => (props.checked ? primaryColor : borderColor)};
   border-radius: 8px;
@@ -42,7 +32,7 @@ const Container = styled.div<{checked: boolean}>`
   color: ${secondaryColor};
 `;
 
-const Input = styled.input<{defaultChecked: boolean}>`
+const Input = styled.input<{ defaultChecked: boolean }>`
   position: relative;
   border-radius: 4px;
   width: 17.422px;
@@ -76,5 +66,19 @@ const Icon = styled.span`
 `;
 
 const Label = styled.label``;
+
+const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  ({ id, name, value, onChange, checked, icon, ...props }, ref) => {
+    return (
+      <Container checked={checked} onClick={() => onChange(() => onChange(!checked))}>
+        <Input id={id} name={name} type="radio" ref={ref} defaultChecked={checked} {...props} />
+        <Label>{value}</Label>
+        <Icon>{icon}</Icon>
+      </Container>
+    );
+  }
+);
+
+Radio.displayName = 'Radio';
 
 export default Radio;

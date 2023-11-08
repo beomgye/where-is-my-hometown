@@ -1,21 +1,13 @@
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
-  type: "submit" | "reset" | "button";
-  size?: "default" | "small" | "large";
-  color?: "primary" | "secondary";
-  disabled?: boolean;
-  onClick?: () => void; 
+  type: 'submit' | 'reset' | 'button';
+  size: 'default' | 'small' | 'large';
+  color: 'primary' | 'secondary';
+  disabled: boolean;
+  onClick: () => void;
   children: React.ReactNode;
 }
-
-const Button = ({ type, size = 'default', color, disabled = false, onClick, children }: ButtonProps) => {
-  return (
-    <StyledButton type={type} size={size} color={color} disabled={disabled} onClick={onClick} >
-      {children}
-    </StyledButton>
-  );
-};
 
 const StyledButton = styled.button<ButtonProps>`
   display: flex;
@@ -96,5 +88,20 @@ const StyledButton = styled.button<ButtonProps>`
     return css``;
   }};
 `;
+
+const Button = ({
+  type,
+  size = 'default',
+  color,
+  disabled = false,
+  onClick,
+  children
+}: ButtonProps) => {
+  return (
+    <StyledButton type={type} size={size} color={color} disabled={disabled} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
+};
 
 export default Button;

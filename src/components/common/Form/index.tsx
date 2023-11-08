@@ -7,60 +7,13 @@ interface FormProps {
   title: string;
   description: string;
   children: React.ReactNode;
-  footerHidden?: boolean;
-  goBackButton?: boolean;
-  onGoBack?: () => void;
-  refreshButton?: boolean;
-  onRefresh?: () => void;
-  buttonText?: string;
+  footerHidden: boolean;
+  goBackButton: boolean;
+  onGoBack: () => void;
+  refreshButton: boolean;
+  onRefresh: () => void;
+  buttonText: string;
 }
-
-const Form = ({
-  navbarProps,
-  title,
-  description,
-  children,
-  footerHidden,
-  goBackButton,
-  onGoBack,
-  refreshButton,
-  onRefresh,
-  buttonText,
-  ...props
-}: FormProps) => {
-  return (
-    <StyledForm {...props}>
-      <Navbar navbarProps={navbarProps} />
-      <Container>
-        {title && <Title>{title}</Title>}
-        {description && <Description>{description}</Description>}
-        {children && <Content>{children}</Content>}
-
-        {!footerHidden && (
-          <Footer>
-            <ButtonContainer>
-              {goBackButton && (
-                <Button type="button" size="default" color="secondary" onClick={onGoBack}>
-                  Go Back
-                </Button>
-              )}
-
-              {refreshButton && (
-                <Button type="button" size="default" color="secondary" onClick={onRefresh}>
-                  Refresh
-                </Button>
-              )}
-            </ButtonContainer>
-
-            <Button type="submit" size="default" color="primary">
-              {buttonText}
-            </Button>
-          </Footer>
-        )}
-      </Container>
-    </StyledForm>
-  );
-};
 
 const StyledForm = styled.form`
   position: relative;
@@ -119,5 +72,52 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+const Form = ({
+  navbarProps,
+  title,
+  description,
+  children,
+  footerHidden,
+  goBackButton,
+  onGoBack,
+  refreshButton,
+  onRefresh,
+  buttonText,
+  ...props
+}: FormProps) => {
+  return (
+    <StyledForm {...props}>
+      <Navbar navbarProps={navbarProps} />
+      <Container>
+        {title && <Title>{title}</Title>}
+        {description && <Description>{description}</Description>}
+        {children && <Content>{children}</Content>}
+
+        {!footerHidden && (
+          <Footer>
+            <ButtonContainer>
+              {goBackButton && (
+                <Button type="button" size="default" color="secondary" onClick={onGoBack}>
+                  Go Back
+                </Button>
+              )}
+
+              {refreshButton && (
+                <Button type="button" size="default" color="secondary" onClick={onRefresh}>
+                  Refresh
+                </Button>
+              )}
+            </ButtonContainer>
+
+            <Button type="submit" size="default" color="primary">
+              {buttonText}
+            </Button>
+          </Footer>
+        )}
+      </Container>
+    </StyledForm>
+  );
+};
 
 export default Form;

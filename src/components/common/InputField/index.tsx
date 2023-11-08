@@ -3,22 +3,9 @@ import { InputHTMLAttributes, forwardRef } from 'react';
 import styled from 'styled-components';
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
+  label: string;
   error: string;
 }
-
-const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, id, error, value, ...props }, ref) => {
-  return (
-    <Container>
-      <LabelContainer>
-        <Label htmlFor={id}>{label}</Label>
-        {error && <Error>{error}</Error>}
-      </LabelContainer>
-      <Input ref={ref} type="text" id={id} value={value} {...props} />
-    </Container>
-  );
-});
 
 const Container = styled.div`
   display: flex;
@@ -74,5 +61,21 @@ const Input = styled.input`
     left: 16px;
   }
 `;
+
+const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
+  ({ label, id, error, value, ...props }, ref) => {
+    return (
+      <Container>
+        <LabelContainer>
+          <Label htmlFor={id}>{label}</Label>
+          {error && <Error>{error}</Error>}
+        </LabelContainer>
+        <Input ref={ref} id={id} value={value} {...props} />
+      </Container>
+    );
+  }
+);
+
+InputField.displayName = 'InputField';
 
 export default InputField;
