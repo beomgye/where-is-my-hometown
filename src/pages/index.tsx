@@ -1,18 +1,7 @@
+import styled from 'styled-components';
 import { SplashScreen } from '@/components';
 import MultiFormContainer from '@/MultiFormContainer';
 import { backgroundColor } from '@/styles/variables';
-import styled from 'styled-components';
-
-const Home = () => {
-  return (
-    <Main>
-      <Title>Where is my Hometown</Title>
-      <SplashScreen>
-        <MultiFormContainer />
-      </SplashScreen>
-    </Main>
-  );
-};
 
 const Main = styled.main`
   background-color: ${backgroundColor};
@@ -27,5 +16,16 @@ const Title = styled.h1`
   position: absolute;
   top: -999px;
 `;
+
+const Home = () => {
+  return (
+    <Main>
+      <Title>Where is my Hometown</Title>
+      <SplashScreen>
+        <MultiFormContainer />
+      </SplashScreen>
+    </Main>
+  );
+};
 
 export default Home;
