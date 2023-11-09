@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Form } from '@/components';
 import { BuildingTypeOptions, StepOptions, TransactionTypeOptions } from '@/constants';
 import { formatMoney } from '@/utils/formatMoney';
+import Form from '@/components/common/Form';
 
 const Container = styled.div`
   width: 450px;

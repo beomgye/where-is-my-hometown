@@ -1,7 +1,9 @@
-import { Container, Form, Radio } from '@/components';
 import { BuildingTypeOptions, StepOptions } from '@/constants';
 import { Controller } from 'react-hook-form';
 import { FaBuilding, FaCity, FaHome, FaHouseUser } from 'react-icons/fa';
+import Container from '@/components/common/Container';
+import Form from '@/components/common/Form';
+import Radio from '@/components/common/Radio';
 
 const getBuildingIcon = (type) => {
   switch (type) {

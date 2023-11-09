@@ -1,9 +1,9 @@
-import { Form, InputField } from '@/components';
 import { StepOptions } from '@/constants';
 import { formatMoney } from '@/utils/formatMoney';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
-
+import Form from '@/components/common/Form';
+import InputField from '@/components/common/InputField';
 
 const defaultInputRule = {
   required: 'This field is required'

@@ -1,7 +1,8 @@
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
-import { Address, Form } from '@/components';
 import { StepOptions } from '@/constants';
+import Form from '@/components/common/Form';
+import Address from '@/components/common/Address';
 
 const locationInputRule = {
   validate: (value) => {

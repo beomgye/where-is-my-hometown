@@ -1,7 +1,9 @@
-import { Container, Form, Radio } from '@/components';
 import { StepOptions, TransactionTypeOptions } from '@/constants';
 import { Controller } from 'react-hook-form';
 import { FaHome, FaKey, FaMoneyBill } from 'react-icons/fa';
+import Form from '@/components/common/Form';
+import Container from '@/components/common/Container';
+import Radio from '@/components/common/Radio';
 
 const getTransactionIcon = (type) => {
   switch (type) {
