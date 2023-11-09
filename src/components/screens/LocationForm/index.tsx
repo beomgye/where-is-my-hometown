@@ -17,8 +17,12 @@ const Container = styled.div`
   margin-bottom: 64px;
 `;
 
+type Formtype = {
+  setBcode: (bcdoe: number) => void;
+};
+
 // useForm 함수를 호출할 떄 control 을 따로 타입지정을 하지 않아두 된다
-const LocationForm = ({ control, ...props }) => {
+const LocationForm = ({ setBcode, control, ...props }: Formtype) => {
   return (
     <Form
       title="위치 선택"
