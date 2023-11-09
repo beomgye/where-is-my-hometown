@@ -1,5 +1,5 @@
-import { grayColor, secondaryColor, whiteColor } from '@/styles/variables';
 import styled from 'styled-components';
+import { grayColor, secondaryColor, whiteColor } from '@/styles/variables';
 import Button from '@/components/common/Button';
 import Navbar from '@/components/common/Navbar';
 

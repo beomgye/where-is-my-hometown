@@ -1,5 +1,4 @@
-import Global from "@/styles/global";
-
+import Global from '@/styles/global';
 
 const App = ({ Component, pageProps }) => {
   return (

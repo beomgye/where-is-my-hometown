@@ -1,5 +1,5 @@
-import { highlightColor, secondaryColor } from '@/styles/variables';
 import styled from 'styled-components';
+import { highlightColor, secondaryColor } from '@/styles/variables';
 
 interface NavbarProps {
   navbarProps: NavbarType;

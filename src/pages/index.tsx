@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SplashScreen } from '@/components';
+import SplashScreen from '@/components/screens/SplashScreen';
 import MultiFormContainer from '@/MultiFormContainer';
 import { backgroundColor } from '@/styles/variables';
 

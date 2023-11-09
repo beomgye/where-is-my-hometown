@@ -1,14 +1,12 @@
 import { useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {
-  AssetInputForm,
-  BuildingTypeForm,
-  Loading,
-  LocationForm,
-  SelectInfo,
-  SummaryForm,
-  TransactionTypeForm
-} from '@/components';
+import AssetInputForm from '@/components/screens/AssetInputForm';
+import BuildingTypeForm from '@/components/screens/BuildingTypeForm';
+import Loading from '@/components/common/Loading';
+import LocationForm from '@/components/screens/LocationForm';
+import SelectInfo from '@/components/screens/SelectInfo';
+import SummaryForm from '@/components/screens/SummaryForm';
+import TransactionTypeForm from '@/components/screens/TransactionTypeForm';
 
 import useFindMyHome from '@/hooks/useFindMyHome';
 import useStepControl from '@/hooks/useStepControl';
