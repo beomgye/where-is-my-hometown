@@ -6,7 +6,6 @@ import { FormHTMLAttributes } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import styled from 'styled-components';
 
-
 interface LocationFormProps extends FormHTMLAttributes<HTMLFormElement> {
   control: Control<MultiFormProps>;
   setBcode: (bcdoe: number) => void;
@@ -27,8 +26,13 @@ const locationInputRule = {
   }
 };
 
-const LocationForm = ({ control, setBcode, goBackButton, onGoBack, ...props }: LocationFormProps) => {
-
+const LocationForm = ({
+  control,
+  setBcode,
+  goBackButton,
+  onGoBack,
+  ...props
+}: LocationFormProps) => {
   return (
     <Form
       title="위치 선택"

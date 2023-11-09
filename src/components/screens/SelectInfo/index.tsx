@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import Button from '@/components/common/Button';
+import styled from 'styled-components';
 
 const StyledSelect = styled.form`
   position: relative;
