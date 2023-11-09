@@ -1,18 +1,18 @@
-import styled from 'styled-components';
-import { grayColor, secondaryColor, whiteColor } from '@/styles/variables';
 import Button from '@/components/common/Button';
 import Navbar from '@/components/common/Navbar';
+import { grayColor, secondaryColor, whiteColor } from '@/styles/variables';
+import styled from 'styled-components';
 
 interface FormProps {
   navbarProps: NavbarType;
   title: string;
   description: string;
   children: React.ReactNode;
-  footerHidden: boolean;
-  goBackButton: boolean;
-  onGoBack: () => void;
-  refreshButton: boolean;
-  onRefresh: () => void;
+  footerHidden?: boolean;
+  goBackButton?: boolean;
+  onGoBack?: () => void;
+  refreshButton?: boolean;
+  onRefresh?: () => void;
   buttonText: string;
 }
 

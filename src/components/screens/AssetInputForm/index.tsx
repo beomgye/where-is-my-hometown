@@ -1,15 +1,29 @@
-import { StepOptions } from '@/constants';
-import { formatMoney } from '@/utils/formatMoney';
-import { Controller } from 'react-hook-form';
-import styled from 'styled-components';
 import Form from '@/components/common/Form';
 import InputField from '@/components/common/InputField';
+
+import { StepOptions } from '@/constants';
+import { MultiFormProps } from '@/types/form';
+import { FormHTMLAttributes } from 'react';
+import { Control, Controller } from 'react-hook-form';
+import styled from 'styled-components';
+
+interface AssetInputFormProps extends FormHTMLAttributes<HTMLFormElement> {
+  control: Control<MultiFormProps>;
+}
+
+const Container = styled.div`
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 64px;
+`;
+
 
 const defaultInputRule = {
   required: 'This field is required'
 };
 
-const AssetInputForm = ({ control, ...props }) => {
+const AssetInputForm = ({ control, ...props }: AssetInputFormProps) => {
   return (
     <Form
       title="자산 입력"
@@ -30,10 +44,11 @@ const AssetInputForm = ({ control, ...props }) => {
             <InputField
               id="assets"
               label="자산"
+              type="text"
               placeholder="자산을 입력해 주세요."
               error={error?.message}
               ref={field.ref}
-              value={formatMoney(field.value)}
+              value={field.value}
               onChange={(newValue) => {
                 field.onChange(newValue);
               }}
@@ -45,12 +60,5 @@ const AssetInputForm = ({ control, ...props }) => {
     </Form>
   );
 };
-
-const Container = styled.div`
-  width: 450px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 64px;
-`;
 
 export default AssetInputForm;

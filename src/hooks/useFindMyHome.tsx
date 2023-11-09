@@ -4,7 +4,6 @@ import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 interface HometownProps {
   isKBApi: number;
   property: number;
-  location: string;
   neighborhoodCode: string;
   transactionType: number;
   buildingType: number;
@@ -16,7 +15,8 @@ interface UseFindMyHomeProps {
   setResult: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
-  findMyHome: (info: HometownProps) => Promise<AxiosResponse<string>>;
+
+  findMyHome: (info: HometownProps) => Promise<AxiosResponse<HometownProps>>;
 }
 
 const useFindMyHome = (): UseFindMyHomeProps => {
@@ -24,12 +24,10 @@ const useFindMyHome = (): UseFindMyHomeProps => {
   const [isLoading, setIsLoading] = useState(false);
 
   const findMyHome = useCallback(async (info: HometownProps) => {
-    const { ...requestInfo } = info;
-
     setIsLoading(true);
 
     try {
-      const response = await axios.post('/whereismyneighborhood', requestInfo, {
+      const response = await axios.post('/whereismyneighborhood', info, {
         headers: {
           'Content-Type': 'application/json'
         }
