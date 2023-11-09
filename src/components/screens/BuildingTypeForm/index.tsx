@@ -1,7 +1,18 @@
-import { Container, Form, Radio } from '@/components';
+import Container from '@/components/common/Container';
+import Form from '@/components/common/Form';
+import Radio from '@/components/common/Radio';
 import { BuildingTypeOptions, StepOptions } from '@/constants';
-import { Controller } from 'react-hook-form';
+import { MultiFormProps } from '@/types/form';
+import { FormHTMLAttributes } from 'react';
+import { Control, Controller } from 'react-hook-form';
 import { FaBuilding, FaCity, FaHome, FaHouseUser } from 'react-icons/fa';
+
+interface BuildingTypeFormProps extends FormHTMLAttributes<HTMLFormElement> {
+  control: Control<MultiFormProps>;
+  watch;
+  goBackButton: boolean;
+  onGoBack: () => void;
+}
 
 const getBuildingIcon = (type) => {
   switch (type) {
@@ -18,7 +29,13 @@ const getBuildingIcon = (type) => {
   }
 };
 
-const BuildingTypeForm = ({ control, watch, ...props }) => {
+const BuildingTypeForm = ({
+  control,
+  watch,
+  goBackButton,
+  onGoBack,
+  ...props
+}: BuildingTypeFormProps) => {
   const selectedValue = watch('buildingType');
 
   return (
@@ -30,7 +47,8 @@ const BuildingTypeForm = ({ control, watch, ...props }) => {
         stepOptions: StepOptions
       }}
       buttonText="다음 단계"
-      goBackButton
+      goBackButton={goBackButton}
+      onGoBack={onGoBack}
       {...props}
     >
       <Container>

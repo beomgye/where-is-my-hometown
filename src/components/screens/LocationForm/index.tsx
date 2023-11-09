@@ -1,13 +1,17 @@
-import { Controller } from 'react-hook-form';
-import styled from 'styled-components';
-import { Address, Form } from '@/components';
+import Address from '@/components/common/Address';
+import Form from '@/components/common/Form';
 import { StepOptions } from '@/constants';
+import { MultiFormProps } from '@/types/form';
+import { FormHTMLAttributes } from 'react';
+import { Control, Controller } from 'react-hook-form';
+import styled from 'styled-components';
 
-const locationInputRule = {
-  validate: (value) => {
-    return value === '주소를 입력해주세요.' ? 'This field is required' : undefined;
-  }
-};
+interface LocationFormProps extends FormHTMLAttributes<HTMLFormElement> {
+  control: Control<MultiFormProps>;
+  setBcode;
+  goBackButton: boolean;
+  onGoBack: () => void;
+}
 
 const Container = styled.div`
   width: 450px;
@@ -16,7 +20,19 @@ const Container = styled.div`
   margin-bottom: 64px;
 `;
 
-const LocationForm = ({ control, setBcode, ...props }) => {
+const locationInputRule = {
+  validate: (value) => {
+    return value === '주소를 입력해주세요.' ? 'This field is required' : undefined;
+  }
+};
+
+const LocationForm = ({
+  control,
+  setBcode,
+  goBackButton,
+  onGoBack,
+  ...props
+}: LocationFormProps) => {
   return (
     <Form
       title="위치 선택"
@@ -26,7 +42,8 @@ const LocationForm = ({ control, setBcode, ...props }) => {
         stepOptions: StepOptions
       }}
       buttonText="다음 단계"
-      goBackButton
+      goBackButton={goBackButton}
+      onGoBack={onGoBack}
       {...props}
     >
       <Container>
