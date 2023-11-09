@@ -15,6 +15,7 @@ interface UseFindMyHomeProps {
   setResult: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+
   findMyHome: (info: HometownProps) => Promise<AxiosResponse<HometownProps>>;
 }
 

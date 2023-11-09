@@ -1,5 +1,6 @@
 import Form from '@/components/common/Form';
 import InputField from '@/components/common/InputField';
+
 import { StepOptions } from '@/constants';
 import { MultiFormProps } from '@/types/form';
 import { FormHTMLAttributes } from 'react';
@@ -16,6 +17,7 @@ const Container = styled.div`
   flex-direction: column;
   margin-bottom: 64px;
 `;
+
 
 const defaultInputRule = {
   required: 'This field is required'

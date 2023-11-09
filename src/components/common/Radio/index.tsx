@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+import styled from 'styled-components';
 import {
   activeColor,
   borderColor,
@@ -5,8 +7,6 @@ import {
   secondaryColor,
   whiteColor
 } from '@/styles/variables';
-import { forwardRef } from 'react';
-import styled from 'styled-components';
 
 interface RadioProps {
   id: string;

@@ -1,7 +1,7 @@
-import MultiFormContainer from '@/MultiFormContainer';
-import SplashScreen from '@/components/screens/SplashScreen';
-import { backgroundColor } from '@/styles/variables';
 import styled from 'styled-components';
+import SplashScreen from '@/components/screens/SplashScreen';
+import MultiFormContainer from '@/MultiFormContainer';
+import { backgroundColor } from '@/styles/variables';
 
 const Main = styled.main`
   background-color: ${backgroundColor};
