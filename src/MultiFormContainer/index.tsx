@@ -17,10 +17,10 @@ import { MultiFormProps } from '@/types/form';
 const MultiFormContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm<MultiFormProps>({
     defaultValues: {
-      assets: undefined,
-      buildingType: undefined,
-      location: undefined,
-      transactionType: undefined
+      assets: '',
+      buildingType: '',
+      location: '',
+      transactionType: ''
     }
   });
 
@@ -37,10 +37,10 @@ const MultiFormContainer = () => {
     try {
       const response = await findMyHome({
         isKBApi: 0,
-        property: watch('assets'),
+        property: Number(watch('assets')),
         neighborhoodCode: bcode,
-        transactionType: watch('transactionType'),
-        buildingType: watch('buildingType'),
+        transactionType: Number(watch('transactionType')),
+        buildingType: Number(watch('buildingType')),
         recommendedNumber: 1
       });
 

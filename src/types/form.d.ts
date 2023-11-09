@@ -1,6 +1,6 @@
 export interface MultiFormProps {
-  assets: number;
-  buildingType: number;
+  assets: string;
+  buildingType: string;
   location: string;
-  transactionType: number;
+  transactionType: string;
 }

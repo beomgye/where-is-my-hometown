@@ -18,7 +18,6 @@ const Container = styled.div`
   margin-bottom: 64px;
 `;
 
-
 const defaultInputRule = {
   required: 'This field is required'
 };
@@ -44,7 +43,6 @@ const AssetInputForm = ({ control, ...props }: AssetInputFormProps) => {
             <InputField
               id="assets"
               label="자산"
-              type="text"
               placeholder="자산을 입력해 주세요."
               error={error?.message}
               ref={field.ref}

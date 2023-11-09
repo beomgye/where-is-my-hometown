@@ -1,6 +1,6 @@
+import { denimColor, errorColor, secondaryColor } from '@/styles/variables';
 import { InputHTMLAttributes, forwardRef } from 'react';
 import styled from 'styled-components';
-import { denimColor, errorColor, secondaryColor } from '@/styles/variables';
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -63,14 +63,14 @@ const Input = styled.input`
 `;
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, id, error, value, ...props }, ref) => {
+  ({ label, id, error, value, type = 'text', ...props }, ref) => {
     return (
       <Container>
         <LabelContainer>
           <Label htmlFor={id}>{label}</Label>
           {error && <Error>{error}</Error>}
         </LabelContainer>
-        <Input ref={ref} id={id} value={value} {...props} />
+        <Input ref={ref} id={id} type={type} value={value} {...props} />
       </Container>
     );
   }
