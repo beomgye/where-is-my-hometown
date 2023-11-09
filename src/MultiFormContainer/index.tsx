@@ -1,64 +1,59 @@
 import { useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {
-  AssetInputForm,
-  BuildingTypeForm,
-  Loading,
-  LocationForm,
-  SelectInfo,
-  SummaryForm,
-  TransactionTypeForm
-} from '@/components';
+
+import Loading from '@/components/common/Loading';
+import AssetInputForm from '@/components/screens/AssetInputForm';
+import BuildingTypeForm from '@/components/screens/BuildingTypeForm';
+import LocationForm from '@/components/screens/LocationForm';
+import SelectInfo from '@/components/screens/SelectInfo';
+import SummaryForm from '@/components/screens/SummaryForm';
+import TransactionTypeForm from '@/components/screens/TransactionTypeForm';
 
 import useFindMyHome from '@/hooks/useFindMyHome';
 import useStepControl from '@/hooks/useStepControl';
+
 import { MultiFormProps } from '@/types/form';
 
 const MultiFormContainer = () => {
   const { control, watch, handleSubmit, reset } = useForm<MultiFormProps>({
     defaultValues: {
-      assets: 0,
-      buildingType: 0,
-      location: '주소를 입력해주세요.',
-      transactionType: 0
+      assets: undefined,
+      buildingType: undefined,
+      location: undefined,
+      transactionType: undefined
     }
   });
 
   const [bcode, setBcode] = useState('');
   const { result, setResult, isLoading, findMyHome } = useFindMyHome();
-  const { step, decreaseStep, increaseStep, resetStep } = useStepControl();
+  const { step, increaseStep, decreaseStep, resetStep } = useStepControl();
 
-  const onSubmit: SubmitHandler<MultiFormProps> = useCallback(
-    async (data) => {
-      if (step < 4) {
+  const onSubmit: SubmitHandler<MultiFormProps> = useCallback(async () => {
+    if (step < 4) {
+      increaseStep();
+      return;
+    }
+
+    try {
+      const response = await findMyHome({
+        isKBApi: 0,
+        property: watch('assets'),
+        neighborhoodCode: bcode,
+        transactionType: watch('transactionType'),
+        buildingType: watch('buildingType'),
+        recommendedNumber: 1
+      });
+
+      if (response.status === 200) {
         increaseStep();
-        console.log('data', data);
-        return;
-      }
-
-      try {
-        const response = await findMyHome({
-          isKBApi: 0,
-          property: watch('assets'),
-          location: watch('location'),
-          neighborhoodCode: bcode,
-          transactionType: watch('transactionType'),
-          buildingType: watch('buildingType'),
-          recommendedNumber: 1
-        });
-
-        if (response.status === 200) {
-          increaseStep();
-        } else {
-          alert('추천 동네를 불러오는 데 실패했습니다.');
-        }
-      } catch (error) {
-        console.log(error);
+      } else {
         alert('추천 동네를 불러오는 데 실패했습니다.');
       }
-    },
-    [bcode, findMyHome, step, watch, increaseStep]
-  );
+    } catch (error) {
+      console.log(error);
+      alert('추천 동네를 불러오는 데 실패했습니다.');
+    }
+  }, [step, bcode, findMyHome, increaseStep, watch]);
 
   const onReset = () => {
     setResult('');
@@ -75,6 +70,7 @@ const MultiFormContainer = () => {
           control={control}
           setBcode={setBcode}
           onSubmit={handleSubmit(onSubmit)}
+          goBackButton
           onGoBack={decreaseStep}
         />
       )}
@@ -83,6 +79,7 @@ const MultiFormContainer = () => {
           control={control}
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
+          goBackButton
           onGoBack={decreaseStep}
         />
       )}
@@ -91,6 +88,7 @@ const MultiFormContainer = () => {
           control={control}
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
+          goBackButton
           onGoBack={decreaseStep}
         />
       )}
@@ -98,8 +96,10 @@ const MultiFormContainer = () => {
         <SummaryForm
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
-          onRefresh={onReset}
+          goBackButton
           onGoBack={decreaseStep}
+          refreshButton
+          onRefresh={onReset}
         />
       )}
       {step === 5 && result ? <SelectInfo townList={result} onRefreshButton={onReset} /> : ''}
