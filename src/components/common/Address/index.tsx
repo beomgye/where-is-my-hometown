@@ -25,12 +25,12 @@ interface HandlerData {
   bcode: number;
 }
 
-interface AddrData {
+type AddrData = {
   address: string;
   changeAddress: string;
-  setBcode: number;
-  error: string;
-}
+  setBcode: number | undefined;
+  error: string | undefined;
+};
 
 const KakaoMap = styled(Map)`
   width: 100%;
