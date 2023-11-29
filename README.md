@@ -212,17 +212,276 @@ react-hook-form 을 사용하여 단계별로 옵션을 선택하면 다음과 �
 
 ![data](https://github.com/beomgye/where-is-my-hometown/assets/86929961/fcf5c423-7215-48e8-aff0-698a5e618ee6)
 
+### React-kakao-Maps SDK
+
+기존 Kakao Maps API를 React에 맞게 포멧팅한 라이브러리를 사용하였다. 라이브러리를 사용하기 위해선 필수적으로 Kakao Maps API를 불러와야 한다. API를 보호하기 위해 env를 사용하였다.
+
+```jsx
+const API = process.env.NEXT_PUBLIC_KAKAO_APP_JS_KEY;
+const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${API}&libraries=services,clusterer&autoload=false`;
+```
+
+### Script 라이브러리
+
+**Kakao 지도 Javascript API** 는 지도와 함께 사용할 수 있는 `라이브러리` 를 지원하고 있다. 라이브러리는 javascript API와 관련되어 있지만 특화된 기능을 묶어둔 것을 말한다. 
+
+- `clusterer` : 마커를 클러스터링 할 수 있는 클러스터러 라이브러리 이다.
+- `services` : 장소 검색과 주소-좌표변환을 할 수 있는 `services` 라이브러리 이다.
+- `autoload=false` : 동적 로드로 사용할 수 있게 변환해주는 `파라미터` 이다.
+
 ### Daum 우편번호 서비스를 활용한 위치 검색 기능
 
-[Daum 우편번호 서비스](https://postcode.map.daum.net/guide)를 활용하여 원하는 주소를 검색할 수 있게 만들었으며, 검색 결과값을 통해 [Kakao Map]()에 위치값 좌표를 나타내고, 이에 bcode를 
+[Daum 우편번호 서비스](https://postcode.map.daum.net/guide)를 활용하여 원하는 주소를 검색할 수 있게 만들었으며, 검색 결과값을 통해 `React-kakao-Maps SDK` 에 위치값 좌표를 나타내고, 백엔드에 전달할 법정동 코드를 전달해준다.
+
+- `completeHandler` 는 Daum 우편번호 서비스를 검색이 끝냈을 때 사용자가 선택한 정보를 받아올 콜백 함수 핸들러이다. **`react-daum-postcode`** 라이브러리를 이용하여 간편하게 사용하였다.
+- `address, changeAddress, setBcode, error` 를 넘겨준 이유는 `LocationForm` 에 전달하여 `react-hook-form`에 기본값을 전달하기 위해 사용하였다.
+
+```jsx
+const Address = ({ address, changeAddress, setBcode, error }) => {
+  const [center, setCenter] = useState({ lat: 33.452613, lng: 126.570888 });
+  const [isModalOpen, isSetModalOpen] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  const completeHandler = (data) => {
+    changeAddress(data.roadAddress);
+    setBcode(data.bcode);
+    isSetModalOpen(false);
+    if (changeAddress) {
+      changeAddress(data.roadAddress);
+    }
+  };
+
+return(
+	<DaumPostcode style={{ height: '100%' }} onComplete={completeHandler} />
+)
+```
+
+- `kakaoMapGeoCoder` 는 주소-변환 객체를 생성해주는 역할을 해준다.
+- useEffect는 사이드 이펙트 변화를 감지하기 위하여 사용하였고, 의존성 배열에 있는 address 값이 변경되면 실행되게끔 사용하였다.
+
+```jsx
+const kakaoMapGeoCoder = () => {
+    window.kakao.maps.load(() => {
+      // 주소-좌표 변환 객체를 생성합니다
+      const geocoder = new window.kakao.maps.services.Geocoder();
+      // 주소로 좌표를 검색합니다
+      geocoder.addressSearch(address, function (result, status) {
+        // 정상적으로 검색이 완료됐으면
+        if (status === window.kakao.maps.services.Status.OK) {
+          setCenter({
+            lat: Number(result[0].y),
+            lng: Number(result[0].x)
+          });
+        }
+      });
+    });
+  };
+
+useEffect(() => {
+    kakaoMapGeoCoder();
+  }, [address]);
+```
+
+- react-kakao-maps-sdk 공식 문서를 참조하여 쉽게 사용할 수 있다.
+- Modal 컴포넌트는 react-modal 라이브러리를 사용하여 DaumPostCode를 띄우게 사용하였다.
+
+```jsx
+return (
+    <>
+      <KakaoMap center={center} isPanto level={3}>
+        <MapMarker position={center} clickable onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+          {isInfoOpen && <InfoWindow>{address}</InfoWindow>}
+        </MapMarker>
+      </KakaoMap>
+      <AddressContainer>
+        <InputField
+          id="location"
+          type="text"
+          onClick={openModal}
+          error={error?.message}
+          value={address}
+          readOnly
+        />
+        <AddressButton onClick={openModal}>장소 선택</AddressButton>
+      </AddressContainer>
+      <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalCustomStyles}>
+        <DaumPostcode style={{ height: '100%' }} onComplete={completeHandler} />
+        <CloseButtonWrapper>
+          <CloseButton onClick={closeModal}>닫기</CloseButton>
+        </CloseButtonWrapper>
+      </Modal>
+    </>
+  );
+};
+```
+
+### NavBar component
+
+**`stepOptions`** 배열에 있는 단계 정보를 렌더링하고, 페이지를 이동할 때마다 현재 활성화된 단계에 "active" 클래스를 부여하여 강조해준다.
+
+```jsx
+const NavBar = ({ navbarProps: { current, stepOptions }, text, ...props }) => {
+  return (
+    <StyledNavBar {...props}>
+      <ul className="stepContainer">
+        {stepOptions &&
+          stepOptions.map((step, index) => (
+            <li className={current === index ? 'active' : ''} key={step.id}>
+              <div className="circle">{index + 1}</div>
+              <div className="stepDetails">
+                <div className="stepText">
+                  Step
+                  {index + 1}
+                </div>
+                <div className="stepName">{step.value}</div>
+              </div>
+            </li>
+          ))}
+      </ul>
+    </StyledNavBar>
+  );
+};
+```
+
+### **SummaryForm** component
+
+앞서 form에서 선택한 데이터(자산, 위치, 거래자산, 건물유형)들을 가져와 사용자들에게 보여주는 컴포넌트 이다.
+
+- 거래 유형 및 건물 유형 가져오는 함수
+- 주어진 id를 사용하여 **`TransactionTypeOptions` ,** **`BuildingTypeOptions`** 배열에서 해당 거래, 건물 유형 이름을 찾아와 반환해 줬다.
+    
+    ```jsx
+    const SummaryForm = ({ watch, ...props }) => {
+      const getTransactionTypeName = (id) => {
+        const transactionType = TransactionTypeOptions.find((type) => type.id === id);
+        return transactionType ? transactionType.value : '';
+      };
+    
+      const getBuildingTypeName = (id) => {
+        const buildingType = BuildingTypeOptions.find((type) => type.id === id);
+        return buildingType ? buildingType.value : '';
+      };
+    ```
+    
+
+- 정보를 요약해서 사용자에게 표시한 코드
+    
+    ```jsx
+    return (
+        <Form
+          title="마무리 단계"
+          description="총 마무리 단계 입니다."
+          navbarProps={{
+            current: 4,
+            stepOptions: StepOptions
+          }}
+          buttonText="확인"
+          goBackButton
+          refreshButton
+          {...props}
+        >
+          <Container>
+            <StyledSummaryForm>
+              <TotalContainer>
+                <Asset>
+                  <AssetTitle>자산</AssetTitle>
+                  <AssetValue>{`${formatMoney(property)} 원`}</AssetValue>
+                </Asset>
+                <hr />
+                <Location>
+                  <LocationTitle>위치</LocationTitle>
+                  <LocationValue>{location}</LocationValue>
+                </Location>
+                <Trade>
+                  <TradeTitle>거래 방식</TradeTitle>
+                  <TradeValue>{getTransactionTypeName(transactionType)}</TradeValue>
+                </Trade>
+                <BuildingType>
+                  <BuildingTitle>건물 유형</BuildingTitle>
+                  <BuildingValue>{getBuildingTypeName(buildingType)}</BuildingValue>
+                </BuildingType>
+              </TotalContainer>
+            </StyledSummaryForm>
+          </Container>
+        </Form>
+      );
+    };
+    ```
 
 ### Axios 통신을 통한 백엔드 서버와의 연결
 
-내용
+MultiFormContainer 에서 step 이 5가 되면 useFindMyHome 훅에서 가져온 findMyHome 을 통해 form 에 담긴 데이터들을 백엔드 서버에 요청하도록 설계하였다.
 
-### 제목
+```tsx
+const { result, setResult, isLoading, findMyHome } = useFindMyHome();
 
-내용
+const onSubmit: SubmitHandler<MultiFormProps> = useCallback(async () => {
+    if (step < 4) {
+      increaseStep();
+      return;
+    }
+
+    try {
+      const response = await findMyHome({
+        isKBApi: 0,
+        property: Number(watch('assets')),
+        neighborhoodCode: bcode,
+        transactionType: Number(watch('transactionType')),
+        buildingType: Number(watch('buildingType')),
+        recommendedNumber: 1
+      });
+
+      if (response.status === 200) {
+        increaseStep();
+      } else {
+        alert('추천 동네를 불러오는 데 실패했습니다.');
+      }
+    } catch (error) {
+      console.log(error);
+      alert('추천 동네를 불러오는 데 실패했습니다.');
+    }
+  }, [step, bcode, findMyHome, increaseStep, watch]);
+
+```
+
+MultiFormContainer 에서 받은 데이터를 axios POST 방식으로 입력값들을 전송 후, 이에 나온 결과값을 다시 받아 사용할 수 있도록 설계하였다.
+
+```tsx
+const useFindMyHome = (): UseFindMyHomeProps => {
+  const [result, setResult] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const findMyHome = useCallback(async (info: HometownProps) => {
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post('/whereismyneighborhood', info, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      setResult(response.data);
+      return response;
+    } catch (error) {
+      alert(`error: ${error}`);
+      return error;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return {
+    result,
+    setResult,
+    isLoading,
+    setIsLoading,
+    findMyHome
+  };
+};
+
+export default useFindMyHome;
+```
 
 ## 커밋 컨벤션
 
