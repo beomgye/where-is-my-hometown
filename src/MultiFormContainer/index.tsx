@@ -19,7 +19,7 @@ const MultiFormContainer = () => {
     defaultValues: {
       assets: '',
       buildingType: '',
-      location: '',
+      location: '장소 선택',
       transactionType: ''
     }
   });
