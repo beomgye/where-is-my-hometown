@@ -4,7 +4,6 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import ModalCustomStyles from '@/utils/customStyles';
-import { grayColor } from '@/styles/variables';
 import InputField from '../InputField';
 
 declare global {
@@ -45,19 +44,6 @@ const InfoWindow = styled.div`
 
 const AddressContainer = styled.div`
   position: relative;
-`;
-
-const AddressButton = styled.button`
-  width: 68px;
-  height: 40px;
-  border: 0;
-  margin: auto 0;
-  position: absolute;
-  bottom: 8px;
-  right: 0;
-  background-color: transparent;
-  color: ${grayColor};
-  cursor: pointer;
 `;
 
 const CloseButtonWrapper = styled.div`
@@ -152,7 +138,6 @@ const Address = ({ address, changeAddress, setBcode, error }: AddrData) => {
           value={address}
           readOnly
         />
-        <AddressButton onClick={openModal}>장소 선택</AddressButton>
       </AddressContainer>
       <Modal isOpen={isModalOpen} ariaHideApp={false} style={ModalCustomStyles}>
         <DaumPostcode style={{ height: '100%' }} onComplete={completeHandler} />
