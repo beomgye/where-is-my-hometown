@@ -1,10 +1,10 @@
+import { FormHTMLAttributes } from 'react';
+import { Control, Controller } from 'react-hook-form';
+import styled from 'styled-components';
 import Address from '@/components/common/Address';
 import Form from '@/components/common/Form';
 import { StepOptions } from '@/constants';
 import { MultiFormProps } from '@/types/form';
-import { FormHTMLAttributes } from 'react';
-import { Control, Controller } from 'react-hook-form';
-import styled from 'styled-components';
 
 interface LocationFormProps extends FormHTMLAttributes<HTMLFormElement> {
   control: Control<MultiFormProps>;
@@ -21,9 +21,7 @@ const Container = styled.div`
 `;
 
 const locationInputRule = {
-  validate: (value) => {
-    return value === '주소를 입력해주세요.' ? 'This field is required' : undefined;
-  }
+  required: 'This field is required'
 };
 
 const LocationForm = ({
