@@ -1,8 +1,9 @@
+import React from 'react';
 import styled from 'styled-components';
 
-const Container = ({ children, ...props }) => {
-  return <Div {...props}>{children}</Div>;
-};
+interface ContainerProps {
+  children: React.ReactNode;
+}
 
 const Div = styled.div`
   width: 450px;
@@ -13,5 +14,9 @@ const Div = styled.div`
   gap: 16px;
   margin-top: 55px;
 `;
+
+const Container = ({ children, ...props }: ContainerProps) => {
+  return <Div {...props}>{children}</Div>;
+};
 
 export default Container;

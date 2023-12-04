@@ -1,7 +1,19 @@
-import { Controller } from 'react-hook-form';
-import { FaMoneyBill, FaKey, FaHome } from 'react-icons/fa';
-import { Form, Container, Radio } from '@/components';
+import Container from '@/components/common/Container';
+import Form from '@/components/common/Form';
+import Radio from '@/components/common/Radio';
+
 import { StepOptions, TransactionTypeOptions } from '@/constants';
+import { MultiFormProps } from '@/types/form';
+import { FormHTMLAttributes } from 'react';
+import { Control, Controller } from 'react-hook-form';
+import { FaHome, FaKey, FaMoneyBill } from 'react-icons/fa';
+
+interface TransactionTypeFormProps extends FormHTMLAttributes<HTMLFormElement> {
+  control: Control<MultiFormProps>;
+  watch;
+  goBackButton: boolean;
+  onGoBack: () => void;
+}
 
 const getTransactionIcon = (type) => {
   switch (type) {
@@ -16,7 +28,13 @@ const getTransactionIcon = (type) => {
   }
 };
 
-const TransactionTypeForm = ({ control, watch, ...props }) => {
+const TransactionTypeForm = ({
+  control,
+  watch,
+  goBackButton,
+  onGoBack,
+  ...props
+}: TransactionTypeFormProps) => {
   const selectedValue = watch('transactionType');
 
   return (
@@ -28,7 +46,8 @@ const TransactionTypeForm = ({ control, watch, ...props }) => {
         stepOptions: StepOptions
       }}
       buttonText="다음 단계"
-      goBackButton
+      goBackButton={goBackButton}
+      onGoBack={onGoBack}
       {...props}
     >
       <Container>
@@ -42,7 +61,6 @@ const TransactionTypeForm = ({ control, watch, ...props }) => {
                   <Radio
                     id={`transactionType[${type.id}]`}
                     name="transactionType"
-                    radioProps={type}
                     value={type.value}
                     onChange={() => field.onChange(type.id)}
                     checked={selectedValue === type.id}

@@ -1,21 +1,11 @@
-import styled from 'styled-components';
-import React from 'react';
 import { denimColor, errorColor, secondaryColor } from '@/styles/variables';
+import { InputHTMLAttributes, forwardRef } from 'react';
+import styled from 'styled-components';
 
-const InputField = React.forwardRef(function InputField(
-  { label, id, error, value, ...props },
-  ref
-) {
-  return (
-    <Container>
-      <LabelContainer>
-        <Label htmlFor={id}>{label}</Label>
-        {error && <Error>{error}</Error>}
-      </LabelContainer>
-      <Input ref={ref} type="text" id={id} value={value} {...props} />
-    </Container>
-  );
-});
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  error: string;
+}
 
 const Container = styled.div`
   display: flex;
@@ -71,5 +61,21 @@ const Input = styled.input`
     left: 16px;
   }
 `;
+
+const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
+  ({ label, id, error, value, type = 'text', ...props }, ref) => {
+    return (
+      <Container>
+        <LabelContainer>
+          <Label htmlFor={id}>{label}</Label>
+          {error && <Error>{error}</Error>}
+        </LabelContainer>
+        <Input ref={ref} id={id} type={type} value={value} {...props} />
+      </Container>
+    );
+  }
+);
+
+InputField.displayName = 'InputField';
 
 export default InputField;

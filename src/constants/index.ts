@@ -1,3 +1,7 @@
+import { BuildingProps } from '@/types/building';
+import { StepProps } from '@/types/step';
+import { TransactionProps } from '@/types/transaction';
+
 export const Step = [
   {
     id: 0,
@@ -59,21 +63,21 @@ export const Building = [
   }
 ];
 
-export const StepOptions = Step.map(({ id, value }) => {
+export const StepOptions: StepProps[] = Step.map(({ id, value }) => {
   return {
     id,
     value
   };
 });
 
-export const TransactionTypeOptions = Transaction.map(({ id, value }) => {
+export const TransactionTypeOptions: TransactionProps[] = Transaction.map(({ id, value }) => {
   return {
     id,
     value
   };
 });
 
-export const BuildingTypeOptions = Building.map(({ id, value }) => {
+export const BuildingTypeOptions: BuildingProps[] = Building.map(({ id, value }) => {
   return {
     id,
     value

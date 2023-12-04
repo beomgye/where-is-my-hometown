@@ -1,30 +1,34 @@
 import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import {
-  AssetInputForm,
-  BuildingTypeForm,
-  Loading,
-  LocationForm,
-  SelectInfo,
-  SummaryForm,
-  TransactionTypeForm
-} from '@/components';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+import Loading from '@/components/common/Loading';
+import AssetInputForm from '@/components/screens/AssetInputForm';
+import BuildingTypeForm from '@/components/screens/BuildingTypeForm';
+import LocationForm from '@/components/screens/LocationForm';
+import SelectInfo from '@/components/screens/SelectInfo';
+import SummaryForm from '@/components/screens/SummaryForm';
+import TransactionTypeForm from '@/components/screens/TransactionTypeForm';
 
 import useFindMyHome from '@/hooks/useFindMyHome';
 import useStepControl from '@/hooks/useStepControl';
 
-const OptionContainer = () => {
-  const { control, watch, handleSubmit, reset } = useForm({
+import { MultiFormProps } from '@/types/form';
+
+const MultiFormContainer = () => {
+  const { control, watch, handleSubmit, reset } = useForm<MultiFormProps>({
     defaultValues: {
       assets: '',
-      location: '주소를 입력해주세요.'
+      buildingType: '',
+      location: '장소 선택',
+      transactionType: ''
     }
   });
+
   const [bcode, setBcode] = useState('');
   const { result, setResult, isLoading, findMyHome } = useFindMyHome();
-  const { step, decreaseStep, increaseStep, resetStep } = useStepControl();
+  const { step, increaseStep, decreaseStep, resetStep } = useStepControl();
 
-  const onSubmit = useCallback(async () => {
+  const onSubmit: SubmitHandler<MultiFormProps> = useCallback(async () => {
     if (step < 4) {
       increaseStep();
       return;
@@ -33,11 +37,10 @@ const OptionContainer = () => {
     try {
       const response = await findMyHome({
         isKBApi: 0,
-        property: watch('assets').replace(/,/g, ''),
-        location: watch('location'),
+        property: Number(watch('assets')),
         neighborhoodCode: bcode,
-        transactionType: watch('transactionType'),
-        buildingType: watch('buildingType'),
+        transactionType: Number(watch('transactionType')),
+        buildingType: Number(watch('buildingType')),
         recommendedNumber: 1
       });
 
@@ -50,7 +53,7 @@ const OptionContainer = () => {
       console.log(error);
       alert('추천 동네를 불러오는 데 실패했습니다.');
     }
-  }, [bcode, findMyHome, step, watch, increaseStep]);
+  }, [step, bcode, findMyHome, increaseStep, watch]);
 
   const onReset = () => {
     setResult('');
@@ -67,6 +70,7 @@ const OptionContainer = () => {
           control={control}
           setBcode={setBcode}
           onSubmit={handleSubmit(onSubmit)}
+          goBackButton
           onGoBack={decreaseStep}
         />
       )}
@@ -75,6 +79,7 @@ const OptionContainer = () => {
           control={control}
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
+          goBackButton
           onGoBack={decreaseStep}
         />
       )}
@@ -83,6 +88,7 @@ const OptionContainer = () => {
           control={control}
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
+          goBackButton
           onGoBack={decreaseStep}
         />
       )}
@@ -90,8 +96,10 @@ const OptionContainer = () => {
         <SummaryForm
           watch={watch}
           onSubmit={handleSubmit(onSubmit)}
-          onRefresh={onReset}
+          goBackButton
           onGoBack={decreaseStep}
+          refreshButton
+          onRefresh={onReset}
         />
       )}
       {step === 5 && result ? <SelectInfo townList={result} onRefreshButton={onReset} /> : ''}
@@ -99,4 +107,4 @@ const OptionContainer = () => {
   );
 };
 
-export default OptionContainer;
+export default MultiFormContainer;

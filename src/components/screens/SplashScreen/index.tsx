@@ -1,6 +1,16 @@
+import { purpleColor, whiteColor } from '@/styles/variables';
 import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { purpleColor, whiteColor } from '@/styles/variables';
+
+interface SplashScreenProps {
+  children: React.ReactNode;
+}
+
+const Container = styled.div`
+  width: 940px;
+  height: 600px;
+  margin: auto;
+`;
 
 const fadeOut = keyframes`
     from {
@@ -9,36 +19,6 @@ const fadeOut = keyframes`
     to {
         opacity: 0;
     }
-`;
-
-const SplashScreen = ({ children }) => {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <Container>
-      {showSplash && (
-        <Content>
-          <Logo />
-          <Title>어데살꼬</Title>
-        </Content>
-      )}
-      {!showSplash && children}
-    </Container>
-  );
-};
-
-const Container = styled.div`
-  width: 940px;
-  height: 600px;
-  margin: auto;
 `;
 
 const Content = styled.div`
@@ -72,5 +52,29 @@ const Title = styled.h1`
   font-weight: 500;
   line-height: normal;
 `;
+
+const SplashScreen = ({ children }: SplashScreenProps) => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <Container>
+      {showSplash && (
+        <Content>
+          <Logo />
+          <Title>어데살꼬</Title>
+        </Content>
+      )}
+      {!showSplash && children}
+    </Container>
+  );
+};
 
 export default SplashScreen;

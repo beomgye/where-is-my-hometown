@@ -1,5 +1,5 @@
+import { forwardRef } from 'react';
 import styled from 'styled-components';
-import React from 'react';
 import {
   activeColor,
   borderColor,
@@ -8,20 +8,16 @@ import {
   whiteColor
 } from '@/styles/variables';
 
-const Radio = React.forwardRef(function Checkbox(
-  { radioProps: { value }, onChange, checked, icon, ...props },
-  ref
-) {
-  return (
-    <Container checked={checked} onClick={() => onChange(() => onChange(!checked))}>
-      <Input type="radio" ref={ref} defaultChecked={checked} {...props} />
-      <Label>{value}</Label>
-      <Icon>{icon}</Icon>
-    </Container>
-  );
-});
+interface RadioProps {
+  id: string;
+  name: string;
+  value: string;
+  onChange: (checked) => void;
+  checked: boolean;
+  icon: React.ReactNode;
+}
 
-const Container = styled.div`
+const Container = styled.div<{ checked: boolean }>`
   background-color: ${(props) => (props.checked ? activeColor : whiteColor)};
   border: 1px solid ${(props) => (props.checked ? primaryColor : borderColor)};
   border-radius: 8px;
@@ -36,7 +32,7 @@ const Container = styled.div`
   color: ${secondaryColor};
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ defaultChecked: boolean }>`
   position: relative;
   border-radius: 4px;
   width: 17.422px;
@@ -70,5 +66,19 @@ const Icon = styled.span`
 `;
 
 const Label = styled.label``;
+
+const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  ({ id, name, value, onChange, checked, icon, ...props }, ref) => {
+    return (
+      <Container checked={checked} onClick={() => onChange(() => onChange(!checked))}>
+        <Input id={id} name={name} type="radio" ref={ref} defaultChecked={checked} {...props} />
+        <Label>{value}</Label>
+        <Icon>{icon}</Icon>
+      </Container>
+    );
+  }
+);
+
+Radio.displayName = 'Radio';
 
 export default Radio;
