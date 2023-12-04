@@ -6,7 +6,7 @@
 
 - 주제 : **"내가 살만한 동네는 어디일까?"** 라는 주제로 시작된 **동네 추천** 웹 애플리케이션 프로젝트
 - 개발 기간 : 2023.10.02 - 2023.10.17
-- 배포 URL : [배포 URL 바로가기](https://d73klmvqn1x8b.cloudfront.net)
+- 배포 URL : **[과금으로 인한 배포 중단]**
 
 </br>
 
@@ -14,7 +14,7 @@
 
 **Front**
 
-![axios](https://img.shields.io/badge/axios-6.15.0-5A29E4?logo=axios) ![next.js](https://img.shields.io/badge/next.js-latest-000000?logo=next.js) ![react](https://img.shields.io/badge/react-latest-61DAFB?logo=react) ![javascript](https://img.shields.io/badge/javascript-ES6-F7DF1E?logo=javascript) ![react-hook-form](https://img.shields.io/badge/react--hook--form-7.47.0-EC5990?logo=reacthookform) ![react-daum-postcode](https://img.shields.io/badge/react--daum--postcode-3.1.3-608DF9?logo=reactdaumpostcode) ![react-kakao-maps-sdk](https://img.shields.io/badge/react--kakao--maps--sdk-1.1.21-FEE501?logo=reactkakaomapssdk)  ![styled-components](https://img.shields.io/badge/styled--components-6.0.7-DB7093?logo=styledcomponents) 
+![axios](https://img.shields.io/badge/axios-6.15.0-5A29E4?logo=axios) ![next.js](https://img.shields.io/badge/next.js-latest-000000?logo=next.js) ![react](https://img.shields.io/badge/react-latest-61DAFB?logo=react) ![javascript](https://img.shields.io/badge/typescript-ES6-3178C6?logo=typescript) ![react-hook-form](https://img.shields.io/badge/react--hook--form-7.47.0-EC5990?logo=reacthookform) ![react-daum-postcode](https://img.shields.io/badge/react--daum--postcode-3.1.3-608DF9?logo=reactdaumpostcode) ![react-kakao-maps-sdk](https://img.shields.io/badge/react--kakao--maps--sdk-1.1.21-FEE501?logo=reactkakaomapssdk)  ![styled-components](https://img.shields.io/badge/styled--components-6.0.7-DB7093?logo=styledcomponents) 
 
 **Back, Database**
 
